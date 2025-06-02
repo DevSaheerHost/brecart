@@ -70,7 +70,7 @@
   section.deals{
     .list-view{
         .item{
-            max-width: unset;
+            max-inline-size: unset;
             inline-size: 290px;
         }
     }
