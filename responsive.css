@@ -1,0 +1,90 @@
+@media (max-width: 280px) {
+    main .slide-image-card {
+        block-size: 100px;
+      }
+    .category .list-view {
+      display: block;
+      gap: 1rem;
+      grid-template-columns: repeat(2, minmax(100px, 1fr));
+  .item{
+    inline-size: 100%;
+  }
+    }
+  }
+
+/* Extra small devices (phones, less than 576px) */
+@media (max-width: 575.98px) {
+  .category .list-view {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+
+    .item {
+      align-self: start;
+    }
+  }
+}
+
+/* Small devices (phones, 576px and up) */
+@media (min-width: 576px) {
+  main .slide-image-card {
+    block-size: 300px;
+  }
+
+  .category .list-view {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    
+  .category .list-view {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .category .list-view {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+
+
+    .item {
+      align-self: start;
+      inline-size: 200px;
+      block-size: 160px;
+    }
+  }
+  main .slide-image-card {
+    block-size: 70vh;
+  }
+
+  section.deals{
+    .list-view{
+        .item{
+            max-width: unset;
+            inline-size: 290px;
+        }
+    }
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-inline-size: 1200px) {
+    main .slide-image-card {
+        block-size: 70vh;
+      }
+}
+
+/* Extra extra large devices (very large screens, 1400px and up) */
+@media (min-inline-size: 1400px) {
+  /* Your styles here */
+}
