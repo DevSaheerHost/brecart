@@ -230,10 +230,10 @@ const changeImage = () => {
 
 changeImage();
 
-window.onscroll = () => {
-  if (window.scrollY > 80) {
-    $("header").classList.add("scrolled");
-  } else {
-    $("header").classList.remove("scrolled");
-  }
-};
+// window.onscroll = () => {
+//   if (window.scrollY > 80) {
+//     $("header").classList.add("scrolled");
+//   } else {
+//     $("header").classList.remove("scrolled");
+//   }
+// };
