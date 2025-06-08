@@ -28,8 +28,8 @@
     .flex{
       
       .item{
-        width: 70%;
-        height: 285px;
+        width: 80%;
+        /* height: 285px; */
         overflow: hidden;
         text-align: center;
         img{

@@ -114,37 +114,12 @@ function renderAds(items) {
     })
     .join("");
 }
-// Fetch deals from Firebase
-get(child(dbRef, "shopless/home/fresh_deals"))
-  .then((snapshot) => {
-    $(".loader").remove();
-    if (snapshot.exists()) {
-      const items = Object.values(snapshot.val());
-      renderDeals(items);
-    } else {
-      console.log("No data available");
-    }
-  })
-  .catch((error) => {
-    console.error(error);
-  });
 
 
 
-// Fetch Ads from Firebase
-get(child(dbRef, "shopless/home/ads"))
-  .then((snapshot) => {
-    if (snapshot.exists()) {
-      const items = Object.values(snapshot.val());
-      //renderAds(items);
-      console.log(items)
-    } else {
-      console.log("No data available");
-    }
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+
+
+
 // Category data
 const datas = {
   category: [
@@ -235,16 +210,22 @@ const datas = {
   
   lineup:[
     {
-      img:'https://goldenshield.in/cdn/shop/files/iphone15plus_3.jpg?v=1702886380&width=1000',
-      description :'Anti-Yellow Magsafe Clear Case'
+      img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-card-40-pro-202405_FMT_WHH?wid=508&hei=472&fmt=p-jpg&qlt=95&.v=aDFmUE8yL0ZIcG1CVlF3ejZoSTBUa3UweFZCakx2YnVZV3A3QjhxMVptZWZaQno4VzdyOTRhQU93VEhhWjgvSHg4ZHpEbm5XWGdaM3BiNVRDaG55Uk9hZHJ2SDQ3c0JlN3lXVFNtclhPL1QrNmVjbmk5c1V4VVk2VEt3TGcxekg',
+      description :'Anti-Yellow Magsafe Clear Case',
+      name: 'iPad Pro',
+      price: '₹19399'
     },
     {
-      img:'https://goldenshield.in/cdn/shop/files/iphone15plus_2.jpg?v=1702886380&width=1000',
-      description:'ClearVue'
+      img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-card-40-air-202405_FMT_WHH?wid=508&hei=472&fmt=p-jpg&qlt=95&.v=U0psRWR6Z2xkY3dwRTZYSCtyQXNFVXUweFZCakx2YnVZV3A3QjhxMVptZWZaQno4VzdyOTRhQU93VEhhWjgvSHg4ZHpEbm5XWGdaM3BiNVRDaG55UkErVEJnUGNTM2tkVDlwYzZJVEwzVkM1dDgvV3BhU1hoSzFPUEZjam5HQ2g',
+      description:'ClearVue',
+      name: 'iPad Air',
+      price:'₹14199'
     },
     {
-      img:'https://goldenshield.in/cdn/shop/files/iphone15plustranspatrentcase_2.jpg?v=1712762622&width=1000',
-      description:'Anti-Yellow Magsafe Clear Case'
+      img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-card-40-ipad-202410_FMT_WHH?wid=508&hei=472&fmt=p-jpg&qlt=95&.v=SFZodklRUStGeVJpUE9iYTA5SFFYay9QT3EzOEVhTmwyMUJSTjlXV3hGdGZMQnBkTWowcTVzai9uUEgzVDdYM3NtS0NkZnlUKzBRdlpRai9zMDR0cS9TN0NVaEVIU09sK0c2RHUvMlFZREoxWnZFQ2ozaVJXS3R0eUNrSXRjUEo',
+      description:'Anti-Yellow Magsafe Clear Case',
+      name: 'iPad',
+      price: '₹14199'
     }
   ]
 };
@@ -252,16 +233,16 @@ const datas = {
 $('.lineup .flex').innerHTML = datas.lineup.map(item=>`
 
 <div class="item">
+<h3>${item.name}</h3>
             <img
               src="${item.img}"
               alt="Img"
             />
 
             <div class="detail">
-              <p class="name">iPhone 16 pro</p>
-              <p>${item.description}</p>
+              <p>From INR ${item.price}</p>
 
-              
+              <span>Buy</span>
             </div>
           </div>
 `).join('')
@@ -318,7 +299,6 @@ changeImage();
 // };
 
 
-
 // scroll observe 
 
 
@@ -346,3 +326,37 @@ const observer = new IntersectionObserver(
 
 observer.observe(target);
 observer.observe(document.querySelector('footer'));
+
+
+
+// Fetch deals from Firebase
+get(child(dbRef, "shopless/home/fresh_deals"))
+  .then((snapshot) => {
+    $(".loader").remove();
+    if (snapshot.exists()) {
+      const items = Object.values(snapshot.val());
+      renderDeals(items);
+    } else {
+      console.log("No data available");
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+
+
+// Fetch Ads from Firebase
+get(child(dbRef, "shopless/home/ads"))
+  .then((snapshot) => {
+    if (snapshot.exists()) {
+      const items = Object.values(snapshot.val());
+      //renderAds(items);
+      console.log(items)
+    } else {
+      console.log("No data available");
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+  });
