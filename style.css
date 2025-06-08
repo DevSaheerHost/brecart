@@ -32,15 +32,24 @@ html {
 header.scrolled {
   background: #fff;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.37);
-
+  
+  
   .input-box {
     border: 1px solid gray;
   }
 }
 header.header_black, nav.header_black{
   background: #313131;
+  background: rgba(0, 0, 0, 0.4); /* semi-transparent black */
+  backdrop-filter: blur(8px);     /* blur the background behind */
+  -webkit-backdrop-filter: blur(8px); /* Safari support */
+
 }
 nav.header_black{
+  background: rgba(0, 0, 0, 0.4); /* semi-transparent black */
+  backdrop-filter: blur(8px);     /* blur the background behind */
+  -webkit-backdrop-filter: blur(8px); /* Safari support */
+
   color: #fff;
 }
 
@@ -413,6 +422,7 @@ footer{
     li{
       list-style: none;
       line-height: 2rem;
+      width: max-content;
     }
   }
   

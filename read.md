@@ -303,3 +303,16 @@ vid link https://cdn.shopify.com/videos/c/o/v/c48eff385dea465193afbf36a54e8206.m
 
   observer.observe(target);
 </script>
+
+
+.glass-black-box {
+  background: rgba(0, 0, 0, 0.4); /* semi-transparent black */
+  backdrop-filter: blur(8px);     /* blur the background behind */
+  -webkit-backdrop-filter: blur(8px); /* Safari support */
+  border-radius: 12px;
+  padding: 1rem;
+  width: fit-content;
+  height: fit-content;
+  color: white; /* optional: text contrast */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* optional: subtle depth */
+}
