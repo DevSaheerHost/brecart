@@ -30,7 +30,7 @@ html {
 }
 
 header.scrolled {
-  background: #F1F1F1;
+  background: #fff;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.37);
 
   .input-box {
@@ -83,7 +83,7 @@ main{
 }
 section{
   padding: 2rem;
-  border-block-end: 1px solid #D8D8D8;
+  
 }
 
 main {
@@ -246,8 +246,7 @@ section.category{
 .lineup {
   margin-block-start: 2rem;
   padding: 2rem 0;
-  border-block-end: 1px solid #D8D8D8;
-  border-block-start: 1px solid #D8D8D8;
+  
   h3{
     font-size: 23px;
     margin-inline-start: 2rem;
