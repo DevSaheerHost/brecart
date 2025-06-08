@@ -28,8 +28,8 @@
     .flex{
       
       .item{
-        width: 60%;
-        height: 240px;
+        width: 70%;
+        height: 285px;
         overflow: hidden;
         text-align: center;
         img{
@@ -53,7 +53,7 @@
 
   .category .list-view {
     display: grid;
-    gap: 1rem;
+    gap: clamp(1rem, 2vw, 3rem);
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
 
   }
@@ -64,9 +64,28 @@
     
   .category .list-view {
     display: grid;
-    gap: 1rem;
+    gap: clamp(1rem, 2vw, 3rem);
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
 
+  }
+  
+  section.video{
+    .box{
+      display: flex;
+      gap: clamp(1rem, 2vw, 3rem);
+      
+      video{
+        inline-size: 50%;
+      }
+      .content{
+        margin: auto;
+        width: fit-content;
+        height: fit-content;
+      }
+    }
+    .box.orange, .box.gray{
+      flex-flow: row-reverse;
+    }
   }
 }
 

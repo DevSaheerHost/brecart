@@ -30,13 +30,20 @@ html {
 }
 
 header.scrolled {
-  background: #fff;
+  background: #F1F1F1;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.37);
 
   .input-box {
     border: 1px solid gray;
   }
 }
+header.header_black, nav.header_black{
+  background: #313131;
+}
+nav.header_black{
+  color: #fff;
+}
+
 header {
   position: sticky;
   inset-block-start: -10px;
@@ -71,10 +78,17 @@ header {
     }
   }
 }
+main{
+  padding: 0 !important;
+}
+section{
+  padding: 2rem;
+  border-block-end: 1px solid #D8D8D8;
+}
 
 main {
   padding: 2rem;
-  padding-block-start: 0;
+  
 
   .slide-image-card {
     block-size: 200px;
@@ -82,10 +96,16 @@ main {
     background: #3da6e6;
     background: #fff;
     border-radius: 20px;
+    padding: 0 2rem;
+   
   }
 
   .slide-image-card {
     overflow: hidden;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    min-inline-size: 100%;
+    min-block-size: 300px;
 
     img {
       inline-size: 100%;
@@ -119,6 +139,7 @@ main {
 
         text-align: start;
         overflow: hidden;
+        
 
         img {
           max-block-size: 100%;
@@ -138,9 +159,10 @@ main {
 
   section.deals {
     .list-view {
-      justify-content: space-between;
-      flex-flow: row;
-      flex-wrap: wrap;
+      display: flex;
+      flex-flow: row wrap;
+      
+      gap: clamp(1rem, 2vw, 3rem);
 
       gap: 1rem;
       .item {
@@ -205,12 +227,30 @@ nav {
   display: none;
 }
 
+
+/*---------- category ----------*/
+
+section.category{
+  
+  .item{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.14);
+  }
+}
+
+.item{
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.14);
+}
+
 /* Section lineup */
 
 .lineup {
   margin-block-start: 2rem;
+  padding: 2rem 0;
+  border-block-end: 1px solid #D8D8D8;
+  border-block-start: 1px solid #D8D8D8;
   h3{
     font-size: 23px;
+    margin-inline-start: 2rem;
   }
   .flex {
     /* background: #fff; */
@@ -218,31 +258,43 @@ nav {
 
     display: flex;
     overflow-x: auto;
-    gap: 2rem;
     scroll-snap-type: x mandatory;
+    padding: 1rem .1rem;
+    
+    
     .item {
-      padding: 2rem;
+      display: flex;
+      flex-flow: column;
+      text-align: start !important;
+      padding: 1rem;
       flex: none;
       scroll-snap-align: center;
       /* text-align: center; */
       /* min-inline-size: 100%; */
-      
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.20);
       background: #fff;
-      
+      margin-inline: 1rem !important;
       border-radius: 15px;
+      max-inline-size: 275px;
 
       img {
-        inline-size: 200px;
-        border-radius: 24px;
+        inline-size: 100% !important;
+        block-size: 190px !important;
+        border-radius: 10px;
+        object-fit: cover;
+        object-position: center;
+        
       }
       p.name {
         font-weight: 800;
-        font-size: 19px;
-        margin-block-start: 1rem;
+        font-size: 14px;
+        margin-block-start: 2rem;
+        color: #000;
       }
       p {
         margin-block-start: 0.6rem;
         font-size: 13px;
+        color: #6A6A6A;
       }
       p.price {
         font-weight: 600;
@@ -269,6 +321,116 @@ nav {
           margin: unset;
           font-weight: 600;
         }
+      }
+    }
+  }
+}
+
+
+video{
+  max-width: 100%;
+}
+
+section.video{
+  padding: 2rem .5rem;
+  background: #000;
+  border-radius: 20px;
+  color: #fff;
+  
+  
+  .box{
+    padding: .8rem;
+    border-radius: 20px;
+    padding-block-end: 3.5rem;
+  }
+  video{
+    border-radius: 10px;
+  }
+  
+  h3{
+    margin-block: 1rem;
+  }
+  p{
+    margin-block-start: 1rem;
+    font-size: 14px;
+    color: #E8E8E8;
+    line-height: 1.3rem;
+    letter-spacing: 1px;
+  }
+  
+  .box.gray{
+    margin-block-start: 2rem;
+    background: #282828;
+    
+    video{
+      border-radius: 20px;
+    }
+  }
+  
+  
+
+  
+}
+
+section.video.white{
+  background: #fff;
+    .box.white{
+    background: #fff;
+    color: #000;
+    p{
+      color: #000;
+    }
+  }
+  
+  
+  .box.orange{
+    background: #F17600;
+  }
+}
+
+
+footer{
+  background: #000;
+  color: #fff;
+  padding: 2rem;
+  height: 100vh;
+  
+  img{
+    width: 80px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .content{
+    margin-top: 2rem;
+    display: flex;
+    align-items: start;
+    gap: clamp(1rem, 3rem, 4rem);
+    
+    li.title{
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    li{
+      list-style: none;
+      line-height: 2rem;
+    }
+  }
+  
+  .social{
+    margin-top: 2rem;
+    p.title{
+      font-weight: 700;
+    }
+    
+    .icons{
+      margin-top: 2rem;
+      display: flex;
+      gap: clamp(1rem, 2vw, 3rem);
+      a{
+        width: 50px;
+        height: 50px;
+        overflow: hidden;
       }
     }
   }

@@ -278,3 +278,28 @@ const changeImage = () => {
 
 changeImage();
 </script>
+
+
+vid link https://cdn.shopify.com/videos/c/o/v/c48eff385dea465193afbf36a54e8206.mp4
+
+
+
+<script>
+  const header = document.querySelector('header');
+  const target = document.querySelector('.black');
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        header.classList.add('active');
+      } else {
+        header.classList.remove('active');
+      }
+    },
+    {
+      threshold: 0.5 // adjust as needed
+    }
+  );
+
+  observer.observe(target);
+</script>

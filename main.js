@@ -84,6 +84,36 @@ function renderDeals(items) {
   });
 }
 
+
+// Render ads
+function renderAds(items) {
+  $(".lineup .flex").innerHTML = items
+    .map((item) => {
+      const isWishlisted = wishlist.some(
+        (w) => w.product_name === item.product_name
+      );
+      return `
+       <div class="item">
+            <img
+              src="${item}"
+              alt="Img"
+            />
+
+            <div class="detail">
+              <p class="name">iPhone 15</p>
+              <p>As amazing as ever.</p>
+              <p class="price">From INR 67,999</p>
+
+              <div class="btn-wrap">
+                <a href="#" class="learn"> Learn more </a>
+                <p>Buy ></p>
+              </div>
+            </div>
+          </div>
+    `;
+    })
+    .join("");
+}
 // Fetch deals from Firebase
 get(child(dbRef, "shopless/home/fresh_deals"))
   .then((snapshot) => {
@@ -99,6 +129,22 @@ get(child(dbRef, "shopless/home/fresh_deals"))
     console.error(error);
   });
 
+
+
+// Fetch Ads from Firebase
+get(child(dbRef, "shopless/home/ads"))
+  .then((snapshot) => {
+    if (snapshot.exists()) {
+      const items = Object.values(snapshot.val());
+      //renderAds(items);
+      console.log(items)
+    } else {
+      console.log("No data available");
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+  });
 // Category data
 const datas = {
   category: [
@@ -186,7 +232,40 @@ const datas = {
       path: "",
     },
   ],
+  
+  lineup:[
+    {
+      img:'https://goldenshield.in/cdn/shop/files/iphone15plus_3.jpg?v=1702886380&width=1000',
+      description :'Anti-Yellow Magsafe Clear Case'
+    },
+    {
+      img:'https://goldenshield.in/cdn/shop/files/iphone15plus_2.jpg?v=1702886380&width=1000',
+      description:'ClearVue'
+    },
+    {
+      img:'https://goldenshield.in/cdn/shop/files/iphone15plustranspatrentcase_2.jpg?v=1712762622&width=1000',
+      description:'Anti-Yellow Magsafe Clear Case'
+    }
+  ]
 };
+
+$('.lineup .flex').innerHTML = datas.lineup.map(item=>`
+
+<div class="item">
+            <img
+              src="${item.img}"
+              alt="Img"
+            />
+
+            <div class="detail">
+              <p class="name">iPhone 16 pro</p>
+              <p>${item.description}</p>
+
+              
+            </div>
+          </div>
+`).join('')
+
 
 $(".category .list-view").innerHTML = datas.category
   .map(
@@ -237,3 +316,33 @@ changeImage();
 //     $("header").classList.remove("scrolled");
 //   }
 // };
+
+
+
+// scroll observe 
+
+
+const header = document.querySelector('header');
+const nav = document.querySelector('nav');
+const footer = document.querySelector('footer');
+
+const target = document.querySelector('.black');
+//const targetTwo = document.querySelector('nav');
+
+const observer = new IntersectionObserver(
+  ([entry]) => {
+    if (entry.isIntersecting) {
+      header.classList.add('header_black');
+      nav.classList.add('header_black');
+    } else {
+      header.classList.remove('header_black');
+      nav.classList.remove('header_black');
+    }
+  },
+  {
+    threshold: 0.5 // adjust as needed
+  }
+);
+
+observer.observe(target);
+observer.observe(document.querySelector('footer'));
