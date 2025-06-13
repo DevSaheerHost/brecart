@@ -11,8 +11,6 @@
 
 body{
     background: #ffffff;
-background: linear-gradient(0deg, rgba(120, 120, 120, 0.1) 70%, rgba(0, 128, 255, 0.33) 100%);
-background-repeat: no-repeat;
 max-inline-size: 700px;
 margin: auto;
 padding-block-end: 3rem;
@@ -31,6 +29,7 @@ section{
     background: #fff;
     
     .main-detail{
+        
         .header{
             display: flex;
             align-items: center;
@@ -48,7 +47,15 @@ section{
             
         }
         
-        
+        #productName{
+            font-weight: normal;
+            font-size: 14px;
+            letter-spacing: 1px;
+            border-top: 1px solid #E3E3E3;
+            color: #777777;
+            padding-top: 2rem;
+            line-height: 1.2rem;
+        }
         .big-img-box{
             margin-block-start: 2rem;
             .main-img{
@@ -110,6 +117,9 @@ section{
                         align-items: center;
                         justify-content: center;
                         border-radius: 100px;
+                    }
+                    span.increment{
+                        border-color: black;
                     }
                 }
             }
@@ -179,8 +189,9 @@ section{
     }
 }
 
+
 .buy-btn-wrap{
-    position: fixed;
+    position: sticky;
     inset-block-end: 0;
     display: flex;
     align-items: center;
@@ -192,16 +203,106 @@ section{
         padding: 1rem 2rem;
         font-weight: 400;
         font-size: 17px;
-        border-radius: 100px;
-        background: #09a0ff;
+        border-radius: 10px;
+        background: #000;
         color: #fff;
-        border: 2px solid #09a0ff;
+        border: 2px solid #000;
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.17);
         inline-size: 50%;
         max-inline-size: 200px;
     }
     button.addtocart{
         background: #fff;
-        color: #09a0ff;
+        color: #000;
     }
+}
+
+
+
+
+
+.buy-page{
+    section{
+        
+        span{
+                height: 20px;
+                width: 20px;
+                background: black;
+                border-radius: 100px;
+                display: block;
+            }
+            span.none   
+            {
+                background: transparent;
+                border: 1px solid #000;
+            }
+        .title-bar{
+            background: #EDEDED;
+            padding: .6rem 1.6rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            
+            
+            p{
+                font-weight: 700;
+                font-size: 13px;
+                
+            }
+        }
+        
+        .box{
+            padding: .6rem 1.6rem;
+            margin-top: 1rem;
+            
+            .text-wrap{
+                display: flex;
+                align-items: center;
+                gap: 2rem;
+                
+            }
+                .input-wrap {
+                    margin-inline-start: 3rem;
+                    margin-block-start: 2rem;
+                    input {
+                        border: 1px solid #C2C2C2;
+                        padding: 1rem;
+                        margin-block-start: .5rem;
+                        border-radius: 6px;
+                        width: 100%;
+                    }
+                    
+                    #date, #cvv{
+                        width: 100px;
+                    }
+                    #cvv{
+                        margin-inline-start: 1rem;
+                    }
+                    
+                    button{
+                        background: #000;
+                        color: #fff;
+                        border-radius: 6px;
+                        padding: 1rem 1.5rem;
+                        margin: auto;
+                        display: block;
+                        margin-top: 2rem;
+                        font-weight: 600;
+                        font-size: 16px;
+                        margin-right: 0;
+                    }
+                }
+        }
+        
+        .box.card{
+            height: 40px;
+            overflow: hidden;
+            border: 1px solid #EAEAEA;
+            opacity: .5;
+        }
+    }
+}
+
+.hidden{
+    display: none !important;
 }

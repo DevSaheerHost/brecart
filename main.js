@@ -19,6 +19,8 @@ const firebaseConfig = {
   measurementId: "G-MZC38NN5BZ",
 };
 
+import {datas} from './data.js';
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
@@ -31,6 +33,50 @@ $(".deals .list-view").innerHTML = "";
 
 // Load wishlist from localStorage
 let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+
+  // url test
+  
+  const params = new URLSearchParams(window.location.search);
+const typeParam = params.get('type');
+
+if (typeParam) {
+  $('main.home').classList.add('hidden');
+  $('.product_list').classList.remove('hidden');
+
+  try {
+    const filteredProducts = datas.products.filter(product => product.type === typeParam);
+
+    if (filteredProducts.length > 0) {
+      $('.product_list .list').innerHTML = filteredProducts.map(product => `
+        <div class="item" data-name="${product.name}">
+          <i class="fa-heart heart fa-regular"></i>
+          <img src="${product.img}" alt="${product.name}">
+          <div class="detail">
+            <p class="product_name">${product.name}</p>
+            <p class="price">${product.price}</p>
+            <p class="delivery">Free delivery</p>
+          </div>
+        </div>
+      `).join('');
+
+      document.querySelectorAll(".product_list .list .item").forEach((el) => {
+        el.addEventListener("click", () => {
+          const name = el.getAttribute("data-name");
+          const item = datas.products.find((i) => i.name === name);
+          localStorage.setItem("selectedProduct", JSON.stringify(item));
+          window.location.href = "./overview/";
+        });
+      });
+
+    } else {
+      $('.product_list .list').innerHTML = '<p class="empty">No products found</p>';
+    }
+
+  } catch (e) {
+    console.error('Error while rendering Product list on url params: ', e);
+  }
+}
 
 // Render deals
 function renderDeals(items) {
@@ -85,7 +131,10 @@ function renderDeals(items) {
 }
 
 
-// Render ads
+
+
+
+// Render ads not in use
 function renderAds(items) {
   $(".lineup .flex").innerHTML = items
     .map((item) => {
@@ -100,7 +149,7 @@ function renderAds(items) {
             />
 
             <div class="detail">
-              <p class="name">iPhone 15</p>
+              <p class="name">iPhone 15 test</p>
               <p>As amazing as ever.</p>
               <p class="price">From INR 67,999</p>
 
@@ -113,6 +162,8 @@ function renderAds(items) {
     `;
     })
     .join("");
+    
+    
 }
 
 
@@ -120,116 +171,7 @@ function renderAds(items) {
 
 
 
-// Category data
-const datas = {
-  category: [
-    {
-      name: "iPhone",
-      img: "https://pngimg.com/uploads/iphone16/iphone16_PNG39.png",
-    },
-    {
-      name: "CASE",
-      img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MDG04?wid=400&hei=400&fmt=jpeg&qlt=90&.v=QVovL2FZYXJkSy9zaDVqdTlNNnNFUFlvYS9naDJJdU9KTWdGWjhKWFRmS1ZGS1d3SDlTVjBOQWIxNCszUkpvN2Q4MTdDbkZmVVptWDc4YitwOTh0MWc",
-    },
-    {
-      name: "iPad",
-      img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MWR43?wid=532&hei=582&fmt=png-alpha&.v=YlVpNnJwS1ZQRkJXOXRzZlgxR3E3Z0hqc0NvK2RZTVd5TWVhUDFuQlo0MVY4cVpMQ0xaaEhETEU0eUZzYitQbEk4VVI4RmlqdXNFT0xULzQxLzZIVmc",
-    },
-    {
-      name: "Mac",
-      img: "https://www.apple.com/v/macbook-air/u/images/overview/routers/trade_in__6u9w2o7115uu_small_2x.jpg",
-    },
-    {
-      name: "Apple watch",
-      img: "https://www.apple.com/v/apple-watch-se/s/images/overview/training-load/training_load__fjmftj1p5cqe_small_2x.jpg",
-    },
-    {
-      name: "Ipad case",
-      img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MWK43?wid=532&hei=582&fmt=png-alpha&.v=T2NaclZmQ0Y3aEFqL1JsemdISmk2QUhqc0NvK2RZTVd5TWVhUDFuQlo0MUYxM2JqSXFlN0dXVitSTitoZlhwbTIwUjlrb21WL0Q2cGlkaFVFdml1dWc",
-    },
-    {
-      name: "MagSafe",
-      img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MA6X4_AV2?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=VFh1amlVcjVRdXRVZTYzdW12SjJmVlZya2lKWlJmUEwrYndWOTJiVWJWQUYwVmtIbGRkS25RMVpBRlo0bk5DUUlHaGN0bk1qMDc2azdXVG9JZEo4SVE",
-    },
-    {
-      name: "Keyboard",
-      img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MXK83?wid=532&hei=582&fmt=png-alpha&.v=eFlJa0thaHg0Zk5Uc3lIcElEZThBZ0hqc0NvK2RZTVd5TWVhUDFuQlo0MWlQcU93cWwvb0J4b2lHc01aQ3FTRmpTVDErb2pvVFNyNGl4TzdpOGhXQnc",
-    },
-    {
-      name: "Cable",
-      img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MU2G3?wid=532&hei=582&fmt=png-alpha&.v=VDR6aHRWaDFmcExoSmNtMlQ5c0hoUUhqc0NvK2RZTVd5TWVhUDFuQlo0MTY0cUsvMVFmWHN5aHY2R05FejlZNWpLVGNQM2N0MHVnejA3TnZTdk9XMlE",
-    },
-    {
-      name: "Pencil",
-      img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MUWA3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=dFZURmpjMWNqeXhjb0NWMDZVVnNsZ2tuVHYzMERCZURia3c5SzJFOTlPanBnR2pXWTRHU3BEaEVISG4vR2NHalJOdUZTK2hyNlk4dTdFSXp2TXpTMnc",
-    },
-    {
-      name: "Adapter",
-      img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MU7W2_GEO_AE?wid=532&hei=582&fmt=png-alpha&.v=a0xVS3BLYklJVFMwaVVOOFUvMkFvTW5GeFlBNUZ4MVNzNjJzZFhYMTFSaTZCQ3ZaNVpXeUZlM1BTdlNzLzg3cmI1QmdFNUV6cGpVMUNSQWZuZzZNRUE",
-    },
-    {
-      name: "Airpod",
-      img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/airpods-pro-2-hero-select-202409_FMT_WHH?wid=750&hei=556&fmt=jpeg&qlt=90&.v=WTk1dTl5UTBnZXdKN2tua2pFb1hvQ3hmVXd6RnorM2pzUlRIKzNkUEN0UVFKL0gxZTZoRVRrWTkzYU96cTExc2VsZVRlVnZHQmY5OW81bDJoczFlQVBwSnBDdWtpT0U0NUsvRE1FbnZmZ2dhUmNsWWNoeG94RS9iYlF0b3cvT3I",
-      price: 19000,
-    },
-  ],
-  banner: [
-    {
-      img: "./assets/logo.jpg",
-      path: "",
-    },
-    {
-      img: "./assets/ads/ad1.jpg",
-      path: "",
-    },
-    {
-      img: "./assets/ads/ad2.jpg",
-      path: "",
-    },
-    {
-      img: "./assets/ads/ad3.jpg",
-      path: "",
-    },
-    {
-      img: "./assets/ads/ad4.jpg",
-      path: "",
-    },
-    {
-      img: "./assets/ads/ad5.jpg",
-      path: "",
-    },
-    {
-      img: "./assets/ads/ad6.jpg",
-      path: "",
-    },
-    {
-      img: "./assets/ads/ad7.jpg",
-      path: "",
-    },
-  ],
-  
-  lineup:[
-    {
-      img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-card-40-pro-202405_FMT_WHH?wid=508&hei=472&fmt=p-jpg&qlt=95&.v=aDFmUE8yL0ZIcG1CVlF3ejZoSTBUa3UweFZCakx2YnVZV3A3QjhxMVptZWZaQno4VzdyOTRhQU93VEhhWjgvSHg4ZHpEbm5XWGdaM3BiNVRDaG55Uk9hZHJ2SDQ3c0JlN3lXVFNtclhPL1QrNmVjbmk5c1V4VVk2VEt3TGcxekg',
-      description :'Anti-Yellow Magsafe Clear Case',
-      name: 'iPad Pro',
-      price: '₹19399'
-    },
-    {
-      img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-card-40-air-202405_FMT_WHH?wid=508&hei=472&fmt=p-jpg&qlt=95&.v=U0psRWR6Z2xkY3dwRTZYSCtyQXNFVXUweFZCakx2YnVZV3A3QjhxMVptZWZaQno4VzdyOTRhQU93VEhhWjgvSHg4ZHpEbm5XWGdaM3BiNVRDaG55UkErVEJnUGNTM2tkVDlwYzZJVEwzVkM1dDgvV3BhU1hoSzFPUEZjam5HQ2g',
-      description:'ClearVue',
-      name: 'iPad Air',
-      price:'₹14199'
-    },
-    {
-      img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-card-40-ipad-202410_FMT_WHH?wid=508&hei=472&fmt=p-jpg&qlt=95&.v=SFZodklRUStGeVJpUE9iYTA5SFFYay9QT3EzOEVhTmwyMUJSTjlXV3hGdGZMQnBkTWowcTVzai9uUEgzVDdYM3NtS0NkZnlUKzBRdlpRai9zMDR0cS9TN0NVaEVIU09sK0c2RHUvMlFZREoxWnZFQ2ozaVJXS3R0eUNrSXRjUEo',
-      description:'Anti-Yellow Magsafe Clear Case',
-      name: 'iPad',
-      price: '₹14199'
-    }
-  ]
-};
-
+// All daxxx
 $('.lineup .flex').innerHTML = datas.lineup.map(item=>`
 
 <div class="item">
@@ -253,12 +195,33 @@ $(".category .list-view").innerHTML = datas.category
     (item) => `
 
   
-    <div class="item">
+    <div class="item" data-type="${item.type}">
             <img src="${item.img}" alt="${item.name || "No image"}">
           </div>
 `
   )
   .join("");
+  
+  $('.category .list-view').querySelectorAll('.item').forEach(item=>{
+    console.log(item.dataset.type)
+    item.onclick=()=>{
+      window.location=`./?type=${item.dataset.type}`
+    }
+  })
+  
+  $('.lineup .flex').querySelectorAll('.item').forEach(item=>{
+    console.log(item)
+      item.onclick=()=>{
+        const product={
+      product_name: item.querySelector('h3').textContent,
+      product_image: item.querySelector('img').src,
+      product_price: item.querySelector('p').textContent
+      
+    }
+        localStorage.setItem("selectedProduct", JSON.stringify(product))
+window.location.href = "./overview/";
+      }
+    })
 
 let i = 0;
 const imgEl = $("#bannerImage");
@@ -352,7 +315,7 @@ get(child(dbRef, "shopless/home/ads"))
     if (snapshot.exists()) {
       const items = Object.values(snapshot.val());
       //renderAds(items);
-      console.log(items)
+      
     } else {
       console.log("No data available");
     }
@@ -360,3 +323,6 @@ get(child(dbRef, "shopless/home/ads"))
   .catch((error) => {
     console.error(error);
   });
+  
+  
+  

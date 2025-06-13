@@ -77,3 +77,11 @@ main {
     }
   }
 }
+
+
+.empty{
+  text-align: center;
+  inline-size: 100%;
+  font-weight: 600;
+  color: #848484;
+}

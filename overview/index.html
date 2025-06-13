@@ -15,7 +15,7 @@
   </head>
 
   <body>
-    <main class="overview">
+    <main class="overview layer">
       <section class="main-detail">
         <div class="header">
           <i class="fa-solid fa-arrow-left" id="back"></i>
@@ -42,31 +42,11 @@
                 alt=""
               />
             </span>
-            <span>
-              <img
-                class="sub-img"
-                src="https://m.media-amazon.com/images/I/61JvFLHZ6NL._AC_UF1000,1000_QL80_FMwebp_.jpg"
-                alt=""
-              />
-            </span>
-            <span>
-              <img
-                class="sub-img"
-                src="https://m.media-amazon.com/images/I/61JvFLHZ6NL._AC_UF1000,1000_QL80_FMwebp_.jpg"
-                alt=""
-              />
-            </span>
-            <span>
-              <img
-                class="sub-img"
-                src="https://m.media-amazon.com/images/I/61JvFLHZ6NL._AC_UF1000,1000_QL80_FMwebp_.jpg"
-                alt=""
-              />
-            </span>
+           
           </div>
         </div>
         <div class="product-detail">
-          <h3 id="productName">iPhone 16 Pro</h3>
+          <h3 id="productName">__</h3>
 
           <div class="mfg">
             <p>By <span>Apple</span> > * 4.6 [2.1k]</p>
@@ -74,14 +54,14 @@
 
           <div class="price-wrap">
             <span>
-              <h3>₹16,9999</h3>
-              <h3 class="old-price">₹17,9999</h3>
+              <h3 class="price">0000</h3>
+              <h3 class="old-price">₹-0000</h3>
             </span>
 
             <div class="coutn-wrap">
-              <span> - </span>
-              <p>1</p>
-              <span> + </span>
+              <span class="decrement"> - </span>
+              <p id="quantity">1</p>
+              <span class="increment"> + </span>
             </div>
           </div>
         </div>
@@ -97,7 +77,7 @@
           </span>
         </div>
 
-        <div class="color-varient">
+        <div class="color-varient storage-varient">
           <p>Storage: <b>128 GB</b></p>
           <span>
             <p>3 more</p>
@@ -110,6 +90,76 @@
         <button class="buy">Buy Now</button>
         <button class="addtocart">Add to Cart</button>
       </div>
+    </main>
+    
+    
+    <!--- Buy Page --->
+    
+    
+    <main class="layer buy-page hidden">
+      <section class="address">
+        <div class="title-bar">
+          <span></span>
+          <p>SHIPPING ADDRESS</p>
+        </div>
+        
+        <div class="box">
+          <div class="text-wrap">
+            <span></span>
+            <p>Address</p>
+          </div>
+          
+          <div class="input-wrap">
+            
+            <input type="text" name="district" id="district" placeholder="District" />
+            <input type="text" name="city" id="city" placeholder="City" />
+            <input type="text" name="locality" id="locality" placeholder="Local area" />
+            <input type="number" name="pincode" id="pincode" placeholder="PIN code">
+            
+            <button class="place hidden">Place order</button>
+          </div>
+        </div>
+      </section>
+      
+      
+       <section class="payment">
+   <div class="title-bar">
+     <span></span>
+     <p>PAYMENT METHOD</p>
+   </div>
+   
+   <div class="box card">
+     <div class="text-wrap">
+       <span class="none"></span>
+       <p>Debit / Credit Card</p>
+     </div>
+     
+     <div class="input-wrap">
+       
+       <input type="number" name="card" id="card" placeholder="Card Number *" />
+       <input type="month" name="date" id="date" placeholder="Date" value=""/>
+       <input type="number" name="cvv" id="cvv" placeholder="CVV" />
+       
+       
+       <button class="place">Pay ${price.total}</button>
+     </div>
+   </div>
+   
+
+   <div class="box">
+               <div class="text-wrap">
+           <span></span>
+           <p>Pay on Delivery</p>
+         </div>
+
+   
+   <div class="input-wrap">
+     <button class="place" id="placeOrder">Place Order</button>
+   </div>
+   
+ </div>
+   </div>
+ </section>
     </main>
     <script src="./script.js"></script>
   </body>

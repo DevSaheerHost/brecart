@@ -458,3 +458,59 @@ footer{
     }
   }
 }
+
+
+.layer.product_list{
+  .list{
+    margin-top: 0;
+    .item{
+      box-shadow: none;
+      display: flex;
+      gap: 2rem;
+      position: relative;
+      margin-top: 2rem;
+      background: #fff;
+      padding: 2rem 1rem;
+      i{
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        color: #B7B7B7;
+      }
+      img{
+        width: 100px;
+        height: 100%;
+        object-fit: cover;
+        mix-blend-mode: multiply;
+      }
+      p{
+        line-height: 1.5rem;
+      }
+      .product_name{
+        font-weight: 400;
+      }
+      .price{
+        font-weight: 600;
+        font-size: 18px;
+      }
+      .delivery{
+        font-size: 13px;
+      }
+    }
+  }
+}
+
+
+.hidden 
+{
+  display: none;
+}
+.item:active{
+  scale: 0.9;
+}
+.empty{
+  text-align: center;
+  inline-size: 100%;
+  font-weight: 600;
+  color: #848484;
+}

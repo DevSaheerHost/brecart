@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Website</title>
+  <style>
+    /* This class hides the element */
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Welcome to our site!</h1>
+    <a href="./priducts">./priducts</a>
+
+  <div class="product_page hidden">
+    <h2>Product Details</h2>
+    <p>This is the main content for the product page.</p>
+    
+    <a href="./priducts">./priducts</a>
+  </div>
+
+  <script>
+    // The conditional check for the URL
+    console.log(window.location.pathname)
+    if (window.location.pathname.includes('/products')) {
+
+      // Find the element with the class 'product_page'
+      const productPage = document.querySelector('.product_page');
+
+      // Check if the element was actually found before trying to change it
+      if (productPage) {
+        // If it exists, remove the 'hidden' class to make it visible
+        productPage.classList.remove('hidden');
+        console.log('Product page content is now visible.');
+      }
+    }
+  </script>
+
+</body>
+</html>
