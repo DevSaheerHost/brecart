@@ -475,6 +475,7 @@ footer{
         right: 1rem;
         top: 1rem;
         color: #B7B7B7;
+        display: none; /* Heart removed from list*/
       }
       img{
         width: 100px;
