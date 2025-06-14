@@ -316,3 +316,249 @@ vid link https://cdn.shopify.com/videos/c/o/v/c48eff385dea465193afbf36a54e8206.m
   color: white; /* optional: text contrast */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* optional: subtle depth */
 }
+
+
+
+<script>
+  const input = document.querySelector('input[type="search"]');
+  const historyWrap = document.querySelector('.history-wrap');
+  const STORAGE_KEY = 'searchHistory';
+
+  // Load history on page load
+  const history = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  renderHistory(history);
+
+  // On Enter Key Pressed
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const text = input.value.trim();
+      if (text && !history.includes(text)) {
+        history.unshift(text);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+        renderHistory(history);
+      }
+      performSearch(text);
+    }
+  });
+
+  // Click on history item
+  historyWrap.addEventListener('click', (e) => {
+    const item = e.target.closest('.item');
+    if (item) {
+      const text = item.querySelector('p').textContent;
+      input.value = text;
+      performSearch(text);
+    }
+  });
+
+  // Render search history
+  function renderHistory(items) {
+    historyWrap.innerHTML = items
+      .map(
+        (text) => `
+      <div class="item">
+        <i class="fa-solid fa-arrow-trend-up"></i>
+        <p>${text}</p>
+      </div>
+    `
+      )
+      .join('');
+  }
+
+  // Search action (to be implemented)
+  function performSearch(query) {
+    console.log("Search triggered for:", query);
+    // TODO: implement real search later with array/object
+  }
+</script>
+
+
+
+
+
+<script type="module">
+  import { datas } from './data.js'; // Adjust path as needed
+
+  const input = document.querySelector('input[type="search"]');
+  const historyWrap = document.querySelector('.history-wrap');
+  const suggestions = document.querySelector('.suggestions');
+  const STORAGE_KEY = 'searchHistory';
+  let history = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+  renderHistory(history);
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const text = input.value.trim();
+      if (text) {
+        addToHistory(text);
+        performSearch(text);
+        input.blur(); // Optional UX
+      }
+    }
+  });
+
+  input.addEventListener('input', () => {
+    const text = input.value.trim().toLowerCase();
+    if (!text) {
+      renderHistory(history);
+      suggestions.innerHTML = '';
+      return;
+    }
+
+    const historyMatches = history.filter((item) =>
+      item.toLowerCase().includes(text)
+    );
+
+    if (historyMatches.length > 0) {
+      renderSuggestions(historyMatches, true);
+    } else {
+      const dataMatches = getSuggestionsFromData(text);
+      renderSuggestions(dataMatches, false);
+    }
+  });
+
+  historyWrap.addEventListener('click', (e) => {
+    const item = e.target.closest('.item');
+    if (item) {
+      const text = item.querySelector('p').textContent;
+      input.value = text;
+      performSearch(text);
+    }
+  });
+
+  suggestions.addEventListener('click', (e) => {
+    const item = e.target.closest('.suggestion');
+    if (item) {
+      const text = item.dataset.text;
+      input.value = text;
+      addToHistory(text);
+      performSearch(text);
+      suggestions.innerHTML = '';
+    }
+  });
+
+  function addToHistory(text) {
+    if (!history.includes(text)) {
+      history.unshift(text);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+      renderHistory(history);
+    }
+  }
+
+  function renderHistory(items) {
+    historyWrap.innerHTML = items
+      .map(
+        (text) => `
+      <div class="item">
+        <i class="fa-solid fa-arrow-trend-up"></i>
+        <p>${text}</p>
+      </div>
+    `
+      )
+      .join('');
+  }
+
+  function renderSuggestions(items, isHistory) {
+    suggestions.innerHTML = items
+      .map(
+        (text) => `
+      <div class="suggestion" data-text="${text}">
+        <i class="fa-solid ${isHistory ? 'fa-clock' : 'fa-magnifying-glass'}"></i>
+        <span>${text}</span>
+      </div>
+    `
+      )
+      .join('');
+  }
+
+  function getSuggestionsFromData(query) {
+    const all = [
+      ...datas.category.map((c) => c.name),
+      ...datas.products.map((p) => p.name),
+      ...datas.lineup.map((l) => l.name),
+    ];
+    const unique = [...new Set(all)];
+    return unique.filter((item) =>
+      item.toLowerCase().includes(query.toLowerCase())
+    );
+  }
+
+  function performSearch(text) {
+    console.log('Searching for:', text);
+    // TODO: filter and display products based on `text`
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // 3. LAYER FILTER (flexible match)
+else if (layerParam) {
+  console.log("Layer param triggered:", layerParam);
+
+  $('.product_list').classList.remove('hidden');
+  $('main.home').classList.add('hidden');
+  $('.layer.search').classList.add('hidden');
+
+  try {
+    const filteredProducts = datas.products.filter(product => {
+      const name = product.name?.toLowerCase().slice(0, 10) || '';
+      const category = datas.category.find(c => c.id === product.categoryId)?.name?.toLowerCase().slice(0, 10) || '';
+      const lineup = datas.lineup.find(l => l.id === product.lineupId)?.name?.toLowerCase().slice(0, 10) || '';
+
+      return (
+        name.includes(layerKey) ||
+        category.includes(layerKey) ||
+        lineup.includes(layerKey)
+      );
+    });
+
+    console.log("Filtered products (layerParam):", filteredProducts);
+
+    if (filteredProducts.length > 0) {
+      $('.product_list .list').innerHTML = filteredProducts.map(product => `
+        <div class="item" data-name="${product.name}">
+          <i class="fa-heart heart fa-regular"></i>
+          <img src="${product.img}" alt="${product.name}">
+          <div class="detail">
+            <p class="product_name">${product.name}</p>
+            <p class="price">${product.price}</p>
+            <p class="delivery">Free delivery</p>
+          </div>
+        </div>
+      `).join('');
+
+      document.querySelectorAll(".product_list .list .item").forEach((el) => {
+        el.addEventListener("click", () => {
+          const name = el.getAttribute("data-name");
+          const item = datas.products.find((i) => i.name === name);
+          localStorage.setItem("selectedProduct", JSON.stringify(item));
+          window.location.href = "./overview/";
+        });
+      });
+
+    } else {
+      $('.product_list .list').innerHTML = '<p class="empty">No products found</p>';
+    }
+
+  } catch (e) {
+    console.error('Error while rendering Product list on layerParam:', e.message);
+  }
+}
+
+
+product.name.replace(new RegExp(searchInput, 'gi'), match => `<mark>${match}</mark>`)

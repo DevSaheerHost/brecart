@@ -26,7 +26,7 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getDatabase(app);
 const dbRef = ref(db);
-
+let foudQ=''
 // Shorthand
 const $ = (selector) => document.querySelector(selector);
 $(".deals .list-view").innerHTML = "";
@@ -37,10 +37,28 @@ let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 
   // url test
   
-  const params = new URLSearchParams(window.location.search);
-const typeParam = params.get('type');
+  $('.input-box').onclick=()=>window.location='./?layer=search'
 
-if (typeParam) {
+// Get URL parameters
+const params = new URLSearchParams(window.location.search);
+const typeParam = params.get('type');
+const layerParamRaw = params.get('layer') || '';
+const layerParam = layerParamRaw.trim().toLowerCase();
+const layerKey = layerParam.slice(0, 10); // only use first 10 characters
+console.log(layerKey)
+
+// 1. Special case: Search Layer
+if (layerParam === 'search') {
+  $('.product_list').classList.add('hidden');
+  $('main.home').classList.add('hidden');
+  $('.layer.search').classList.remove('hidden');
+  $('header').classList.add('hidden');
+  $('nav').classList.add('hidden');
+  $('.layer.search input').focus()
+}
+
+// 2. TYPE FILTER
+else if (typeParam) {
   $('main.home').classList.add('hidden');
   $('.product_list').classList.remove('hidden');
 
@@ -68,14 +86,65 @@ if (typeParam) {
           window.location.href = "./overview/";
         });
       });
-
     } else {
       $('.product_list .list').innerHTML = '<p class="empty">No products found</p>';
     }
 
   } catch (e) {
-    console.error('Error while rendering Product list on url params: ', e);
+    console.error('Error while rendering Product list on typeParam: ', e.message);
   }
+}
+else if (layerParam=='search-list') {
+   $('.product_list').classList.remove('hidden');
+  $('main.home').classList.add('hidden');
+  $('.layer.search').classList.add('hidden');
+  
+  
+  
+  try {
+  const searchInputRaw = localStorage.getItem('searchWord');
+  const searchInput = searchInputRaw ? searchInputRaw.trim().toLowerCase() : '';
+
+  console.log("Search input:", searchInput);  // debug log
+  if (!searchInput) throw new Error('Search word is empty or not found in localStorage.');
+
+  const filteredProducts = datas.products.filter(product => {
+    const name = (product.name || '').toLowerCase();
+    const description = (product.description || '').toLowerCase();
+    return name.includes(searchInput) || description.includes(searchInput);
+  });
+
+  console.log("Filtered products:", filteredProducts); // debug log
+
+  if (filteredProducts.length > 0) {
+    $('.product_list .list').innerHTML = filteredProducts.map(product => `
+      <div class="item" data-name="${product.name}">
+        <i class="fa-heart heart fa-regular"></i>
+        <img src="${product.img}" alt="${product.name}">
+        <div class="detail">
+          <p class="product_name">${product.name}</p>
+          <p class="price">${product.price}</p>
+          <p class="delivery">Free delivery</p>
+        </div>
+      </div>
+    `).join('');
+
+    document.querySelectorAll(".product_list .list .item").forEach(el => {
+      el.addEventListener("click", () => {
+        const name = el.getAttribute("data-name");
+        const item = datas.products.find(i => i.name === name);
+        localStorage.setItem("selectedProduct", JSON.stringify(item));
+        window.location.href = "./overview/";
+      });
+    });
+
+  } else {
+    $('.product_list .list').innerHTML = '<p class="empty">No products found</p>';
+  }
+
+} catch (e) {
+  console.error('Error while rendering Product list on search:', e.message);
+}
 }
 
 // Render deals
@@ -203,14 +272,14 @@ $(".category .list-view").innerHTML = datas.category
   .join("");
   
   $('.category .list-view').querySelectorAll('.item').forEach(item=>{
-    console.log(item.dataset.type)
+    //console.log(item.dataset.type)
     item.onclick=()=>{
       window.location=`./?type=${item.dataset.type}`
     }
   })
   
   $('.lineup .flex').querySelectorAll('.item').forEach(item=>{
-    console.log(item)
+    //console.log(item)
       item.onclick=()=>{
         const product={
       product_name: item.querySelector('h3').textContent,
@@ -326,3 +395,147 @@ get(child(dbRef, "shopless/home/ads"))
   
   
   
+  
+  
+function searchDatas(query) {
+  const keyword = query.toLowerCase();
+
+  const result = {
+    category: [],
+    lineup: [],
+    products: []
+  };
+
+  ['category', 'lineup', 'products'].forEach(section => {
+    datas[section].forEach(item => {
+      const name = item.name?.toLowerCase() || '';
+      const description = item.description?.toLowerCase() || '';
+      
+      if (name.includes(keyword) || description.includes(keyword)) {
+        result[section].push(item);
+      }
+    });
+  });
+
+  return result;
+}
+  
+
+  // -------- Search func --------- //
+
+const input = document.querySelector('input[type="search"]');
+const historyWrap = document.querySelector('.history-wrap');
+const suggestions = document.querySelector('.suggestions');
+const STORAGE_KEY = 'searchHistory';
+let history = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+renderHistory(history);
+
+// On typing
+input.addEventListener('input', () => {
+  const text = input.value.trim().toLowerCase();
+  if (!text) {
+    renderHistory(history);
+    suggestions.innerHTML = '';
+    return;
+  }
+
+  const historyMatches = history.filter((item) =>
+    item.toLowerCase().includes(text)
+  );
+
+  if (historyMatches.length > 0) {
+    renderSuggestions(historyMatches, true);
+  } else {
+    const dataMatches = getSuggestionsFromData(text);
+    renderSuggestions(dataMatches, false);
+  }
+});
+
+// On Enter key
+input.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const text = input.value.trim();
+    if (text) {
+      addToHistory(text);
+      performSearch(text);
+      input.blur();
+    }
+  }
+});
+
+// On clicking history item
+historyWrap.addEventListener('click', (e) => {
+  const item = e.target.closest('.item');
+  if (item) {
+    const text = item.querySelector('p').textContent;
+    input.value = text;
+    performSearch(text);
+  }
+});
+
+// On clicking suggestion
+suggestions.addEventListener('click', (e) => {
+  const suggestion = e.target.closest('.suggestion');
+  if (suggestion) {
+    const keyword = suggestion.dataset.text;
+    input.value = keyword;
+    addToHistory(keyword);
+    performSearch(keyword);
+    suggestions.innerHTML = '';
+  }
+});
+
+function performSearch(keyword) {
+  const cleanKeyword = keyword.toLowerCase().replace(/\s+/g, '-').slice(0, 30);
+  localStorage.setItem('searchWord', keyword)
+  window.location = `./?layer=search-list`;
+  foudQ=cleanKeyword
+}
+
+function addToHistory(text) {
+  if (!history.includes(text)) {
+    history.unshift(text);
+    if (history.length > 8) history.pop(); // limit to last 8 searches
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+    renderHistory(history);
+  }
+}
+
+function renderHistory(items) {
+  historyWrap.innerHTML = items
+    .map(
+      (text) => `
+      <div class="item">
+        <i class="fa-solid fa-arrow-trend-up"></i>
+        <p>${text}</p>
+      </div>
+    `
+    )
+    .join('');
+}
+
+function renderSuggestions(items, isHistory) {
+  suggestions.innerHTML = items
+    .map(
+      (text) => `
+      <div class="suggestion" data-text="${text}">
+        <i class="fa-solid ${isHistory ? 'fa-clock' : 'fa-magnifying-glass'}"></i>
+        <span class="text">${text}</span>
+      </div>
+    `
+    )
+    .join('');
+}
+
+function getSuggestionsFromData(query) {
+  const all = [
+    ...datas.category.map((c) => c.name),
+    ...datas.products.map((p) => p.name),
+    ...datas.lineup.map((l) => l.name),
+  ];
+  const unique = [...new Set(all)];
+  return unique.filter((item) =>
+    item.toLowerCase().includes(query.toLowerCase())
+  );
+}

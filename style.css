@@ -501,6 +501,55 @@ footer{
 }
 
 
+
+
+.layer.search{
+  height: 100vh;
+  .nav{
+    padding: 1rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    border-bottom: 1px solid #D6D6D6;
+    
+    input{
+      background: transparent;
+      font-size: 18px;
+      width: 100%;
+    }
+  }
+  
+  .history-wrap{
+    .item{
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      box-shadow: none;
+    }
+  }
+}
+
+
+.suggestions {
+  background: white;
+  border: 1px solid #ddd;
+  border-top: none;
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+}
+.suggestion {
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.suggestion:hover {
+  background-color: #f0f0f0;
+}
+
 .hidden 
 {
   display: none;
