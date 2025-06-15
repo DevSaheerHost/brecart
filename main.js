@@ -47,6 +47,34 @@ const layerParam = layerParamRaw.trim().toLowerCase();
 const layerKey = layerParam.slice(0, 10); // only use first 10 characters
 console.log(layerKey)
 
+function renderProductList(products) {
+  if (products.length === 0) {
+    $('.product_list .list').innerHTML = '<p class="empty">No products found</p>';
+    return;
+  }
+  
+  $('.product_list .list').innerHTML = products.map(product => `
+    <div class="item" data-name="${product.name}">
+      <i class="fa-heart heart fa-regular"></i>
+      <img src="${product.img}" alt="${product.name}">
+      <div class="detail">
+        <p class="product_name">${product.name}</p>
+        <p class="price">${product.price}</p>
+        <p class="delivery">Free delivery</p>
+      </div>
+    </div>
+  `).join('');
+  
+  document.querySelectorAll(".product_list .list .item").forEach(el => {
+    el.addEventListener("click", () => {
+      const name = el.getAttribute("data-name");
+      const item = datas.products.find((i) => i.name === name);
+      localStorage.setItem("selectedProduct", JSON.stringify(item));
+      window.location.href = "./overview/";
+    });
+  });
+}
+
 // 1. Special case: Search Layer
 if (layerParam === 'search') {
   $('.product_list').classList.add('hidden');
@@ -444,7 +472,7 @@ input.addEventListener('input', () => {
     item.toLowerCase().includes(text)
   );
 
-  if (historyMatches.length > 0) {
+  if (historyMatches.length > 2) {
     renderSuggestions(historyMatches, true);
   } else {
     const dataMatches = getSuggestionsFromData(text);
@@ -461,6 +489,14 @@ input.addEventListener('keydown', (e) => {
       performSearch(text);
       input.blur();
     }
+  }
+});
+
+
+input.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    suggestions.innerHTML = '';
+    input.blur();
   }
 });
 
@@ -489,12 +525,14 @@ suggestions.addEventListener('click', (e) => {
 function performSearch(keyword) {
   const cleanKeyword = keyword.toLowerCase().replace(/\s+/g, '-').slice(0, 30);
   localStorage.setItem('searchWord', keyword)
-  window.location = `./?layer=search-list`;
+  //window.location = `./?layer=search-list`;
+  window.history.pushState({}, '', '/?layer=search-list');
   foudQ=cleanKeyword
 }
-
+console.log(history)
 function addToHistory(text) {
   if (!history.includes(text)) {
+    
     history.unshift(text);
     if (history.length > 8) history.pop(); // limit to last 8 searches
     localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
@@ -505,37 +543,79 @@ function addToHistory(text) {
 function renderHistory(items) {
   historyWrap.innerHTML = items
     .map(
-      (text) => `
-      <div class="item">
+      (text, index) => `
+      <div class="item" data-index="${index}">
         <i class="fa-solid fa-arrow-trend-up"></i>
         <p>${text}</p>
+        <span class="remove">×</span>
       </div>
     `
     )
     .join('');
 }
+
+historyWrap.addEventListener('click', (e) => {
+  const item = e.target.closest('.item');
+  if (e.target.classList.contains('remove')) {
+    const index = item.dataset.index;
+    history.splice(index, 1);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+    renderHistory(history);
+    return;
+  }
+  if (item) {
+    const text = item.querySelector('p').textContent;
+    input.value = text;
+    performSearch(text);
+  }
+});
 
 function renderSuggestions(items, isHistory) {
+  const inputText = input.value.trim().toLowerCase();
   suggestions.innerHTML = items
-    .map(
-      (text) => `
-      <div class="suggestion" data-text="${text}">
-        <i class="fa-solid ${isHistory ? 'fa-clock' : 'fa-magnifying-glass'}"></i>
-        <span class="text">${text}</span>
-      </div>
-    `
-    )
+    .map((text) => {
+      const lower = text.toLowerCase();
+      const start = lower.indexOf(inputText);
+      const end = start + inputText.length;
+      const highlighted = text.substring(0, start) +
+                          '<strong>' + text.substring(start, end) + '</strong>' +
+                          text.substring(end);
+      return `
+        <div class="suggestion" data-text="${text}">
+          <i class="fa-solid ${isHistory ? 'fa-clock' : 'fa-magnifying-glass'}"></i>
+          <span class="text">${highlighted}</span>
+        </div>
+      `;
+    })
     .join('');
 }
 
+const fullSuggestionList = [...new Set([
+  ...datas.category.map((c) => c.name),
+  ...datas.products.map((p) => p.name),
+  ...datas.lineup.map((l) => l.name),
+])];
+
 function getSuggestionsFromData(query) {
-  const all = [
-    ...datas.category.map((c) => c.name),
-    ...datas.products.map((p) => p.name),
-    ...datas.lineup.map((l) => l.name),
-  ];
-  const unique = [...new Set(all)];
-  return unique.filter((item) =>
+  return fullSuggestionList.filter((item) =>
     item.toLowerCase().includes(query.toLowerCase())
   );
 }
+
+
+window.onerror = function (message, source, lineno, colno, error) {
+  alert("Error: " + message + "\nLine: " + lineno + "\nColumn: " + colno);
+};
+
+
+
+window.onpopstate = () => {
+  const params = new URLSearchParams(window.location.search);
+  const layer = params.get('layer');
+  if (layer === 'search-list') {
+    const word = localStorage.getItem('searchWord') || '';
+    // renderSearchList(word); // Build this to avoid reload
+  } else {
+    location.reload();
+  }
+};

@@ -122,50 +122,91 @@ export const datas = {
       img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-card-40-pro-202405_FMT_WHH?wid=508&hei=472&fmt=p-jpg&qlt=95&.v=aDFmUE8yL0ZIcG1CVlF3ejZoSTBUa3UweFZCakx2YnVZV3A3QjhxMVptZWZaQno4VzdyOTRhQU93VEhhWjgvSHg4ZHpEbm5XWGdaM3BiNVRDaG55Uk9hZHJ2SDQ3c0JlN3lXVFNtclhPL1QrNmVjbmk5c1V4VVk2VEt3TGcxekg',
       description :'Anti-another ipod Magsafe Clear Case',
       name: 'iPad Pro',
-      price: '₹19399',
+      price: '19399',
       type:'mobile'
     },
     {
   img: 'https://rukminim2.flixcart.com/image/292/360/xif0q/mobile/8/w/5/-original-imah4jyfwr3bfjbg.jpeg?q=60&crop=false',
   description: 'latest ipad pro',
   name: 'iPhone 16 (Black, 128 GB)',
-  price: '₹19399',
+  price: '19399',
   type:'mobile'
 },
 {
   img: 'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-card-40-pro-202405_FMT_WHH?wid=508&hei=472&fmt=p-jpg&qlt=95&.v=aDFmUE8yL0ZIcG1CVlF3ejZoSTBUa3UweFZCakx2YnVZV3A3QjhxMVptZWZaQno4VzdyOTRhQU93VEhhWjgvSHg4ZHpEbm5XWGdaM3BiNVRDaG55Uk9hZHJ2SDQ3c0JlN3lXVFNtclhPL1QrNmVjbmk5c1V4VVk2VEt3TGcxekg',
   description: 'Anti-Yellow Magsafe Clear Case',
   name: 'iPad Pro',
-  price: '₹19399',
+  price: '19399',
   type:'case'
 },
 {
   img: 'https://rukminim2.flixcart.com/image/822/986/xif0q/mobile/9/f/p/-original-imaghxenhnpyhn5u.jpeg?q=60&crop=false',
   description: 'Anti-Yellow Magsafe Clear Case',
   name: 'iPhone 14 Pro Max (Space Black, 512 GB)',
-  price: '₹19399',
+  price: '19399',
   type:'mobile'
 },
 {
   img:'https://m.media-amazon.com/images/I/61apfl6EiqL._UF1000,1000_QL80_FMwebp_.jpg',
   description:'Apple Watch SE (2nd Gen, 2023) [GPS 40mm] Smartwatch with Midnight Aluminum Case with Midnight Sport Band. Fitness & Sleep Tracker, Crash Detection, Heart Rate Monitor, Retina Display',
-  price: '₹24900',
+  price: '24900',
   name:'Apple Watch SE (2nd Gen, 2023)',
   type: 'watch'
 },
 {
   img:'https://m.media-amazon.com/images/I/71Lfwkepk+L._UF894,1000_QL80_FMwebp_DpWeblab_.jpg',
   description:'Withings ScanWatch Nova, Heart Health Hybrid Smartwatch for Men & Women - ECG, with SPO2, Temperature Monitoring, Sleep, Respiratory Health, Cycle Monitoring, 30-Day Battery Life, iOS & Android, Black',
-  price: '₹49,999',
+  price: '49,999',
   name:'Withings ScanWatch Nova',
   type: 'watch'
 },
 {
   img:'https://m.media-amazon.com/images/I/71Lfwkepk+L._UF894,1000_QL80_FMwebp_DpWeblab_.jpg',
   description:'Samsung Galaxy Watch6 Classic LTE (43mm, Silver, Compatible with Android only) | Introducing BP & ECG Features',
-  price: '₹23,999',
+  price: '23,999',
   name:'Samsung Galaxy Watch6 Classic ',
   type: 'watch'
+},
+
+//Pencil---
+{
+  img:'https://m.media-amazon.com/images/I/41WNvMCswQL._UF1000,1000_QL80_FMwebp_.jpg',
+  description:'Basics Stylus Pen for iPad with Magnetic Wireless Charging, Palm Rejection, Apple Pencil Compatible with Pro 11 in 1/2/3/4, Pro 12.9 in 3/4/5/6, Air 4/5, Mini 6 (White)',
+  price: '1,518',
+  name:'Basics Stylus Pen for iPad with Magnetic Wireless Charging',
+  type: 'pencil'
+},
+
+{
+  img:'https://m.media-amazon.com/images/I/51apSMEO42L._UF1000,1000_QL80_FMwebp_.jpg',
+  description:'Basics Stylus Pencil for iPad Tablets with Angle Tilt Sensitivity, Palm Rejection, Up to 9 Hrs Playtime, Attaches Magnetically, Battery LED Indicator, Stylus Pen for iPads,4 Lights',
+  price: '7799',
+  name:'Stylus Pencil for iPad Tablets with Angle Tilt Sensitivity',
+  type: 'pencil'
+},
+{
+  img:'https://m.media-amazon.com/images/I/41s9DmRSgcL._UF1000,1000_QL80_FMwebp_.jpg',
+  description:'Apple Pencil (USB-C)',
+  price: '7,900',
+  name:'Apple Pencil (USB-C)',
+  type: 'pencil'
+},
+{
+  img: 'https://m.media-amazon.com/images/I/41VrYEWgJaL._UF1000,1000_QL80_FMwebp_DpWeblab_.jpg',
+  description: 'Apple Pencil (2nd Generation)',
+  price: '11,498',
+  name: 'Apple Pencil (2nd Generation)',
+  type: 'pencil'
+},
+
+// case ---
+
+{
+  img: 'https://m.media-amazon.com/images/I/51Fd5yHmUgL._UF1000,1000_QL80_FMwebp_.jpg',
+  description: 'SKECH Basic Case for iPhone 14 Plus (6.7") (Polycarbonate_Clear)',
+  price: '799',
+  name: 'SKECH Basic Case for iPhone 14 Plus (6.7") (Polycarbonate_Clear)',
+  type: 'case'
 }
 
     

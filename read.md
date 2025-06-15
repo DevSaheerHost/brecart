@@ -562,3 +562,9 @@ else if (layerParam) {
 
 
 product.name.replace(new RegExp(searchInput, 'gi'), match => `<mark>${match}</mark>`)
+
+
+
+
+
+if (!history.some(item => item.toLowerCase() === text.toLowerCase())) {
