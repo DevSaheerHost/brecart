@@ -42,7 +42,31 @@ BreCart/ ├── public/
 
 
 
-Brecart/ ├── Assets/ │   ├── Logo.jpg │   └── Ads/ │       └── [ad-image files] ├── Auth/ │   ├── index.html │   ├── style.css │   └── script.js ├── List view/ │   ├── index.html │   ├── style.css │   └── script.js ├── Overview/ │   ├── index.html │   ├── style.css │   └── script.js ├── Wishlist/ │   ├── index.html │   ├── style.css │   └── script.js ├── Data.js ├── index.html          ##### Home Page ├── style.css           ##### Global Styles └── responsive.css      ##### Mobile Responsiveness
+Brecart/ 
+   ├── Assets/ 
+   │   ├── Logo.jpg 
+   │   └── Ads/ 
+   │       └── [ad-image files] 
+   ├── Auth/ 
+   │   ├── index.html 
+   │   ├── style.css 
+   │   └── script.js 
+   ├── List view/ 
+   │   ├── index.html 
+   │   ├── style.css 
+   │   └── script.js 
+   ├── Overview/ 
+   │   ├── index.html 
+   │   ├── style.css 
+   │   └── script.js 
+   ├── Wishlist/ 
+   │   ├── index.html 
+   │   ├── style.css 
+   │   └── script.js 
+   ├── Data.js 
+   ├── index.html          Home page
+   ├── style.css           Global Styles └── responsive.css         Mobile Responsiveness
+   
 ---
 
 ## 🔧 Tech Stack
