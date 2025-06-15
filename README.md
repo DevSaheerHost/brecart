@@ -20,14 +20,21 @@ BreCart is a fast, responsive, and user-focused e-commerce web application built
 ## 📁 Folder Structure
 
 BreCart/ ├── public/ 
-         ├── src/ │   
-         ├── assets/ │   
-         ├── components/ │   
-         ├── firebase/ │   
-         ├── pages/ │   
-         ├── styles/ │   
-         ├── utils/ │   
-           └── index.js 
+         ├── src/ 
+         │   
+         ├── assets/ 
+         │   
+         ├── components/ 
+         │   
+         ├── firebase/ 
+         │
+         ├── pages/ 
+         │   
+         ├── styles/ 
+         │   
+         ├── utils/ 
+         │   
+         └── index.js 
          ├── .gitignore 
          ├── package.json 
          ├── README.md 
@@ -52,6 +59,31 @@ BreCart/ ├── public/
 git clone https://github.com/Devsaheerhost/brecart.git
 cd brecart
 
+
+
+2. Set Up Firebase
+
+Go to Firebase Console
+
+Create a project and enable Realtime Database
+
+Copy the Firebase config and replace it inside /firebase/init.js
+
+
+// firebase/init.js
+const firebaseConfig = {
+  apiKey: "...",
+  authDomain: "...",
+  databaseURL: "...",
+  projectId: "...",
+  storageBucket: "...",
+  messagingSenderId: "...",
+  appId: "..."
+};
+
+3. Run Locally
+
+Open index.html in a local web server like Live Server or host with Vite/Parcel for better dev experience.
 
 
 ---
