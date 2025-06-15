@@ -42,8 +42,8 @@ BreCart/ ├── public/
 
 
 
-Brecart/ 
-   ├── Assets/ 
+
+  Brecart/ ├── Assets/ 
    │   ├── Logo.jpg 
    │   └── Ads/ 
    │       └── [ad-image files] 
@@ -65,7 +65,8 @@ Brecart/
    │   └── script.js 
    ├── Data.js 
    ├── index.html          Home page
-   ├── style.css           Global Styles └── responsive.css         Mobile Responsiveness
+   ├── style.css           Global Styles 
+   └── responsive.css      Mobile Responsiveness
    
 ---
 
