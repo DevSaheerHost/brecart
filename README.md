@@ -44,7 +44,7 @@ BreCart/ ├── public/
 
 
   Brecart/ 
-F/ ├── Assets/ 
+   ├── Assets/ 
    │   ├── Logo.jpg 
    │   └── Ads/ 
    │       └── [ad-image files] 
