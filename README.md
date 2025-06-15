@@ -43,7 +43,7 @@ BreCart/ ├── public/
 
 
 
-  Brecart/ 
+Brecart/ 
    ├── Assets/ 
    │   ├── Logo.jpg 
    │   └── Ads/ 
