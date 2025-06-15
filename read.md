@@ -568,3 +568,16 @@ product.name.replace(new RegExp(searchInput, 'gi'), match => `<mark>${match}</ma
 
 
 if (!history.some(item => item.toLowerCase() === text.toLowerCase())) {
+
+
+
+
+// On clicking history item
+// historyWrap.addEventListener('click', (e) => {
+//   const item = e.target.closest('.item');
+//   if (item) {
+//     const text = item.querySelector('p').textContent;
+//     input.value = text;
+//     performSearch(text);
+//   }
+// });

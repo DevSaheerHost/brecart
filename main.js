@@ -37,7 +37,11 @@ let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 
   // url test
   
-  $('.input-box').onclick=()=>window.location='./?layer=search'
+  //$('.input-box').onclick=()=>window.location='./?layer=search'
+  $('.input-box').onclick=()=>{
+    window.history.pushState({}, '', '/?layer=search');
+window.dispatchEvent(new PopStateEvent("popstate"));
+  }
 
 // Get URL parameters
 const params = new URLSearchParams(window.location.search);
@@ -93,30 +97,7 @@ else if (typeParam) {
   try {
     const filteredProducts = datas.products.filter(product => product.type === typeParam);
 
-    if (filteredProducts.length > 0) {
-      $('.product_list .list').innerHTML = filteredProducts.map(product => `
-        <div class="item" data-name="${product.name}">
-          <i class="fa-heart heart fa-regular"></i>
-          <img src="${product.img}" alt="${product.name}">
-          <div class="detail">
-            <p class="product_name">${product.name}</p>
-            <p class="price">${product.price}</p>
-            <p class="delivery">Free delivery</p>
-          </div>
-        </div>
-      `).join('');
-
-      document.querySelectorAll(".product_list .list .item").forEach((el) => {
-        el.addEventListener("click", () => {
-          const name = el.getAttribute("data-name");
-          const item = datas.products.find((i) => i.name === name);
-          localStorage.setItem("selectedProduct", JSON.stringify(item));
-          window.location.href = "./overview/";
-        });
-      });
-    } else {
-      $('.product_list .list').innerHTML = '<p class="empty">No products found</p>';
-    }
+    renderProductList(filteredProducts)
 
   } catch (e) {
     console.error('Error while rendering Product list on typeParam: ', e.message);
@@ -144,31 +125,7 @@ else if (layerParam=='search-list') {
 
   console.log("Filtered products:", filteredProducts); // debug log
 
-  if (filteredProducts.length > 0) {
-    $('.product_list .list').innerHTML = filteredProducts.map(product => `
-      <div class="item" data-name="${product.name}">
-        <i class="fa-heart heart fa-regular"></i>
-        <img src="${product.img}" alt="${product.name}">
-        <div class="detail">
-          <p class="product_name">${product.name}</p>
-          <p class="price">${product.price}</p>
-          <p class="delivery">Free delivery</p>
-        </div>
-      </div>
-    `).join('');
-
-    document.querySelectorAll(".product_list .list .item").forEach(el => {
-      el.addEventListener("click", () => {
-        const name = el.getAttribute("data-name");
-        const item = datas.products.find(i => i.name === name);
-        localStorage.setItem("selectedProduct", JSON.stringify(item));
-        window.location.href = "./overview/";
-      });
-    });
-
-  } else {
-    $('.product_list .list').innerHTML = '<p class="empty">No products found</p>';
-  }
+  renderProductList(filteredProducts)
 
 } catch (e) {
   console.error('Error while rendering Product list on search:', e.message);
@@ -500,15 +457,7 @@ input.addEventListener('keydown', (e) => {
   }
 });
 
-// On clicking history item
-historyWrap.addEventListener('click', (e) => {
-  const item = e.target.closest('.item');
-  if (item) {
-    const text = item.querySelector('p').textContent;
-    input.value = text;
-    performSearch(text);
-  }
-});
+
 
 // On clicking suggestion
 suggestions.addEventListener('click', (e) => {
@@ -527,6 +476,7 @@ function performSearch(keyword) {
   localStorage.setItem('searchWord', keyword)
   //window.location = `./?layer=search-list`;
   window.history.pushState({}, '', '/?layer=search-list');
+window.dispatchEvent(new PopStateEvent("popstate"));
   foudQ=cleanKeyword
 }
 console.log(history)
@@ -612,10 +562,56 @@ window.onerror = function (message, source, lineno, colno, error) {
 window.onpopstate = () => {
   const params = new URLSearchParams(window.location.search);
   const layer = params.get('layer');
+  console.log("onpopstate layer:", layer);
+  
   if (layer === 'search-list') {
+    // Show search results
+    $('header').classList.remove('hidden');
+    $('nav').classList.remove('hidden');
+    $('.product_list').classList.remove('hidden');
+    $('main.home').classList.add('hidden');
+    $('.layer.search').classList.add('hidden');
+    
+    localStorage.setItem('previousPage', 'search');
+    
     const word = localStorage.getItem('searchWord') || '';
-    // renderSearchList(word); // Build this to avoid reload
-  } else {
-    location.reload();
+    const searchInput = word.trim().toLowerCase();
+    
+    const filteredProducts = datas.products.filter(product => {
+      const name = (product.name || '').toLowerCase();
+      const description = (product.description || '').toLowerCase();
+      return name.includes(searchInput) || description.includes(searchInput);
+    });
+    
+    renderProductList(filteredProducts);
+  }
+  
+  else if (layer === 'search') {
+    $('.product_list').classList.add('hidden');
+    $('main.home').classList.add('hidden');
+    $('.layer.search').classList.remove('hidden');
+    $('header').classList.add('hidden');
+    $('nav').classList.add('hidden');
+    $('.layer.search input').focus();
+    
+    localStorage.setItem('previousPage', 'search');
+  }
+  
+  else {
+    // Default: home
+    $('.product_list').classList.add('hidden');
+    $('.layer.search').classList.add('hidden');
+    $('main.home').classList.remove('hidden');
+    $('header').classList.remove('hidden');
+    $('nav').classList.remove('hidden');
+    localStorage.setItem('previousPage', 'home');
   }
 };
+
+
+//later clear history 
+// document.querySelector('.clear-history').onclick = () => {
+//   history = [];
+//   localStorage.removeItem(STORAGE_KEY);
+//   renderHistory([]);
+// };
