@@ -39,7 +39,7 @@ let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
   
   //$('.input-box').onclick=()=>window.location='./?layer=search'
   $('.input-box').onclick=()=>{
-    window.history.pushState({}, '', '/?layer=search');
+    window.history.pushState({}, '', './?layer=search');
 window.dispatchEvent(new PopStateEvent("popstate"));
   }
 
@@ -63,8 +63,8 @@ function renderProductList(products) {
       <img src="${product.img}" alt="${product.name}">
       <div class="detail">
         <p class="product_name">${product.name}</p>
-        <p class="price">${product.price}</p>
-        <p class="delivery">Free delivery</p>
+        <p class="price">₹${product.price.toLocaleString()}</p>
+        <p class="delivery">${product.delivery? '₹'+product.delivery:'Free delivery'}</p>
       </div>
     </div>
   `).join('');
@@ -236,7 +236,7 @@ $('.lineup .flex').innerHTML = datas.lineup.map(item=>`
             />
 
             <div class="detail">
-              <p>From INR ${item.price}</p>
+              <p>From INR ₹${item.price}</p>
 
               <span>Buy</span>
             </div>
@@ -259,7 +259,9 @@ $(".category .list-view").innerHTML = datas.category
   $('.category .list-view').querySelectorAll('.item').forEach(item=>{
     //console.log(item.dataset.type)
     item.onclick=()=>{
-      window.location=`./?type=${item.dataset.type}`
+     // window.location=`./?type=${item.dataset.type}`
+      window.history.pushState({}, '', `./?type=${item.dataset.type}`);
+window.dispatchEvent(new PopStateEvent("popstate"));
     }
   })
   
@@ -298,7 +300,7 @@ const changeImage = () => {
         imgEl.style.opacity = 1;
       });
 
-      console.log("Changed to image", i + 1);
+      // console.log("Changed to image", i + 1);
       i++;
       changeImage();
     }, 400); // match fade-out duration
@@ -475,7 +477,7 @@ function performSearch(keyword) {
   const cleanKeyword = keyword.toLowerCase().replace(/\s+/g, '-').slice(0, 30);
   localStorage.setItem('searchWord', keyword)
   //window.location = `./?layer=search-list`;
-  window.history.pushState({}, '', '/?layer=search-list');
+  window.history.pushState({}, '', './?layer=search-list');
 window.dispatchEvent(new PopStateEvent("popstate"));
   foudQ=cleanKeyword
 }
@@ -540,9 +542,12 @@ function renderSuggestions(items, isHistory) {
     .join('');
 }
 
+// Search suggestions fix here if needed
+
 const fullSuggestionList = [...new Set([
   ...datas.category.map((c) => c.name),
   ...datas.products.map((p) => p.name),
+  ...datas.products.map((pd) => pd.description.split(' ').slice(0, 10).join(' ')), // Here
   ...datas.lineup.map((l) => l.name),
 ])];
 
@@ -553,9 +558,7 @@ function getSuggestionsFromData(query) {
 }
 
 
-window.onerror = function (message, source, lineno, colno, error) {
-  alert("Error: " + message + "\nLine: " + lineno + "\nColumn: " + colno);
-};
+
 
 
 
@@ -597,7 +600,27 @@ window.onpopstate = () => {
     localStorage.setItem('previousPage', 'search');
   }
   
-  else {
+  else if(params.get('type')){
+    const Type = params.get('type'); // example: "case,pencil"
+
+    const allowedTypes = Type ? Type.split(',') : [];
+    console.log(allowedTypes)
+
+
+    const filteredProducts = datas.products.filter(product => product.type === Type);
+    renderProductList(filteredProducts)
+    datas.products.forEach(product => {
+    
+      if (Type && allowedTypes.includes(product.type)) {
+        console.log("Showing:", product.name);
+        $('.product_list').classList.remove('hidden');
+        $('main.home').classList.add('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scroll to top
+  } else {
+    //alert('No products found!')
+  }
+});
+  } else{
     // Default: home
     $('.product_list').classList.add('hidden');
     $('.layer.search').classList.add('hidden');
@@ -606,6 +629,10 @@ window.onpopstate = () => {
     $('nav').classList.remove('hidden');
     localStorage.setItem('previousPage', 'home');
   }
+  
+  
+
+
 };
 
 
@@ -615,3 +642,14 @@ window.onpopstate = () => {
 //   localStorage.removeItem(STORAGE_KEY);
 //   renderHistory([]);
 // };
+// author 
+
+
+//const params = new URLSearchParams(window.location.search);
+//const layer = params.get('layer'); // example: "case,pencil"
+
+
+
+window.onerror = function (message, source, lineno, colno, error) {
+  alert("Error: " + message + "\nLine: " + lineno + "\nColumn: " + colno);
+};

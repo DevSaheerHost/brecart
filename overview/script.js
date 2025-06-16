@@ -6,7 +6,7 @@ if (product) {
   $(".sub-img").src = product.product_image || product.img;
   $("#productName").textContent = product.product_description || product.description;
   
-  $(".price").textContent = product.product_price || product.price;
+  $(".price").textContent = `₹${product.product_price?product.product_price.toLocaleString() :product.price.toLocaleString()}`;
 } else {
   document.querySelector(".overview").innerHTML = `<p>No product selected.</p>`;
 }
@@ -19,12 +19,17 @@ $('.increment').onclick=()=>{
   if ($('#quantity').textContent<10) {
     $('#quantity').textContent++
     $('.decrement').style.borderColor='black'
+    const totalPrice = product.price * $('#quantity').textContent
+    $(".price").textContent = ` ₹${totalPrice.toLocaleString()}`
   } else $('.increment').style.borderColor='#C5C5C5'
 }
 $('.decrement').onclick=()=>{
   if ($('#quantity').textContent > 1) {
     $('#quantity').textContent--
     $('.increment').style.borderColor='black'
+    
+    const totalPrice = product.price * $('#quantity').textContent
+    $(".price").textContent = ` ₹${totalPrice.toLocaleString()}`
   } 
   if ($('#quantity').textContent<2) {
     $('.decrement').style.borderColor='#C5C5C5'
@@ -44,3 +49,7 @@ $('.buy').onclick=()=>{
 }
 
 $('#placeOrder').onclick=()=>alert(`Order Not Placed :)`)
+
+window.onerror = function(message, source, lineno, colno, error) {
+  alert("Error: " + message + "\nLine: " + lineno + "\nColumn: " + colno);
+};
