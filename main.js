@@ -64,7 +64,7 @@ function renderProductList(products) {
       <div class="detail">
         <p class="product_name">${product.name}</p>
         <p class="price">₹${product.price.toLocaleString()}</p>
-        <p class="delivery">${product.delivery? '₹'+product.delivery:'Free delivery'}</p>
+        <p class="delivery">${product.delivery? 'Deliver fee ₹'+product.delivery:'Free delivery'}</p>
       </div>
     </div>
   `).join('');
@@ -177,9 +177,19 @@ function renderDeals(items) {
   document.querySelectorAll(".deals .item").forEach((el) => {
     el.addEventListener("click", () => {
       const name = el.getAttribute("data-name");
-      const item = items.find((i) => i.product_name === name);
+      const item = items.find((i) => i.product_name === name || i.description === name);
       localStorage.setItem("selectedProduct", JSON.stringify(item));
       window.location.href = "./overview/";
+     
+
+// const word = el.querySelector('p').textContent.trim().toLowerCase();
+
+// const fixedWord = word.includes('magsafe') ? 'magsafe' : word;
+
+//performSearch(fixedWord)
+      
+     
+//window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   });
 }
@@ -259,9 +269,11 @@ $(".category .list-view").innerHTML = datas.category
   $('.category .list-view').querySelectorAll('.item').forEach(item=>{
     //console.log(item.dataset.type)
     item.onclick=()=>{
-     // window.location=`./?type=${item.dataset.type}`
+     
       window.history.pushState({}, '', `./?type=${item.dataset.type}`);
 window.dispatchEvent(new PopStateEvent("popstate"));
+
+
     }
   })
   
@@ -575,6 +587,7 @@ window.onpopstate = () => {
     $('main.home').classList.add('hidden');
     $('.layer.search').classList.add('hidden');
     
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     localStorage.setItem('previousPage', 'search');
     
     const word = localStorage.getItem('searchWord') || '';

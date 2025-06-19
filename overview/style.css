@@ -303,6 +303,58 @@ section{
     }
 }
 
+.order-placed-message-wrap{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+    background: #fff;
+}
+.order-placed-message-wrap .message-box{
+    padding: 2rem;
+    
+    background: #fff;
+   
+    text-align: center;
+}
+
+.order-placed-message-wrap .message-box h2{
+    margin: 2rem 0;
+    margin-top: 0;
+    font-weight: 500;
+}
+.order-placed-message-wrap .message-box p{
+    color: #B6B6B6;
+    letter-spacing: 1px;
+    margin: .8rem 0;
+    font-size: 12px;
+    span{
+        font-weight: 500;
+    }
+    span.b{
+        color: #008B1F;
+        
+    }
+}
+
+.order-placed-message-wrap .message-box button.back-to-purchase{
+                        color: #fff;
+                        border-radius: 6px;
+                        padding: 1rem 1.5rem;
+                        margin: auto;
+                        display: block;
+                        margin-top: 2rem;
+                        font-weight: 600;
+                        font-size: 16px;
+                        background: #008B1F;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.27);
+                        
+}
+
 .hidden{
     display: none !important;
 }

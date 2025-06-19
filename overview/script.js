@@ -6,7 +6,8 @@ if (product) {
   $(".sub-img").src = product.product_image || product.img;
   $("#productName").textContent = product.product_description || product.description;
   
-  $(".price").textContent = `₹${product.product_price?product.product_price.toLocaleString() :product.price.toLocaleString()}`;
+  const price = Number(product.product_price ?? product.price);
+$(".price").textContent = `₹${price.toLocaleString()}`;
 } else {
   document.querySelector(".overview").innerHTML = `<p>No product selected.</p>`;
 }
@@ -18,17 +19,25 @@ console.log(product)
 $('.increment').onclick=()=>{
   if ($('#quantity').textContent<10) {
     $('#quantity').textContent++
+    
+    let quantity =Number($('#quantity').textContent)
+    
     $('.decrement').style.borderColor='black'
-    const totalPrice = product.price * $('#quantity').textContent
+    
+    const totalPrice = (product.price?? product.product_price) * quantity;
+    
     $(".price").textContent = ` ₹${totalPrice.toLocaleString()}`
+    
   } else $('.increment').style.borderColor='#C5C5C5'
 }
 $('.decrement').onclick=()=>{
   if ($('#quantity').textContent > 1) {
     $('#quantity').textContent--
     $('.increment').style.borderColor='black'
+    let quantity =Number($('#quantity').textContent)
     
-    const totalPrice = product.price * $('#quantity').textContent
+    
+    const totalPrice = (product.price?? product.product_price) * quantity;
     $(".price").textContent = ` ₹${totalPrice.toLocaleString()}`
   } 
   if ($('#quantity').textContent<2) {
