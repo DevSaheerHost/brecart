@@ -492,6 +492,14 @@ function performSearch(keyword) {
   window.history.pushState({}, '', './?layer=search-list');
 window.dispatchEvent(new PopStateEvent("popstate"));
   foudQ=cleanKeyword
+  
+  const text = input.value;
+  if (text) {
+    $('#searchPlaceHolder').textContent=text
+  } else {
+    $('#searchPlaceHolder').textContent='Search'
+    
+  }
 }
 console.log(history)
 function addToHistory(text) {

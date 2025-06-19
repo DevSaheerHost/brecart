@@ -52,13 +52,23 @@ if (layerParam == 'place-order') {
   $('.layer').classList.add('hidden')
   $('.buy-page').classList.remove('hidden')
 }
-$('.buy').onclick=()=>{
+$('.buy_btn').onclick=()=>{
+  
   window.location='./?layer=place-order'
   
 }
 
-$('#placeOrder').onclick=()=>alert(`Order Not Placed :)`)
+$('#placeOrder').onclick=()=>$('.order-placed-message-wrap').classList.remove('hidden')
+
+$('.back-to-purchase').onclick=()=>window.location='../';
 
 window.onerror = function(message, source, lineno, colno, error) {
   alert("Error: " + message + "\nLine: " + lineno + "\nColumn: " + colno);
+};
+
+
+$('.buy i').onclick = () => {
+  const icon = $('.buy i');
+  icon.classList.toggle('fa-regular');
+  icon.classList.toggle('fa-solid');
 };

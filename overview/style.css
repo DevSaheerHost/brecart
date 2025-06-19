@@ -172,33 +172,44 @@ section{
     
     padding: 0;
     h3{
-        padding: 1rem 2rem;
+        padding: 0rem 2rem;
         padding-block-start: 0;
-        
+        font-size: 24px;
         margin-block: 1rem;
+        
+        span{
+            color: #B2B2B2;
+            font-weight: 500;
+        }
+    }
+    h3.color{
+        margin-top: 4rem;
     }
 }
 .color-varient{
-    padding: 1rem 2rem;
+    padding: 2rem 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-block-start: 1.4px solid #DBDBDB;
+    border-block-start: 1.4px solid #B2B2B2;
     
     /* curved design*/
-    border: 1.4px solid #DBDBDB;
-    margin-inline: 1rem;
+    border: 1.4px solid #C6C6C6;
+    margin-inline: 2rem;
     border-radius: 10px;
     margin-top: 1rem;
-    color: #8A8A8A;
-    font-weight: 500;
+    color: #C6C6C6;
     
+    p{
+        font-weight: 600;
+    }
     span{
         display: flex;
         align-items: center;
         gap: .6rem;
         p{
-            color: #8A8A8A;
+            
+            font-weight: normal;
         }
     }
     
@@ -209,27 +220,35 @@ section{
     position: sticky;
     inset-block-end: 0;
     display: flex;
+    flex-flow: row-reverse;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: 1rem;
-    padding: 2rem;
+    padding: 2rem 0;
     inline-size: 100%;
     button{
         padding: 1rem 2rem;
         font-weight: 400;
         font-size: 17px;
         border-radius: 10px;
-        background: #000;
+        background: #09a0ff;
         color: #fff;
-        border: 2px solid #000;
+        
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.17);
-        inline-size: 50%;
-        max-inline-size: 200px;
+        inline-size: 100%;
+        max-inline-size: 370px;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-flow: row-reverse;
+        font-weight: 600;
+        font-size: 20px;
+        i{
+            font-size: 24px;
+        }
     }
-    button.addtocart{
-        background: #fff;
-        color: #000;
-    }
+    
 }
 
 

@@ -29,6 +29,14 @@ html {
   padding-block-end: 3rem;
 }
 
+#searchPlaceHolder{
+        overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis;
+        display: block;
+        width: 200px;
+      }
+
 header.scrolled {
   background: #fff;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.37);
@@ -79,6 +87,8 @@ header {
       border-radius: 100px;
       padding: 1rem;
       inline-size: 100%;
+      
+      
     }
     i.cart {
       border-radius: 100px;
@@ -234,7 +244,6 @@ nav {
 .loader {
   position: fixed;
   inline-size: 100%;
-  max-inline-size: 700px;
   inset-inline-start: 50%;
   transform: translateX(-50%);
   background: #fff;
