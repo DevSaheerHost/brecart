@@ -159,6 +159,9 @@ section{
                     }
                 }
             }
+            
+            border-bottom: 1px solid #DBDBDB;
+            padding-bottom: 1rem;
         }
     }
 }
@@ -166,10 +169,13 @@ section{
 
 
 .varient{
+    
     padding: 0;
     h3{
         padding: 1rem 2rem;
         padding-block-start: 0;
+        
+        margin-block: 1rem;
     }
 }
 .color-varient{
@@ -179,6 +185,14 @@ section{
     justify-content: space-between;
     border-block-start: 1.4px solid #DBDBDB;
     
+    /* curved design*/
+    border: 1.4px solid #DBDBDB;
+    margin-inline: 1rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+    color: #8A8A8A;
+    font-weight: 500;
+    
     span{
         display: flex;
         align-items: center;
@@ -187,6 +201,7 @@ section{
             color: #8A8A8A;
         }
     }
+    
 }
 
 
