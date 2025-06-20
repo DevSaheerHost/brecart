@@ -1,7 +1,8 @@
-const product = JSON.parse(localStorage.getItem("selectedProduct"));
-
+//const product = JSON.parse(localStorage.getItem("selectedProduct"));
+import { datas } from 'https://brecart.vercel.app/data.js';
+let pro = null
 const $ = (selector) => document.querySelector(selector);
-if (product) {
+if (pro) {
   $(".main-img").src = product.product_image || product.img;
   $(".sub-img").src = product.product_image || product.img;
   $("#productName").textContent = product.product_description || product.description;
@@ -9,7 +10,7 @@ if (product) {
   const price = Number(product.product_price ?? product.price);
 $(".price").textContent = `₹${price.toLocaleString()}`;
 } else {
-  document.querySelector(".overview").innerHTML = `<p>No product selected.</p>`;
+  //document.querySelector(".overview").innerHTML = `<p>No product selected.</p>`;
 }
 
 $("#back").onclick = () => window.history.back();
@@ -78,7 +79,7 @@ $('.buy i').onclick = () => {
 
 
 
-import { datas } from 'https://brecart.vercel.app/data.js';
+
 const products = datas.products
   const slug = location.pathname.split('/').pop();
 
