@@ -389,19 +389,19 @@ section{
                         
 }
 
-section.related{
-    div#related{
-         display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-        a{
-            display: block;
-            align-self: start;
-            padding: 10px;
-            text-decoration: none;
-            border-radius: 10px;
-    }
-}}
+section.related div#related {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+}
+
+section.related div#related a {
+  display: block;
+  align-self: start;
+  padding: 10px;
+  text-decoration: none;
+  border-radius: 10px;
+}
 
 .hidden{
     display: none !important;
