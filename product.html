@@ -3,51 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Product Details</title>
+  <title>Product Page</title>
   <style>
-    body { font-family: sans-serif; padding: 20px; }
-    img { max-width: 300px; display: block; margin-bottom: 20px; border-radius: 12px; }
-    .price { font-size: 20px; font-weight: bold; color: #008000; }
-    .desc { margin-top: 10px; font-size: 16px; color: #444; }
+    body { font-family: sans-serif; padding: 2rem; max-width: 600px; margin: auto; }
+    img { max-width: 100%; border-radius: 12px; margin-bottom: 1rem; }
+    h1 { font-size: 24px; }
+    .price { font-size: 20px; color: green; font-weight: bold; }
+    .desc { margin-top: 10px; font-size: 16px; }
   </style>
 </head>
 <body>
-  <h1 id="productTitle">Loading...</h1>
-  <img id="productImage" style="display:none;" />
+  <h1 id="title">Loading...</h1>
+  <img id="image" style="display:none;" />
   <div class="price" id="price"></div>
-  <p class="desc" id="desc"></p>
+  <div class="desc" id="desc"></div>
 
   <script type="module">
     import { datas } from './data.js';
 
-    // Get slug from clean URL
     const slug = window.location.pathname.split("/").pop();
 
-    // Slugify product name
-    function generateSlug(name) {
-      return name
+    // FIXED: remove special characters like (, ), commas, etc.
+    function generateSlug(text) {
+      return text
         .toLowerCase()
-        .replace(/[^a-z0-9\s-]/g, '')
-        .trim()
-        .replace(/\s+/g, '-');
+        .replace(/[\s()&,]+/g, '-')  // Replace spaces, brackets, commas with -
+        .replace(/[^a-z0-9-]/g, '')  // Remove other special chars
+        .replace(/--+/g, '-')        // Replace multiple dashes with one
+        .replace(/^-+|-+$/g, '');    // Trim starting/ending dashes
     }
 
-    // Find the product
     const product = datas.products.find(p => generateSlug(p.name) === slug);
 
-    const titleEl = document.getElementById("productTitle");
-    const imgEl = document.getElementById("productImage");
-    const priceEl = document.getElementById("price");
-    const descEl = document.getElementById("desc");
+    const titleEl = document.getElementById('title');
+    const imgEl = document.getElementById('image');
+    const priceEl = document.getElementById('price');
+    const descEl = document.getElementById('desc');
 
     if (product) {
       titleEl.textContent = product.name;
       imgEl.src = product.img;
       imgEl.style.display = 'block';
-      priceEl.textContent = `Price: ₹${product.price.toLocaleString()}`;
+      priceEl.textContent = `₹${product.price.toLocaleString()}`;
       descEl.textContent = product.description;
     } else {
-      titleEl.textContent = "Product not found.";
+      titleEl.textContent = "Product Not Found";
     }
   </script>
 </body>
