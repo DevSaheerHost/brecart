@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Product Details</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
   <h1>Product Details</h1>
@@ -13,28 +13,22 @@
   <script type="module">
     import { datas } from './data.js';
 
-    // ✅ Get slug from either ?slug= or /product/slug
-    function getSlug() {
-      const querySlug = new URLSearchParams(location.search).get("slug");
-      if (querySlug) return querySlug;
-      return location.pathname.split("/").pop();
-    }
+    // Get slug from clean URL path
+    const slug = window.location.pathname.split("/").pop();
 
-    const slug = getSlug();
-
-    // ✅ Slug generator from product name
+    // Convert product name to slug
     function generateSlug(name) {
       return name
         .toLowerCase()
-        .replace(/[^a-z0-9\s-]/g, '') // remove special chars
+        .replace(/[^a-z0-9\s-]/g, '')
         .trim()
-        .replace(/\s+/g, '-');       // spaces → dashes
+        .replace(/\s+/g, '-');
     }
 
-    // ✅ Match slug to product
+    // Match slug with product name
     const product = datas.products.find(p => generateSlug(p.name) === slug);
 
-    // ✅ Display product
+    // Display product
     const titleEl = document.getElementById('productTitle');
     const priceEl = document.getElementById('price');
 
