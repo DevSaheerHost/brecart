@@ -395,6 +395,7 @@ section.related{
     gap: 1rem;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
         a{
+            display: block;
             align-self: start;
     }
 }}
