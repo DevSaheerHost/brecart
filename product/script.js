@@ -135,5 +135,5 @@ $(".price").textContent = `₹${price.toLocaleString()}`;
     `;
   }
 } else {
-  document.getElementById("title").textContent = "Product not found";
+  alert('no')
 }

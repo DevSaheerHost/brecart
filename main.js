@@ -179,7 +179,7 @@ function renderDeals(items) {
       const name = el.getAttribute("data-name");
       const item = items.find((i) => i.product_name === name || i.description === name);
       localStorage.setItem("selectedProduct", JSON.stringify(item));
-      window.location.href = "./product/";
+      window.location.href = `./product/?${name}`;
      
 
 // const word = el.querySelector('p').textContent.trim().toLowerCase();
