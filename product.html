@@ -17,6 +17,10 @@
   <img id="image" style="display:none;" />
   <div class="price" id="price"></div>
   <div class="desc" id="desc"></div>
+  
+  
+  <h2 style="margin-top: 2rem;">Related Products</h2>
+<div id="related" style="display: flex; flex-wrap: wrap; gap: 1rem;"></div>
 
 <script type="module">
 import { datas } from 'https://brecart.vercel.app/data.js';
@@ -45,6 +49,41 @@ const products = datas.products
 
   document.querySelector('h1').textContent = product?.name || 'Not found';
   document.body.insertAdjacentHTML('beforeend', `<img src="${product?.img}" width="300"/>`);
+  
+  
+  
+  
+  
+
+
+
+if (product) {
+  document.getElementById("title").textContent = product.name;
+  document.getElementById("image").src = product.img;
+  document.getElementById("image").style.display = "block";
+  document.getElementById("price").textContent = `₹${product.price.toLocaleString()}`;
+  document.getElementById("desc").textContent = product.description;
+
+  // RELATED PRODUCTS
+  const relatedList = datas.products
+    .filter(p => p.type === product.type && generateSlug(p.name) !== slug)
+    .slice(0, 4); // show max 4
+
+  const relatedDiv = document.getElementById("related");
+
+  for (const item of relatedList) {
+    const itemSlug = generateSlug(item.name);
+    relatedDiv.innerHTML += `
+      <a href="/product/${itemSlug}" style="text-decoration:none; color:inherit; width: 45%; border: 1px solid #ccc; padding: 10px; border-radius: 10px;">
+        <img src="${item.img}" style="width: 100%; height: auto; border-radius: 8px;"/>
+        <h4 style="margin: .5rem 0;">${item.name}</h4>
+        <p style="color: green; font-weight: bold;">₹${item.price.toLocaleString()}</p>
+      </a>
+    `;
+  }
+} else {
+  document.getElementById("title").textContent = "Product not found";
+}
 </script>
 </body>
 </html>
