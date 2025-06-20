@@ -389,6 +389,14 @@ section{
                         
 }
 
+section.related{
+    div#related{
+        a{
+            width: 300px;
+        }
+    }
+}
+
 .hidden{
     display: none !important;
 }
