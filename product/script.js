@@ -72,3 +72,68 @@ $('.buy i').onclick = () => {
   icon.classList.toggle('fa-regular');
   icon.classList.toggle('fa-solid');
 };
+
+
+
+
+
+
+import { datas } from 'https://brecart.vercel.app/data.js';
+const products = datas.products
+  const slug = location.pathname.split('/').pop();
+
+  function generateSlug(text) {
+    return text
+      .toLowerCase()
+      .replace(/[\s()&,]+/g, '-')
+      .replace(/[^a-z0-9-]/g, '')
+      .replace(/--+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  }
+
+  
+
+  
+  
+  
+  
+  
+
+
+
+if (product) {
+  
+  const product = products.find(p => generateSlug(p.name) === slug);
+
+  $("#productName").textContent = product.product_description || product.description || 'Not found';
+  
+  $(".main-img").src = product.product_image || product.img;
+  
+  $(".sub-img").src = product.product_image || product.img;
+  
+  const price = Number(product.product_price ?? product.price);
+$(".price").textContent = `₹${price.toLocaleString()}`;
+
+
+
+
+  // RELATED PRODUCTS
+  const relatedList = datas.products
+    .filter(p => p.type === product.type && generateSlug(p.name) !== slug)
+    .slice(0, 4); // show max 4
+
+  const relatedDiv = document.getElementById("related");
+
+  for (const item of relatedList) {
+    const itemSlug = generateSlug(item.name);
+    relatedDiv.innerHTML += `
+      <a href="/product/${itemSlug}" style="text-decoration:none; color:inherit; width: 45%; border: 1px solid #ccc; padding: 10px; border-radius: 10px;">
+        <img src="${item.img}" style="width: 100%; height: auto; border-radius: 8px;"/>
+        <h4 style="margin: .5rem 0;">${item.name}</h4>
+        <p style="color: green; font-weight: bold;">₹${item.price.toLocaleString()}</p>
+      </a>
+    `;
+  }
+} else {
+  document.getElementById("title").textContent = "Product not found";
+}
