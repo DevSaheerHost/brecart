@@ -20,6 +20,7 @@
 
 <script type="module">
 import {datas} from './data.js'
+const products = datas.products
   const slug = location.pathname.split('/').pop();
 
   function generateSlug(text) {
@@ -40,7 +41,7 @@ import {datas} from './data.js'
     }
   ];
 
-  const product = datas.products.find(p => generateSlug(p.name) === slug);
+  const product = products.find(p => generateSlug(p.name) === slug);
 
   document.querySelector('h1').textContent = product?.name || 'Not found';
   document.body.insertAdjacentHTML('beforeend', `<img src="${product?.img}" width="300"/>`);
