@@ -33,6 +33,21 @@ if (!product) {
   throw new Error("Product not found"); // Stop further execution
 }
 
+
+// Dynamic SEO meta setup
+document.title = `Buy ${product.name} – Brecart`;
+
+const metaDescription = document.querySelector('meta[name="description"]') || document.createElement('meta');
+metaDescription.name = "description";
+metaDescription.content = `Get the best price for ${product.name}. Fast delivery. 100% original.`;
+document.head.appendChild(metaDescription);
+
+const canonicalLink = document.querySelector('link[rel="canonical"]') || document.createElement('link');
+canonicalLink.rel = "canonical";
+canonicalLink.href = `https://brecart.vercel.app/product/${slug}`;
+document.head.appendChild(canonicalLink);
+
+
 //  Display Product Info
 $(".main-img").src = product.product_image || product.img;
 $(".sub-img").src = product.product_image || product.img;
