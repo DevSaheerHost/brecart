@@ -167,7 +167,20 @@ export const datas = {
   name:'Samsung Galaxy Watch6 Classic ',
   type: 'watch'
 },
-
+{
+  img:'https://m.media-amazon.com/images/I/91CtbnJRrIL._UF1000,1000_QL80_FMwebp_.jpg',
+  description:'Apple Watch Series 10 [GPS + Cellular 42 mm] Smartwatch with Gold Titanium Case with Gold Milanese Loop. Fitness Tracker, ECG App, Always-On Retina Display, Carbon Neutral',
+  price: 84900,
+  name:'Apple Watch Series 10 ',
+  type: 'watch'
+},
+{
+  img:'https://m.media-amazon.com/images/I/81YtQDW9LCL._UF1000,1000_QL80_FMwebp_.jpg',
+  description:'Apple Watch SE (2nd Gen, 2023) [GPS 44mm] Smartwatch with Silver Aluminum Case with Blue Cloud Sport Loop. Fitness & Sleep Tracker, Crash Detection, Heart Rate Monitor, Retina Display',
+  price: 27900,
+  name:'Apple Watch SE (2nd Gen, 2023)',
+  type: 'watch'
+},
 //Pencil---
 {
   img:'https://m.media-amazon.com/images/I/41WNvMCswQL._UF1000,1000_QL80_FMwebp_.jpg',
