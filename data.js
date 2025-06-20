@@ -132,13 +132,7 @@ export const datas = {
   price: 19399,
   type:'mobile'
 },
-{
-  img: 'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-card-40-pro-202405_FMT_WHH?wid=508&hei=472&fmt=p-jpg&qlt=95&.v=aDFmUE8yL0ZIcG1CVlF3ejZoSTBUa3UweFZCakx2YnVZV3A3QjhxMVptZWZaQno4VzdyOTRhQU93VEhhWjgvSHg4ZHpEbm5XWGdaM3BiNVRDaG55Uk9hZHJ2SDQ3c0JlN3lXVFNtclhPL1QrNmVjbmk5c1V4VVk2VEt3TGcxekg',
-  description: 'Anti-Yellow Magsafe Clear Case',
-  name: 'iPad Pro',
-  price: 19399,
-  type:'case'
-},
+
 {
   img: 'https://rukminim2.flixcart.com/image/822/986/xif0q/mobile/9/f/p/-original-imaghxenhnpyhn5u.jpeg?q=60&crop=false',
   description: 'Anti-Yellow Magsafe Clear Case',
@@ -221,6 +215,13 @@ export const datas = {
   name: 'iPhone 16 Pro Max Case',
   type: 'case'
 },
+{
+  img: 'https://m.media-amazon.com/images/I/61nR7iM4hEL._UF1000,1000_QL80_FMwebp_.jpg',
+  description: 'Sounce for iPhone 15 Cover Translucent Matte Hard Back Case Cover Designed Shield Strong Strong Megnetic Adsorption with TPU Polycarbonate Protection Compatible with Magsafe - Frost Black',
+  name: 'Sounce for iPhone 15 Cover Translucent Matte Hard Back Case Cover',
+  price: 399,
+  type:'case'
+},
 
 {
   img: 'https://m.media-amazon.com/images/I/71D3q3iBHQL._UF1000,1000_QL80_FMwebp_.jpg',
@@ -228,6 +229,14 @@ export const datas = {
   price: 1993,
   name: 'Scratch-Resistant Back Cover',
   type: 'case'
+},
+{
+  img: 'https://m.media-amazon.com/images/I/51o7Y+J8GaL._UF1000,1000_QL80_FMwebp_.jpg',
+  description: 'MIDOS Back Cover Compatible with iPhone 15 Case Liquid Silicone Full Protection Shock Proof Back Cover for iPhone 15 (Sky Blue)',
+  price: 284,
+  name: 'iPhone 15 Case Liquid Silicone Full Protection',
+  type: 'case',
+  brand: 'MIDOS'
 },
 
 // iPad ------
