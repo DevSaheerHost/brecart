@@ -97,11 +97,11 @@ const relatedDiv = document.getElementById("related");
 for (const item of relatedList) {
   const itemSlug = generateSlug(item.name);
   relatedDiv.innerHTML += `
-    <a href="/product/${itemSlug}">
-      <img src="${item.img}" style="width: 100%; height: auto; border-radius: 8px;"/>
-      <h4 style="margin: .5rem 0;">${item.name}</h4>
-      <p style="color: green; font-weight: bold;">₹${item.price.toLocaleString()}</p>
-    </a>
+<a href="/product/${itemSlug}" style="text-decoration: none; color: inherit;">
+  <img src="${item.img}" alt="${item.name}" style="width: 100%; height: auto; border-radius: 8px;" />
+  <h4 style="margin: 0.5rem 0;">${item.name}</h4>
+  <p style="color: green; font-weight: bold;">₹${item.price.toLocaleString()}</p>
+</a>
   `;
 }
 
