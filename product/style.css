@@ -397,6 +397,9 @@ section.related{
         a{
             display: block;
             align-self: start;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 10px;
     }
 }}
 
