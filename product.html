@@ -18,38 +18,31 @@
   <div class="price" id="price"></div>
   <div class="desc" id="desc"></div>
 
-  <script type="module">
-    import { datas } from './data.js';
+<script type="module">
+  const slug = location.pathname.split('/').pop();
 
-    const slug = window.location.pathname.split("/").pop();
+  function generateSlug(text) {
+    return text
+      .toLowerCase()
+      .replace(/[\s()&,]+/g, '-')
+      .replace(/[^a-z0-9-]/g, '')
+      .replace(/--+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  }
 
-    // FIXED: remove special characters like (, ), commas, etc.
-    function generateSlug(text) {
-      return text
-        .toLowerCase()
-        .replace(/[\s()&,]+/g, '-')   
-        .replace(/[^a-z0-9-]/g, '')  // Remove other special chars
-        .replace(/--+/g, '-')
-        .replace(/^-+|-+$/g, '');    // Trim starting/ending dashes
+  const testProducts = [
+    {
+      name: 'iPhone 14 Pro Max (Space Black, 512 GB)',
+      price: 19399,
+      img: 'https://rukminim2.flixcart.com/image/822/986/xif0q/mobile/9/f/p/-original-imaghxenhnpyhn5u.jpeg?q=60&crop=false',
+      description: 'Anti-Yellow Magsafe Clear Case'
     }
+  ];
 
-    const product = datas.products.find(p => generateSlug(p.name) === slug);
+  const product = testProducts.find(p => generateSlug(p.name) === slug);
 
-    const titleEl = document.getElementById('title');
-    const imgEl = document.getElementById('image');
-    const priceEl = document.getElementById('price');
-    const descEl = document.getElementById('desc');
-
-    if (product) {
-      titleEl.textContent = product.name;
-      imgEl.src = product.img;
-      imgEl.style.display = 'block';
-      priceEl.textContent = `₹${product.price.toLocaleString()}`;
-      descEl.textContent = product.description;
-    } else {
-      titleEl.textContent = "Product Not Found";
-    }
-    console.log('Hello')
-  </script>
+  document.querySelector('h1').textContent = product?.name || 'Not found';
+  document.body.insertAdjacentHTML('beforeend', `<img src="${product?.img}" width="300"/>`);
+</script>
 </body>
 </html>
