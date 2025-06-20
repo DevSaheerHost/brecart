@@ -690,16 +690,16 @@ window.onerror = function (message, source, lineno, colno, error) {
 
 
 
-function generateSlug(name) {
-  return name
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '') // Remove special chars
-    .trim()
-    .replace(/\s+/g, '-')         // Replace spaces with -
-}
+// function generateSlug(name) {
+//   return name
+//     .toLowerCase()
+//     .replace(/[^a-z0-9\s-]/g, '') // Remove special chars
+//     .trim()
+//     .replace(/\s+/g, '-')         // Replace spaces with -
+// }
 
-const name = "iPhone 15 Pro Max Back Cover Silicon Blue";
-const slug = generateSlug(name);
+// const name = "iPhone 15 Pro Max Back Cover Silicon Blue";
+// const slug = generateSlug(name);
 
-console.log(slug); 
-// Output: "iphone-15-pro-max-back-cover-silicon-blue"
+// console.log(slug); 
+// // Output: "iphone-15-pro-max-back-cover-silicon-blue"
