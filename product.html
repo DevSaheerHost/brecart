@@ -27,9 +27,9 @@
     function generateSlug(text) {
       return text
         .toLowerCase()
-        .replace(/[\s()&,]+/g, '-')  // Replace spaces, brackets, commas with -
+        .replace(/[\s()&,]+/g, '-')   
         .replace(/[^a-z0-9-]/g, '')  // Remove other special chars
-        .replace(/--+/g, '-')        // Replace multiple dashes with one
+        .replace(/--+/g, '-')
         .replace(/^-+|-+$/g, '');    // Trim starting/ending dashes
     }
 
@@ -49,6 +49,7 @@
     } else {
       titleEl.textContent = "Product Not Found";
     }
+    console.log('Hello')
   </script>
 </body>
 </html>
