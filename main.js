@@ -235,7 +235,7 @@ function renderAds(items) {
 const viewProduct = product=>{
   localStorage.setItem("selectedProduct", JSON.stringify(product))
   const sugle = generateSlug(product.name)
-window.location.href = `./product/:sugle?${sugle}`
+window.location.href = `./product/?${sugle}`
 }
 
 
