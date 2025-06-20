@@ -1,130 +1,85 @@
-//const product = JSON.parse(localStorage.getItem("selectedProduct"));
 import { datas } from 'https://brecart.vercel.app/data.js';
-let pro = null
+
 const $ = (selector) => document.querySelector(selector);
-if (pro) {
+
+// Get slug from URL
+const slug = location.pathname.split('/').pop();
+
+function generateSlug(text) {
+  return text
+    .toLowerCase()
+    .replace(/[\s()&,]+/g, '-')
+    .replace(/[^a-z0-9-]/g, '')
+    .replace(/--+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+const products = datas.products;
+const product = products.find(p => generateSlug(p.name) === slug);
+
+if (product) {
+  // Display Product Info
   $(".main-img").src = product.product_image || product.img;
   $(".sub-img").src = product.product_image || product.img;
   $("#productName").textContent = product.product_description || product.description;
-  
+
   const price = Number(product.product_price ?? product.price);
-$(".price").textContent = `₹${price.toLocaleString()}`;
-} else {
-  //document.querySelector(".overview").innerHTML = `<p>No product selected.</p>`;
-}
+  $(".price").textContent = `₹${price.toLocaleString()}`;
 
-$("#back").onclick = () => window.history.back();
-console.log(product)
+  // Handle quantity updates
+  $('.increment').onclick = () => {
+    if ($('#quantity').textContent < 10) {
+      $('#quantity').textContent++;
+      const quantity = Number($('#quantity').textContent);
+      $('.decrement').style.borderColor = 'black';
+      const totalPrice = (product.price ?? product.product_price) * quantity;
+      $(".price").textContent = ` ₹${totalPrice.toLocaleString()}`;
+    } else {
+      $('.increment').style.borderColor = '#C5C5C5';
+    }
+  };
 
+  $('.decrement').onclick = () => {
+    if ($('#quantity').textContent > 1) {
+      $('#quantity').textContent--;
+      $('.increment').style.borderColor = 'black';
+      const quantity = Number($('#quantity').textContent);
+      const totalPrice = (product.price ?? product.product_price) * quantity;
+      $(".price").textContent = ` ₹${totalPrice.toLocaleString()}`;
+    }
+    if ($('#quantity').textContent < 2) {
+      $('.decrement').style.borderColor = '#C5C5C5';
+    }
+  };
 
-$('.increment').onclick=()=>{
-  if ($('#quantity').textContent<10) {
-    $('#quantity').textContent++
-    
-    let quantity =Number($('#quantity').textContent)
-    
-    $('.decrement').style.borderColor='black'
-    
-    const totalPrice = (product.price?? product.product_price) * quantity;
-    
-    $(".price").textContent = ` ₹${totalPrice.toLocaleString()}`
-    
-  } else $('.increment').style.borderColor='#C5C5C5'
-}
-$('.decrement').onclick=()=>{
-  if ($('#quantity').textContent > 1) {
-    $('#quantity').textContent--
-    $('.increment').style.borderColor='black'
-    let quantity =Number($('#quantity').textContent)
-    
-    
-    const totalPrice = (product.price?? product.product_price) * quantity;
-    $(".price").textContent = ` ₹${totalPrice.toLocaleString()}`
-  } 
-  if ($('#quantity').textContent<2) {
-    $('.decrement').style.borderColor='#C5C5C5'
-  }
-}
-
-const params = new URLSearchParams(window.location.search);
-const layerParam = params.get('layer');
-
-if (layerParam == 'place-order') {
-  $('.layer').classList.add('hidden')
-  $('.buy-page').classList.remove('hidden')
-}
-$('.buy_btn').onclick=()=>{
-  
-  window.location='./?layer=place-order'
-  
-}
-
-$('#placeOrder').onclick=()=>$('.order-placed-message-wrap').classList.remove('hidden')
-
-$('.back-to-purchase').onclick=()=>window.location='../';
-
-window.onerror = function(message, source, lineno, colno, error) {
-  alert("Error: " + message + "\nLine: " + lineno + "\nColumn: " + colno);
-};
-
-
-$('.buy i').onclick = () => {
-  const icon = $('.buy i');
-  icon.classList.toggle('fa-regular');
-  icon.classList.toggle('fa-solid');
-};
-
-
-
-
-
-
-
-const products = datas.products
-  const slug = location.pathname.split('/').pop();
-
-  function generateSlug(text) {
-    return text
-      .toLowerCase()
-      .replace(/[\s()&,]+/g, '-')
-      .replace(/[^a-z0-9-]/g, '')
-      .replace(/--+/g, '-')
-      .replace(/^-+|-+$/g, '');
+  // Buy Button Layer
+  const params = new URLSearchParams(window.location.search);
+  const layerParam = params.get('layer');
+  if (layerParam == 'place-order') {
+    $('.layer').classList.add('hidden');
+    $('.buy-page').classList.remove('hidden');
   }
 
-  
+  $('.buy_btn').onclick = () => {
+    window.location = './?layer=place-order';
+  };
 
-  
-  
-  
-  
-  
+  $('#placeOrder').onclick = () => $('.order-placed-message-wrap').classList.remove('hidden');
+  $('.back-to-purchase').onclick = () => window.location = '../';
 
+  // Bookmark Icon Toggle
+  $('.buy i').onclick = () => {
+    const icon = $('.buy i');
+    icon.classList.toggle('fa-regular');
+    icon.classList.toggle('fa-solid');
+  };
 
-
-if (product) {
-  
-  const product = products.find(p => generateSlug(p.name) === slug);
-
-  $("#productName").textContent = product.product_description || product.description || 'Not found';
-  
-  $(".main-img").src = product.product_image || product.img;
-  
-  $(".sub-img").src = product.product_image || product.img;
-  
-  const price = Number(product.product_price ?? product.price);
-$(".price").textContent = `₹${price.toLocaleString()}`;
-
-
-
-
-  // RELATED PRODUCTS
+  // Related Products
   const relatedList = datas.products
     .filter(p => p.type === product.type && generateSlug(p.name) !== slug)
-    .slice(0, 4); // show max 4
+    .slice(0, 4);
 
   const relatedDiv = document.getElementById("related");
-
   for (const item of relatedList) {
     const itemSlug = generateSlug(item.name);
     relatedDiv.innerHTML += `
@@ -135,6 +90,15 @@ $(".price").textContent = `₹${price.toLocaleString()}`;
       </a>
     `;
   }
+
 } else {
-  alert('no')
+  document.querySelector(".overview")?.innerHTML = `<p>No product found.</p>`;
 }
+
+// Back button
+$("#back").onclick = () => window.history.back();
+
+// Global error handler
+window.onerror = function(message, source, lineno, colno, error) {
+  alert("Error: " + message + "\nLine: " + lineno + "\nColumn: " + colno);
+};
