@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://devsaheerhost.github.io/brecart/sitemap.xml

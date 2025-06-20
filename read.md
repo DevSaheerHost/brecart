@@ -581,3 +581,6 @@ if (!history.some(item => item.toLowerCase() === text.toLowerCase())) {
 //     performSearch(text);
 //   }
 // });
+
+
+<meta name="keywords" content="Buy iPhone in India, Apple Store India, AirPods accessories, Apple original products, Apple chargers online, iPad deals India, Brecart Apple shopping, Apple gadgets Kerala, MacBook buy online, iPhone best price India, Apple products Brecart">
