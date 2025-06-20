@@ -33,7 +33,7 @@ if (!product) {
   throw new Error("Product not found"); // Stop further execution
 }
 
-// ✅ Display Product Info
+//  Display Product Info
 $(".main-img").src = product.product_image || product.img;
 $(".sub-img").src = product.product_image || product.img;
 $("#productName").textContent = product.product_description || product.description;
@@ -41,7 +41,7 @@ $("#productName").textContent = product.product_description || product.descripti
 const price = Number(product.product_price ?? product.price);
 $(".price").textContent = `₹${price.toLocaleString()}`;
 
-// ✅ Quantity Button Logic
+// Quantity Button Logic
 $('.increment').onclick = () => {
   if ($('#quantity').textContent < 10) {
     $('#quantity').textContent++;
@@ -67,7 +67,7 @@ $('.decrement').onclick = () => {
   }
 };
 
-// ✅ Buy Layer Handler
+// Buy Layer Handler
 const params = new URLSearchParams(window.location.search);
 const layerParam = params.get('layer');
 if (layerParam === 'place-order') {
@@ -81,14 +81,14 @@ $('.buy_btn').onclick = () => {
 $('#placeOrder').onclick = () => $('.order-placed-message-wrap').classList.remove('hidden');
 $('.back-to-purchase').onclick = () => window.location = '../';
 
-// ✅ Bookmark Icon Toggle
+// Bookmark Icon Toggle
 $('.buy i').onclick = () => {
   const icon = $('.buy i');
   icon.classList.toggle('fa-regular');
   icon.classList.toggle('fa-solid');
 };
 
-// ✅ Related Products
+// Related Products
 const relatedList = datas.products
   .filter(p => p.type === product.type && generateSlug(p.name) !== slug)
   .slice(0, 4);
@@ -97,7 +97,7 @@ const relatedDiv = document.getElementById("related");
 for (const item of relatedList) {
   const itemSlug = generateSlug(item.name);
   relatedDiv.innerHTML += `
-    <a href="/product/${itemSlug}" style="text-decoration:none; color:inherit; width: 45%; border: 1px solid #ccc; padding: 10px; border-radius: 10px;">
+    <a href="/product/${itemSlug}" style="text-decoration:none; color:inherit; padding: 10px; border-radius: 10px;">
       <img src="${item.img}" style="width: 100%; height: auto; border-radius: 8px;"/>
       <h4 style="margin: .5rem 0;">${item.name}</h4>
       <p style="color: green; font-weight: bold;">₹${item.price.toLocaleString()}</p>
@@ -105,10 +105,10 @@ for (const item of relatedList) {
   `;
 }
 
-// ✅ Back button
+// Back button
 $("#back").onclick = () => window.history.back();
 
-// ✅ Global error alert (since you're on mobile)
+// Global error alert
 window.onerror = function(message, source, lineno, colno, error) {
   alert("JS Error:\n" + message + "\nLine: " + lineno + " Column: " + colno);
 };

@@ -391,9 +391,11 @@ section{
 
 section.related{
     div#related{
+         display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
         a{
-            width: 200px;
-        }
+            align-self: start;
     }
 }
 
