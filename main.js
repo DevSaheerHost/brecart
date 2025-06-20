@@ -74,7 +74,7 @@ function renderProductList(products) {
       const name = el.getAttribute("data-name");
       const item = datas.products.find((i) => i.name === name);
       localStorage.setItem("selectedProduct", JSON.stringify(item));
-      window.location.href = "./overview/";
+      window.location.href = "./product/";
     });
   });
 }
@@ -173,13 +173,13 @@ function renderDeals(items) {
     });
   });
 
-  // Item click → overview
+  // Item click → product
   document.querySelectorAll(".deals .item").forEach((el) => {
     el.addEventListener("click", () => {
       const name = el.getAttribute("data-name");
       const item = items.find((i) => i.product_name === name || i.description === name);
       localStorage.setItem("selectedProduct", JSON.stringify(item));
-      window.location.href = "./overview/";
+      window.location.href = "./product/";
      
 
 // const word = el.querySelector('p').textContent.trim().toLowerCase();
@@ -232,7 +232,11 @@ function renderAds(items) {
 
 
 
-
+const viewProduct = product=>{
+  localStorage.setItem("selectedProduct", JSON.stringify(product))
+  const sugle = generateSlug(product.name)
+window.location.href = `./product/:sugle?${sugle}`
+}
 
 
 // All daxxx
@@ -281,13 +285,12 @@ window.dispatchEvent(new PopStateEvent("popstate"));
     //console.log(item)
       item.onclick=()=>{
         const product={
-      product_name: item.querySelector('h3').textContent,
-      product_image: item.querySelector('img').src,
-      product_price: item.querySelector('p').textContent
+      name: item.querySelector('h3').textContent,
+      img: item.querySelector('img').src,
+      price: item.querySelector('p').textContent
       
     }
-        localStorage.setItem("selectedProduct", JSON.stringify(product))
-window.location.href = "./overview/";
+        viewProduct(product)
       }
     })
 
@@ -674,3 +677,21 @@ window.onpopstate = () => {
 window.onerror = function (message, source, lineno, colno, error) {
   alert("Error: " + message + "\nLine: " + lineno + "\nColumn: " + colno);
 };
+
+
+
+
+
+function generateSlug(name) {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '') // Remove special chars
+    .trim()
+    .replace(/\s+/g, '-')         // Replace spaces with -
+}
+
+const name = "iPhone 15 Pro Max Back Cover Silicon Blue";
+const slug = generateSlug(name);
+
+console.log(slug); 
+// Output: "iphone-15-pro-max-back-cover-silicon-blue"
