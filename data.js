@@ -132,7 +132,13 @@ export const datas = {
   price: 19399,
   type:'mobile'
 },
-
+{
+  img: 'https://m.media-amazon.com/images/I/61xJlx-3KDL._UF1000,1000_QL80_FMwebp_.jpg',
+  description: 'iPhone 16 Pro 128 GB: 5G Mobile Phone with Camera Control, 4K 120 fps Dolby Vision and a Huge Leap in Battery Life. Works with AirPods; White Titanium',
+  name: 'iPhone 16 Pro 128 GB',
+  price: 110900,
+  type:'mobile'
+},
 {
   img: 'https://rukminim2.flixcart.com/image/822/986/xif0q/mobile/9/f/p/-original-imaghxenhnpyhn5u.jpeg?q=60&crop=false',
   description: 'Anti-Yellow Magsafe Clear Case',
@@ -248,6 +254,13 @@ export const datas = {
   name: 'Apple iPad',
   type: 'ipad'
 },
+{
+  img: 'https://m.media-amazon.com/images/I/71Lcaat+UUL._UF1000,1000_QL80_FMwebp_.jpg',
+  description: 'Apple iPad Air 13″ (M2): Liquid Retina Display, 256GB, Landscape 12MP Front Camera / 12MP Back Camera, Wi-Fi 6E, Touch ID, All-Day Battery Life — Space Grey',
+  price: 73999,
+  name: 'Apple iPad Air 13″ (M2)',
+  type: 'ipad'
+},
 
 // Mac ------
 
@@ -256,6 +269,13 @@ export const datas = {
   description: 'Apple 2025 MacBook Air (13-inch, Apple M4 chip with 10-core CPU and 8-core GPU, 16GB Unified Memory, 256GB) - Sky Blue',
   price: 33400,
   name: 'Apple M4 chip with 10-core CPU and 8-core GPU, 16GB Unified Memory, 256GB',
+  type: 'mac'
+},
+{
+  img: 'https://m.media-amazon.com/images/I/61opqQEBUxL._UF1000,1000_QL80_FMwebp_.jpg',
+  description: 'Apple 2024 MacBook Pro Laptop with M4 Pro chip with 14‑core CPU and 20‑core GPU: Built for Apple Intelligence, (16.2″) Liquid Retina XDR Display, 24GB Unified Memory, 512GB SSD Storage; Space Black',
+  price: 239990,
+  name: 'Apple 2024 MacBook Pro Laptop with M4 Pro chip with 14‑core CPU and 20‑core GPU',
   type: 'mac'
 },
 
