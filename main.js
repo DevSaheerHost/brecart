@@ -82,7 +82,8 @@ function renderProductList(products) {
       const name = el.getAttribute("data-name");
       const item = datas.products.find((i) => i.name === name);
       localStorage.setItem("selectedProduct", JSON.stringify(item));
-      window.location.href = `./product/${generateSlug(name)}`;
+      //window.location.href = `./product/${generateSlug(name)}`;
+      window.location.href = `./product/index.html?${generateSlug(name)}`;
     });
   });
 }
@@ -187,7 +188,8 @@ function renderDeals(items) {
       const name = el.getAttribute("data-name");
       const item = items.find((i) => i.product_name === name || i.description === name);
       localStorage.setItem("selectedProduct", JSON.stringify(item));
-      window.location.href = `./product/${generateSlug(name)}`;
+      //window.location.href = `./product/${generateSlug(name)}`;
+      window.location.href = `./product/index.html?${generateSlug(name)}`;
      
 
 // const word = el.querySelector('p').textContent.trim().toLowerCase();
@@ -242,8 +244,9 @@ function renderAds(items) {
 
 const viewProduct = product=>{
   localStorage.setItem("selectedProduct", JSON.stringify(product))
-  const sugle = generateSlug(product.name)
-window.location.href = `./product/${generateSlug(name)}`
+  //const sugle = generateSlug(product.name)
+//window.location.href = `./product/${generateSlug(name)}`
+window.location.href = `./product/index.html?${generateSlug(product.name)}`;
 }
 
 
