@@ -308,6 +308,7 @@ window.dispatchEvent(new PopStateEvent("popstate"));
 let i = 0;
 const imgEl = $("#bannerImage");
 imgEl.src = datas.banner[i].img;
+
 i++;
 
 const changeImage = () => {
@@ -321,6 +322,7 @@ const changeImage = () => {
     setTimeout(() => {
       i = i % datas.banner.length; // Ensure loop
       imgEl.src = datas.banner[i].img;
+      imgEl.dataset.name=datas.banner[i].path
 
       requestAnimationFrame(() => {
         imgEl.style.opacity = 1;
@@ -331,6 +333,7 @@ const changeImage = () => {
       changeImage();
     }, 400); // match fade-out duration
   }, 3000); // display time per image
+  imgEl.onclick=()=>console.log(imgEl.dataset.name)
 };
 
 changeImage();

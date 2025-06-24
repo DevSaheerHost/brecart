@@ -69,7 +69,7 @@ export const datas = {
     },
     {
       img: "./assets/ads/ad1.jpg",
-      path: "",
+      path: "case",
     },
     {
       img: "./assets/ads/ad2.jpg",
