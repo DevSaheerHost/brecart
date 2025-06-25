@@ -350,5 +350,37 @@ export const datas = {
 
 
     
-  ]
+  ],
+  compo_offers: [
+  {
+    for: "iphone", // keyword to match in product name
+    items: [
+      {
+        name: "iPhone Adapter",
+        price: 1299,
+        img: "https://link-to-adapter.jpg",
+      },
+      {
+        name: "iPhone Back Case",
+        price: 499,
+        img: "https://link-to-case.jpg",
+      },
+      {
+        name: "Tempered Glass",
+        price: 199,
+        img: "https://link-to-glass.jpg",
+      },
+    ]
+  },
+  {
+    for: "samsung",
+    items: [
+      {
+        name: "Samsung Fast Adapter",
+        price: 999,
+        img: "https://link-to-samsung-adapter.jpg",
+      }
+    ]
+  }
+]
 }

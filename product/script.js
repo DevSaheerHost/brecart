@@ -153,6 +153,39 @@ window.onerror = function(message, source, lineno, colno, error) {
 
 
 
+// ✅ Render Compo Offers
+const compoDiv = document.querySelector(".compo_products");
+//console.log(datas.compo_offers)
+
+const compo = datas.compo_offers.find(c =>
+  generateSlug(product.name).includes(generateSlug(c.for))
+);
+
+if (compo && compo.items.length) {
+  compoDiv.innerHTML = ''; // clear previous content
+  compo.items.forEach(item => {
+    const el = document.createElement("div");
+    el.className = "item";
+    el.innerHTML = `
+      <div class="box">
+        <input type="checkbox" name="select">
+        <img src="${item.img}" alt="${item.name}">
+      </div>
+      <div class="detail">
+        <h4>${item.name}</h4>
+        <p class="price">₹${item.price.toLocaleString()}</p>
+      </div>
+    `;
+    compoDiv.appendChild(el);
+  });
+} else {
+  compoDiv.innerHTML = `<p style="text-align:center;">No combo offers available for this product.</p>`;
+}
+
+
+
+
+
 window.onpopstate = () => {
   const params = new URLSearchParams(window.location.search);
   const layer = params.get('layer');
