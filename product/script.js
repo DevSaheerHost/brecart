@@ -78,6 +78,7 @@ $('.decrement').onclick = () => {
   if (quantity > 1) {
     $('#quantity').textContent = --quantity;
     $('.increment').style.borderColor = 'black';
+    updateTotalPrice()
     $(".price").textContent = ` ₹${(price * quantity).toLocaleString()}`;
   }
   if (quantity <= 1) {
