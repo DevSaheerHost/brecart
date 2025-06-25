@@ -191,25 +191,34 @@ if (compo && compo.items.length) {
 
 // Total price with compo ofer
 function updateTotalPrice() {
-  
-  const basePrice = price * Number($('#quantity').textContent.replace(/[^\d]/g, ''));
+  const quantity = Number($('#quantity').textContent.replace(/[^\d]/g, ''));
+  const basePrice = price * quantity;
   let total = basePrice;
-var boxes = 0
-  document.querySelectorAll('.compo_products input[type="checkbox"]').forEach((checkbox, i) => {
+  let boxes = 0;
+  
+  const checkboxes = document.querySelectorAll('.compo_products input[type="checkbox"]');
+  
+  checkboxes.forEach((checkbox) => {
     if (checkbox.checked) {
-      boxes++
+      boxes++;
       const priceText = checkbox.closest('.item').querySelector('.price').textContent;
       const compoPrice = Number(priceText.replace(/[^\d]/g, ''));
       total += compoPrice;
-      $('.add_item').textContent=`Add ${boxes} Items`
-      $('.add_item').classList.add('active')
-    }else {
-      $('.add_item').textContent=`Add Items`
-      $('.add_item').classList.remove('active')
     }
   });
-
+  
+  // ✅ Total price update
   $(".total h3").textContent = `₹${total.toLocaleString()}`;
+  
+  // ✅ Button label + style
+  const addBtn = $('.add_item');
+  if (boxes > 0) {
+    addBtn.textContent = `Add ${boxes} Item${boxes > 1 ? 's' : ''}`;
+    addBtn.classList.add('active');
+  } else {
+    addBtn.textContent = 'Add Items';
+    addBtn.classList.remove('active');
+  }
 }
 
 // Attach listeners to all checkboxes
