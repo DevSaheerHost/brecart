@@ -358,11 +358,13 @@ export const datas = {
       {
         name: "20W USB-C Power Adapter",
         price: 1299,
+        offer_price: 999,
         img: "https://m.media-amazon.com/images/I/21rFLTV3tML._UF1000,1000_QL80_FMwebp_.jpg",
       },
       {
         name: "Type-C to Lightning USB Cable",
         price: 199,
+        offer_price: 99,
         img: "https://m.media-amazon.com/images/I/61avT8m81IL._UF1000,1000_QL80_FMwebp_.jpg",
       },
       

@@ -521,6 +521,14 @@ section.related div#related a {
                     margin-top: .5rem;
                     font-weight: 500;
                 }
+                .offer_price{
+                    font-size: 18px;
+                }
+                .line{
+                    text-decoration: line-through;
+                    font-size: 15px;
+                    color: #c2c2c2;
+                }
             }
         }
     }

@@ -56,7 +56,8 @@ document.head.appendChild(canonicalLink);
 $(".main-img").src = product.product_image || product.img;
 $(".sub-img").src = product.product_image || product.img;
 $("#productName").textContent = product.product_description || product.description;
-
+$('.current_product img').src=product.img || product.product_image;
+$('.compo_name').textContent=product.name
 const price = Number(product.product_price ?? product.price);
 $(".price").textContent = `₹${price.toLocaleString()}`;
   $(".total h3").textContent = `₹${price.toLocaleString()}`;
@@ -102,7 +103,24 @@ $('.buy_btn').onclick = () => {
   handleLayer();
 };
 
+
+
 $('#placeOrder').onclick = () => {
+  const selectedItems = [];
+
+  document.querySelectorAll('.compo_products input[type="checkbox"]').forEach((checkbox) => {
+    if (checkbox.checked) {
+      const item = checkbox.closest('.item');
+      const name = item.querySelector('h4').textContent;
+      const priceText = item.querySelector('.price').textContent;
+      const price = Number(priceText.replace(/[^\d]/g, ''));
+      const img = item.querySelector('img').src;
+
+      selectedItems.push({ name, price, img });
+    }
+  });
+
+  localStorage.setItem(`combo-${slug}`, JSON.stringify(selectedItems));
   $('.order-placed-message-wrap').classList.remove('hidden');
 };
 
@@ -176,7 +194,21 @@ if (compo && compo.items.length) {
       </div>
       <div class="detail">
         <h4>${item.name}</h4>
-        <p class="price">₹${item.price.toLocaleString()}</p>
+        
+<span>
+${item.offer_price?
+  ` <span style="color:green;" class="offer_price">₹${item.offer_price?.toLocaleString()}</span>
+  
+  
+  <p class="price line" data-offer-price="${item.offer_price}">₹${item.price.toLocaleString()}</p>`
+  
+  :
+  `
+          <p class="price">₹${item.price.toLocaleString()}</p>
+  `
+}
+
+</span>
       </div>
     `;
     compoDiv.appendChild(el);
@@ -200,10 +232,17 @@ function updateTotalPrice() {
   const checkboxes = document.querySelectorAll('.compo_products input[type="checkbox"]');
   
   checkboxes.forEach((checkbox) => {
+    
     if (checkbox.checked) {
       boxes++;
       const priceText = checkbox.closest('.item').querySelector('.price').textContent;
-      const compoPrice = Number(priceText.replace(/[^\d]/g, ''));
+      const priceEl = checkbox.closest('.item').querySelector('.price');
+      //const compoPrice = Number(priceText.replace(/[^\d]/g, ''));
+      console.log(priceEl.getAttribute('data-offer-price'))
+      const compoPrice = Number(
+  priceEl.getAttribute('data-offer-price') ||
+  priceText.replace(/[^\d]/g, '')
+);
       total += compoPrice;
     }
   });
