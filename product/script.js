@@ -1,4 +1,5 @@
-import { datas } from 'https://brecart.vercel.app/data.js';
+//import { datas } from 'https://brecart.vercel.app/data.js';
+import { datas } from '../data.js';
 
 // $ shortcut
 const $ = (selector) => document.querySelector(selector);
@@ -58,13 +59,14 @@ $("#productName").textContent = product.product_description || product.descripti
 
 const price = Number(product.product_price ?? product.price);
 $(".price").textContent = `₹${price.toLocaleString()}`;
-
+  $(".total h3").textContent = `₹${price.toLocaleString()}`;
 // ✅ Quantity Buttons
 $('.increment').onclick = () => {
   let quantity = Number($('#quantity').textContent);
   if (quantity < 10) {
     $('#quantity').textContent = ++quantity;
     $('.decrement').style.borderColor = 'black';
+    updateTotalPrice()
     $(".price").textContent = ` ₹${(price * quantity).toLocaleString()}`;
   } else {
     $('.increment').style.borderColor = '#C5C5C5';
@@ -155,12 +157,12 @@ window.onerror = function(message, source, lineno, colno, error) {
 
 // ✅ Render Compo Offers
 const compoDiv = document.querySelector(".compo_products");
-//console.log(datas.compo_offers)
+console.log(product)
 
 const compo = datas.compo_offers.find(c =>
-  generateSlug(product.name).includes(generateSlug(c.for))
+  product.name.toLowerCase().includes(c.for)
 );
-
+console.log(compo)
 if (compo && compo.items.length) {
   compoDiv.innerHTML = ''; // clear previous content
   compo.items.forEach(item => {
@@ -178,9 +180,42 @@ if (compo && compo.items.length) {
     `;
     compoDiv.appendChild(el);
   });
+  
+  document.querySelectorAll('.compo_products input[type="checkbox"]').forEach(box=>{
+    box.onchange=()=>updateTotalPrice()
+  })
 } else {
   compoDiv.innerHTML = `<p style="text-align:center;">No combo offers available for this product.</p>`;
 }
+
+
+// Total price with compo ofer
+function updateTotalPrice() {
+  
+  const basePrice = price * Number($('#quantity').textContent.replace(/[^\d]/g, ''));
+  let total = basePrice;
+var boxes = 0
+  document.querySelectorAll('.compo_products input[type="checkbox"]').forEach((checkbox, i) => {
+    if (checkbox.checked) {
+      boxes++
+      const priceText = checkbox.closest('.item').querySelector('.price').textContent;
+      const compoPrice = Number(priceText.replace(/[^\d]/g, ''));
+      total += compoPrice;
+      $('.add_item').textContent=`Add ${boxes} Items`
+      $('.add_item').classList.add('active')
+    }else {
+      $('.add_item').textContent=`Add Items`
+      $('.add_item').classList.remove('active')
+    }
+  });
+
+  $(".total h3").textContent = `₹${total.toLocaleString()}`;
+}
+
+// Attach listeners to all checkboxes
+document.querySelectorAll('.compo_products').forEach(div => {
+  div.addEventListener('change', updateTotalPrice);
+});
 
 
 

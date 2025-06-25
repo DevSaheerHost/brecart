@@ -356,20 +356,16 @@ export const datas = {
     for: "iphone", // keyword to match in product name
     items: [
       {
-        name: "iPhone Adapter",
+        name: "20W USB-C Power Adapter",
         price: 1299,
-        img: "https://link-to-adapter.jpg",
+        img: "https://m.media-amazon.com/images/I/21rFLTV3tML._UF1000,1000_QL80_FMwebp_.jpg",
       },
       {
-        name: "iPhone Back Case",
-        price: 499,
-        img: "https://link-to-case.jpg",
-      },
-      {
-        name: "Tempered Glass",
+        name: "Type-C to Lightning USB Cable",
         price: 199,
-        img: "https://link-to-glass.jpg",
+        img: "https://m.media-amazon.com/images/I/61avT8m81IL._UF1000,1000_QL80_FMwebp_.jpg",
       },
+      
     ]
   },
   {

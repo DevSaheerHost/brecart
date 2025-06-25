@@ -300,14 +300,15 @@ section{
                 
             }
                 .input-wrap {
-                    margin-inline-start: 3rem;
+                    
                     margin-block-start: 2rem;
                     input {
                         border: 1px solid #C2C2C2;
-                        padding: 1rem;
-                        margin-block-start: .5rem;
+                        padding: 2rem 1rem;
+                        margin-block-start: 1rem;
                         border-radius: 6px;
                         width: 100%;
+                        font-size: 18px;
                     }
                     
                     #date, #cvv{
@@ -510,6 +511,8 @@ section.related div#related a {
                     width: 100px;
                     border: 1px solid #E1E1E1;
                     padding: 10px;
+                    aspect-ratio: 1 / 1;
+                    object-fit: contain;
                 }
             }
             
@@ -555,6 +558,10 @@ section.related div#related a {
             color: #fff;
             background: #A6A6A6;
             font-weight: 500;
+        }
+        
+        .active{
+            background: #09a0ff;
         }
     }
 }
