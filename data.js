@@ -118,13 +118,7 @@ export const datas = {
   ],
   products:[
     
-      {
-      img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-card-40-pro-202405_FMT_WHH?wid=508&hei=472&fmt=p-jpg&qlt=95&.v=aDFmUE8yL0ZIcG1CVlF3ejZoSTBUa3UweFZCakx2YnVZV3A3QjhxMVptZWZaQno4VzdyOTRhQU93VEhhWjgvSHg4ZHpEbm5XWGdaM3BiNVRDaG55Uk9hZHJ2SDQ3c0JlN3lXVFNtclhPL1QrNmVjbmk5c1V4VVk2VEt3TGcxekg',
-      description :'Anti-another ipod Magsafe Clear Case',
-      name: 'iPad Pro',
-      price: 19399,
-      type:'mobile'
-    },
+  
     {
   img: 'https://rukminim2.flixcart.com/image/292/360/xif0q/mobile/8/w/5/-original-imah4jyfwr3bfjbg.jpeg?q=60&crop=false',
   description: 'latest ipad pro',
@@ -259,6 +253,13 @@ export const datas = {
   description: 'Apple iPad Air 13″ (M2): Liquid Retina Display, 256GB, Landscape 12MP Front Camera / 12MP Back Camera, Wi-Fi 6E, Touch ID, All-Day Battery Life — Space Grey',
   price: 73999,
   name: 'Apple iPad Air 13″ (M2)',
+  type: 'ipad'
+},
+{
+  img: 'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-card-40-pro-202405_FMT_WHH?wid=508&hei=472&fmt=p-jpg&qlt=95&.v=aDFmUE8yL0ZIcG1CVlF3ejZoSTBUa3UweFZCakx2YnVZV3A3QjhxMVptZWZaQno4VzdyOTRhQU93VEhhWjgvSHg4ZHpEbm5XWGdaM3BiNVRDaG55Uk9hZHJ2SDQ3c0JlN3lXVFNtclhPL1QrNmVjbmk5c1V4VVk2VEt3TGcxekg',
+  description: 'Apple iPad Pro 13-Inch (M4): Built for Apple Intelligence, Ultra Retina XDR Display, 512GB, 12MP Front/Back Camera, LiDAR Scanner, Wi-Fi 6E, Face ID, All-Day Battery Life — Space Black',
+  name: 'Apple iPad Pro 13-Inch (M4)',
+  price: 19399,
   type: 'ipad'
 },
 

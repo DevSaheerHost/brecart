@@ -1,0 +1,61 @@
+/* =====================================
+   Root Variables
+===================================== */
+:root {
+  /* Colors */
+  --white: #ffffff;
+  --black: #000000;
+  --gray-light: #f3f3f3;
+  --gray-dark: #2f2f2f;
+  --gray-medium: #b5b5b5;
+  --primary: #0ba2ff;
+  --text-light: #848484;
+  --green-light: rgba(0, 113, 50, 0.73);
+  --shadow: 0 0 5px rgba(0, 0, 0, 0.14);
+  --semi-black: rgba(0, 0, 0, 0.4);
+  --semi-white: rgba(255, 255, 255, 0.4);
+
+  /* Typography */
+  --font-base: 16px;
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+
+  /* Radius */
+  --radius-sm: 10px;
+  --radius-lg: 20px;
+  --radius-pill: 100px;
+}
+
+/* =====================================
+   Base Reset
+===================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  border: none;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+html, body {
+  background: var(--gray-light);
+  padding-block-end: var(--space-lg);
+}
+
+/* Images & Videos */
+img, video {
+  max-inline-size: 100%;
+  display: block;
+  border-radius: var(--radius-sm);
+}
+
+/* Icons */
+i {
+  font-size: 20px;
+}
