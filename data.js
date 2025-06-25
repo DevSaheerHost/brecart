@@ -101,19 +101,22 @@ export const datas = {
       img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-card-40-pro-202405_FMT_WHH?wid=508&hei=472&fmt=p-jpg&qlt=95&.v=aDFmUE8yL0ZIcG1CVlF3ejZoSTBUa3UweFZCakx2YnVZV3A3QjhxMVptZWZaQno4VzdyOTRhQU93VEhhWjgvSHg4ZHpEbm5XWGdaM3BiNVRDaG55Uk9hZHJ2SDQ3c0JlN3lXVFNtclhPL1QrNmVjbmk5c1V4VVk2VEt3TGcxekg',
       description :'Anti-Yellow Magsafe Clear Case',
       name: 'iPad Pro Anti-Yellow Magsafe Clear Case',
-      price: 19399
+      price: 699,
+      type: 'case'
     },
     {
       img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-card-40-air-202405_FMT_WHH?wid=508&hei=472&fmt=p-jpg&qlt=95&.v=U0psRWR6Z2xkY3dwRTZYSCtyQXNFVXUweFZCakx2YnVZV3A3QjhxMVptZWZaQno4VzdyOTRhQU93VEhhWjgvSHg4ZHpEbm5XWGdaM3BiNVRDaG55UkErVEJnUGNTM2tkVDlwYzZJVEwzVkM1dDgvV3BhU1hoSzFPUEZjam5HQ2g',
-      description:'ClearVue',
+      description:'Apple iPad (10th Generation): with A14 Bionic chip, 10.9-inch Liquid Retina Display, 256GB, Wi-Fi 6, 12MP front/12MP Back Camera, Touch ID, All-Day Battery Life – Pink',
       name: 'iPad Air',
-      price:14199
+      price:14199,
+      type: 'ipad'
     },
     {
       img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-card-40-ipad-202410_FMT_WHH?wid=508&hei=472&fmt=p-jpg&qlt=95&.v=SFZodklRUStGeVJpUE9iYTA5SFFYay9QT3EzOEVhTmwyMUJSTjlXV3hGdGZMQnBkTWowcTVzai9uUEgzVDdYM3NtS0NkZnlUKzBRdlpRai9zMDR0cS9TN0NVaEVIU09sK0c2RHUvMlFZREoxWnZFQ2ozaVJXS3R0eUNrSXRjUEo',
       description:'Anti-Yellow Magsafe Clear Case',
       name: 'iPad',
-      price: 14199
+      price: 14199,
+      type: 'ipad'
     }
   ],
   products:[
