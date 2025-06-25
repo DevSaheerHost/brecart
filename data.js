@@ -371,13 +371,14 @@ export const datas = {
     ]
   },
   {
-    for: "samsung",
+    for: "ipad",
     items: [
       {
-        name: "Samsung Fast Adapter",
-        price: 999,
-        img: "https://link-to-samsung-adapter.jpg",
-      }
+        name: "Stylus Pencil for iPad Tablets with Angle Tilt Sensitivity",
+        price: 1518,
+        img: "https://m.media-amazon.com/images/I/41WNvMCswQL._UF1000,1000_QL80_FMwebp_.jpg",
+      },
+      
     ]
   }
 ]
