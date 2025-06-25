@@ -181,7 +181,7 @@ console.log(product)
 const compo = datas.compo_offers.find(c =>
   product.name.toLowerCase().includes(c.for)
 );
-console.log(compo)
+
 if (compo && compo.items.length) {
   compoDiv.innerHTML = ''; // clear previous content
   compo.items.forEach(item => {
@@ -273,7 +273,6 @@ document.querySelectorAll('.compo_products').forEach(div => {
 window.onpopstate = () => {
   const params = new URLSearchParams(window.location.search);
   const layer = params.get('layer');
- // alert(layer)
   console.log("onpopstate layer:", layer);
   if (layer==null) {
     $('.layer').classList.add('hidden');
