@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://devsaheerhost.github.io/brecart/sitemap.xml
+Sitemap: https://brecart.vercel.app/sitemap.xml

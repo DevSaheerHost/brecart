@@ -2,25 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://devsaheerhost.github.io/brecart/</loc>
-    <lastmod>2025-06-19</lastmod>
+    <loc>https://brecart.vercel.app/</loc>
+    <lastmod>2025-06-26</lastmod>
     <priority>1.00</priority>
   </url>
 
   <url>
-    <loc>https://devsaheerhost.github.io/brecart/products</loc>
-    <lastmod>2025-06-19</lastmod>
+    <loc>https://brecart.vercel.app/products</loc>
+    <lastmod>2025-06-26</lastmod>
     <priority>0.90</priority>
   </url>
 
   <url>
-    <loc>https://devsaheerhost.github.io/brecart/about</loc>
-    <lastmod>2025-06-19</lastmod>
+    <loc>https://brecart.vercel.app/#about</loc>
+    <lastmod>2025-06-26</lastmod>
     <priority>0.60</priority>
   </url>
 
   <url>
-    <loc>https://devsaheerhost.github.io/brecart/contact</loc>
+    <loc>https://brecart.vercel.app/#contact</loc>
     <lastmod>2025-06-19</lastmod>
     <priority>0.60</priority>
   </url>
