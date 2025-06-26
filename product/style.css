@@ -575,6 +575,10 @@ section.related div#related a {
         }
     }
 }
+
+input.error{
+    border-color: red;
+}
 .hidden{
     display: none !important;
 }
