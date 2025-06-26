@@ -141,7 +141,7 @@ $('#placeOrder').onclick = () => {
   })
   
   if (hasEmpty) {
-  alert('All fields are Required');
+  //alert('All fields are Required');
   return;
 }
 
