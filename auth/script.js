@@ -9,3 +9,6 @@ $("#openSignup").onclick = () => {
   $(".signup").classList.add("open");
   $(".login").classList.remove("open");
 };
+
+
+
