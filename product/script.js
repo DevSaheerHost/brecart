@@ -107,6 +107,37 @@ $('.buy_btn').onclick = () => {
 
 $('#placeOrder').onclick = () => {
   const selectedItems = [];
+  const addressInputs=['#district', '#city', '#locality', '#pincode', '#fullname']
+  let hasEmpty = false;
+  
+  
+  
+  addressInputs.forEach(sel=>{
+    const el=$(sel)
+    if (el.value.trim() ==='') {
+      el.classList.add('error')
+      hasEmpty=true
+    } else el.classList.remove('error');
+  })
+  
+  if (hasEmpty) {
+  alert('All fields are Required');
+  return;
+}
+
+const userDetails ={
+  name: $('#fullname').value.trim(),
+  district: $('#district').value.trim(),
+  city: $('#city').value.trim(),
+  locality: $('#locality').value.trim(),
+  pincode: $('#pincode').value.trim()
+}
+
+
+
+  
+
+
 
   document.querySelectorAll('.compo_products input[type="checkbox"]').forEach((checkbox) => {
     if (checkbox.checked) {
@@ -119,6 +150,10 @@ $('#placeOrder').onclick = () => {
       selectedItems.push({ name, price, img });
     }
   });
+  
+console.table(selectedItems)
+console.table(userDetails);
+console.table(product)
 
   localStorage.setItem(`combo-${slug}`, JSON.stringify(selectedItems));
   $('.order-placed-message-wrap').classList.remove('hidden');
