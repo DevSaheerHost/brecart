@@ -116,8 +116,11 @@ $('#placeOrder').onclick = () => {
     const el=$(sel)
     if (el.value.trim() ==='') {
       el.classList.add('error')
+      el.focus()
       hasEmpty=true
     } else el.classList.remove('error');
+    
+    el.oninput=()=>el.classList.remove('error')
   })
   
   if (hasEmpty) {

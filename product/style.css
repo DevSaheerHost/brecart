@@ -577,7 +577,7 @@ section.related div#related a {
 }
 
 input.error{
-    border-color: red;
+    border-color: red !important;
 }
 .hidden{
     display: none !important;
