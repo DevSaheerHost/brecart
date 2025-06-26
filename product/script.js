@@ -13,6 +13,19 @@ if (!slug) {
 }
 
 
+function getDeliveryDate(daysAhead = 5) {
+  const today = new Date();
+  today.setDate(today.getDate() + daysAhead);
+
+  const day = today.getDate();
+  const month = today.toLocaleString('en-US', { month: 'short' }); // eg: Jun
+  const weekday = today.toLocaleString('en-US', { weekday: 'long' }); // eg: Thursday
+
+  return `${day} ${month} ${weekday}`;
+}
+
+
+
 // ✅ Slug generator (same logic everywhere)
 function generateSlug(text) {
   return text
@@ -101,6 +114,10 @@ window.onpopstate = handleLayer;
 $('.buy_btn').onclick = () => {
   history.pushState({}, '', `?${slug}&layer=place-order`);
   handleLayer();
+  
+  
+  
+  $('#deliveryDate span').textContent=getDeliveryDate()
 };
 
 
