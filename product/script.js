@@ -1,7 +1,29 @@
 //import { datas } from 'https://brecart.vercel.app/data.js';
 import { datas } from '../data.js';
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
 
-// $ shortcut
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCsTD5XSRNl7VG-i6Ir0F3D1X1PxWk2Rfs",
+  authDomain: "shopify-30670.firebaseapp.com",
+  databaseURL: "https://shopify-30670-default-rtdb.firebaseio.com",
+  projectId: "shopify-30670",
+  storageBucket: "shopify-30670.appspot.com",
+  messagingSenderId: "792157900529",
+  appId: "1:792157900529:web:32d02d2d8b3fe05d94e350",
+  measurementId: "G-MZC38NN5BZ",
+};
+
+// ✅ Initialize Firebase only once
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+// ✅ Initialize Auth & Database using the same `app`
+const auth = getAuth(app);
+
 const $ = (selector) => document.querySelector(selector);
 
 // ✅ Slug from URL query (?slug-name)
@@ -111,13 +133,29 @@ function handleLayer() {
 //handleLayer();
 window.onpopstate = handleLayer;
 
+
 $('.buy_btn').onclick = () => {
+  const user = auth.currentUser;
+
+if (user) {
+  // ✅ User is signed in
   history.pushState({}, '', `?${slug}&layer=place-order`);
-  handleLayer();
+handleLayer();
+
+$('#deliveryDate span').textContent = getDeliveryDate()
+
+  console.log('Buying now as', user.email);
+  // Proceed with buying process
+} else {
+  // ❌ User not signed in
+  if (confirm('Please sign in first to buy')) {
+    window.location.href = '../auth';
+  }
+  // Optional: redirect to login page
+   
+}
   
   
-  
-  $('#deliveryDate span').textContent=getDeliveryDate()
 };
 
 
@@ -196,6 +234,7 @@ icon.onclick = () => {
   localStorage.setItem(wishlistKey, isActive ? '0' : '1');
   icon.classList.toggle('fa-solid');
   icon.classList.toggle('fa-regular');
+  console.log(auth.currentUser)
 };
 
 // ✅ Related Products (same type, excluding current)
@@ -338,4 +377,25 @@ window.onpopstate = () => {
 
   
 }
+
+
+
+
+
+
+
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // ✅ Authenticated
+    console.log('User is signed in:', user.email);
+    return user.email
+    // Example: show logout button, redirect to dashboard, etc.
+  } else {
+    // ❌ Not Authenticated
+    console.log('No user is signed in.');
+    alert('not signed in')
+    // Example: show login form
+  }
+});
 

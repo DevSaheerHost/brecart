@@ -38,7 +38,7 @@
 
         <h1>Create an Account</h1>
 
-        <div class="input-field">
+        <div class="input-field signup">
           <input required type="text" name="name" id="name" />
           <label for="name">Name</label>
           <input required type="text" name="email" id="email" />
@@ -46,7 +46,7 @@
           <input required type="password" name="password" id="password" />
           <label for="password">Password</label>
 
-          <button>Get started</button>
+          <button id="signup">Get started</button>
 
           <p>Already have an Account? <b id="openLogin">Login</b></p>
         </div>
@@ -81,13 +81,13 @@
 
         <h1>Welcome back!</h1>
 
-        <div class="input-field">
+        <div class="input-field signin">
           <input required type="text" name="email" id="email1" />
           <label for="email1">Email</label>
           <input required type="password" name="password" id="password1" />
           <label for="password1">Password</label>
 
-          <button>Login</button>
+          <button id="signin">Login</button>
 
           <p>Don't have an Account? <b id="openSignup">Signup</b></p>
         </div>
@@ -95,6 +95,6 @@
     </main>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-    <script src="./script.js"></script>
+    <script src="./script.js" type="module"></script>
   </body>
 </html>
