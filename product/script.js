@@ -4,7 +4,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebas
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
 
-
+import {showNotifier} from '../notifier.js';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCsTD5XSRNl7VG-i6Ir0F3D1X1PxWk2Rfs",
@@ -179,7 +179,7 @@ $('#placeOrder').onclick = () => {
   })
   
   if (hasEmpty) {
-  //alert('All fields are Required');
+  showNotifier('All fields are Required');
   return;
 }
 
@@ -260,9 +260,10 @@ for (const item of relatedList) {
 $("#back").onclick = () => window.history.back();
 
 // ✅ Global JS Error Catch
-window.onerror = function(message, source, lineno, colno, error) {
-  alert("JS Error:\n" + message + "\nLine: " + lineno + " Column: " + colno);
+window.onerror = function (message, source, lineno, colno, error) {
+  showNotifier("Error: " + message + "\nLine: " + lineno + "\nColumn: " + colno);
 };
+
 
 
 
@@ -394,7 +395,7 @@ onAuthStateChanged(auth, (user) => {
   } else {
     // ❌ Not Authenticated
     console.log('No user is signed in.');
-    alert('not signed in')
+    showNotifier("You'r not signed in")
     // Example: show login form
   }
 });

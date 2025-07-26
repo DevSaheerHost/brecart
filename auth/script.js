@@ -4,6 +4,7 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
 import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
 
+import {showNotifier} from '../notifier.js';
 // ✅ Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyCsTD5XSRNl7VG-i6Ir0F3D1X1PxWk2Rfs",
@@ -59,10 +60,10 @@ $('#signup').onclick = async () => {
       createdAt: new Date().toISOString()
     });
     
-    alert('Signup successful ✅');
+    showNotifier('Signup successful ✅');
     
   } catch (error) {
-    alert(`Signup Failed: ${error.message}`);
+    showNotifier(`Signup Failed: ${error.message}`);
   }
 };
 
@@ -102,7 +103,8 @@ $('#signin').onclick = async () => {
     // Redirect or load user dashboard here
     
   } catch (error) {
-    alert(`Login failed ❌: ${error.message}`);
+ //   alert(`Login failed ❌: ${error.message}`);
+    showNotifier('Login failed ❌: ${error.message}')
   }
 };
 
@@ -116,3 +118,10 @@ $("#openSignup").onclick = () => {
   $(".login").classList.remove("open");
 };
 
+
+
+
+window.onerror = function (message, source, lineno, colno, error) {
+  showNotifier("Error: " + message + "\nLine: " + lineno + "\nColumn: " + colno);
+  
+};

@@ -20,6 +20,7 @@ const firebaseConfig = {
 };
 
 import {datas} from './data.js';
+import {showNotifier} from './notifier.js';
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -655,7 +656,7 @@ window.onpopstate = () => {
         $('main.home').classList.add('hidden');
         window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scroll to top
   } else {
-    //alert('No products found!')
+    showNotifier('No products found!')
   }
 });
   } else{
@@ -689,8 +690,14 @@ window.onpopstate = () => {
 
 
 window.onerror = function (message, source, lineno, colno, error) {
-  alert("Error: " + message + "\nLine: " + lineno + "\nColumn: " + colno);
+  showNotifier("Error: " + message + "\nLine: " + lineno + "\nColumn: " + colno);
+  
+  //showNotifier(mess)
 };
+
+
+
+
 
 
 

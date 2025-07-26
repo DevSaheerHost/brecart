@@ -1,3 +1,4 @@
+import {showNotifier} from '../notifier.js';
 const $ = s => document.querySelector(s);
 
 const wishlistData = JSON.parse(localStorage.getItem('wishlist')) || [];
@@ -32,3 +33,11 @@ $('.list').innerHTML = wishlistData.map(item => `
     </div>
   </div>
 `).join('')  || '<p class="empty">Empty<p>';
+
+
+
+window.onerror = function (message, source, lineno, colno, error) {
+  showNotifier("Error: " + message + "\nLine: " + lineno + "\nColumn: " + colno);
+  
+  
+};
