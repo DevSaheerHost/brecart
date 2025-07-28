@@ -40,19 +40,19 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     const currentUserId = user.uid;
 
-showNotifier(currentUserId)
+//showNotifier(currentUserId)
     // ✅ Only this user’s orders
     const userOrdersRef = ref(db, `orders/${currentUserId}`);
-
+showNotifier("Loading...");
     onValue(userOrdersRef, (snapshot) => {
       const data = snapshot.val();
-      showNotifier("📦 My Orders:", data);
+      
 
-      showOrders(data); // ✅ Render orders
+      data?showOrders(data): showNotifier('No data found'); // ✅ Render orders
     });
   } else {
     showNotifier("🛑 Not logged in");
-    window.location.href = "/login.html";
+    window.location.href = "../auth/";
   }
 });
 

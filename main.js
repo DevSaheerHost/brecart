@@ -1,5 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
+
+import { getAuth } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
 import {
   getDatabase,
   ref,
@@ -734,3 +736,4 @@ const switchPage=icon=>{
  // document.querySelector(`.${icon}`).classList.remove('hidden')
  document.location='./myorder'
 }
+

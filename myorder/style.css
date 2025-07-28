@@ -61,3 +61,8 @@ ul#orderList li{
   color: seagreen;
   font-weight: 500;
 }
+
+
+.hidden{
+  display: none;
+}
