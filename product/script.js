@@ -261,7 +261,8 @@ addOrderToDb(userDetails, selectedItems, product)
 };
 
 $('.back-to-purchase').onclick = () => {
-  window.location = `./product?${slug}`;
+//  window.location = `./?${slug}`;
+window.history.go(-3)
 };
 
 // ✅ Wishlist (Bookmark) Icon Toggle + Persist with localStorage
