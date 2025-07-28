@@ -145,7 +145,7 @@ function handleLayer() {
   
   if (showBuyPage) {
     $('.layer').classList.add('hidden');
-  $('.buy-page').classList.remove('hidden');alert(5)
+  $('.buy-page').classList.remove('hidden');
   } else if (showMyorderPage) {
      $('.layer').classList.add('hidden');
      
@@ -464,4 +464,8 @@ function addOrderToDb(userDetails, selectedItems, product) {
 }
 
 
-//window.location='./?layer=myorder'
+//window.location='./?none&?layer='
+
+//history.pushState({}, '', `?${slug}&layer=myorder`);
+//handleLayer();
+

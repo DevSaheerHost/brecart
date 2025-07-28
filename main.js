@@ -716,3 +716,21 @@ window.onerror = function (message, source, lineno, colno, error) {
 
 // console.log(slug); 
 // // Output: "iphone-15-pro-max-back-cover-silicon-blue"
+
+const navButtons = document.querySelectorAll('nav span')
+
+navButtons.forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    navButtons.forEach(b => b.classList.remove('active'));
+    e.currentTarget.classList.add('active');
+    
+    const icon = e.target.dataset.icon
+    icon?switchPage(icon):showNotifier('Somthing went wrong!')
+  });
+});
+
+const switchPage=icon=>{
+  //document.querySelector('.layer').classList.add('hidden')
+ // document.querySelector(`.${icon}`).classList.remove('hidden')
+ document.location='./myorder'
+}

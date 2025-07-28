@@ -5,7 +5,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, on
 import { getDatabase, ref, set , onValue} from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
 
 import {showNotifier} from '../notifier.js';
-
+import {card} from './listComponent.js'
 
 // ✅ Firebase config
 const firebaseConfig = {
@@ -88,50 +88,22 @@ function showOrderssssssss(data) {
 function showOrders(data) {
   const orderList = document.getElementById("orderList");
   if (!orderList) return;
-  
+
   orderList.innerHTML = '';
-  
+
   if (!data || typeof data !== 'object') {
     orderList.innerHTML = '<li>No orders found.</li>';
     return;
   }
-  console.log(data)
+
   for (const orderId in data) {
     const order = data[orderId];
-    
-    const {
-      name = "Unknown Product",
-        price = 0,
-        status = "Pending",
-        image = "https://via.placeholder.com/64", // Optional fallback
-        createdAt = new Date().toISOString(),
-        address = {}
-    } = order;
-    
-    const formattedDate = new Date(order.createdAt).toLocaleDateString();
-    
+
+    // ✅ Pass order to your custom card component
     const li = document.createElement("li");
-    li.className = "border rounded-xl p-4 shadow-sm";
-    
-    li.innerHTML = `
-      <div class="flex items-center space-x-4">
-        <img src="${order.img}" alt="Product" class="w-16 h-16 object-cover rounded-lg" />
-        <div class="flex-1">
-          <h3 class="font-semibold text-lg">${order.name}</h3>
-          <p class="text-sm text-gray-600">Ordered on: ${formattedDate}</p>
-          <p class="text-sm text-gray-600">Status: <span class="text-yellow-600 font-medium">${order.status}</span></p>
-        </div>
-        <div class="text-right">
-          <p class="text-lg font-bold text-blue-600">₹${order.price}</p>
-        </div>
-      </div>
-      <div class="mt-2 text-sm text-gray-500">
-        Delivery to: ${order.address.name || ''}, ${order.address.district || ''}, ${order.address.city || ''}, ${order.address.place || ''}, ${order.address.locality || ''}, ${order.address.pincode || ''}
-      </div>
-    `;
-    
+    li.innerHTML = card(order); // 🔥 using your component here
     orderList.appendChild(li);
   }
 }
 
-window.location= '../product/index.html?layer=myorder'
+//window.location= '../product/index.html?layer=myorder'

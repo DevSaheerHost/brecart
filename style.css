@@ -657,3 +657,13 @@ footer{
 
 
 
+
+
+
+.active{
+  transition: .3s;
+  background: black;
+  color: #fff;
+  border-radius: 100px;
+  padding: .5rem;
+}
