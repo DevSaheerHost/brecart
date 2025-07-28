@@ -734,6 +734,6 @@ navButtons.forEach(btn => {
 const switchPage=icon=>{
   //document.querySelector('.layer').classList.add('hidden')
  // document.querySelector(`.${icon}`).classList.remove('hidden')
- document.location='./myorder'
+ document.location='./myorder/index.html'
 }
 
