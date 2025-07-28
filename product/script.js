@@ -1,9 +1,22 @@
 //import { datas } from 'https://brecart.vercel.app/data.js';
 import { datas } from '../data.js';
+// Firebase Core
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+
+// Analytics (optional)
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
+
+// Firebase Auth
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
 
+// ✅ Realtime Database
+import {
+  getDatabase,
+  ref,
+  push,
+  set,
+  onValue
+} from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
 import {showNotifier} from '../notifier.js';
 
 const firebaseConfig = {
@@ -31,6 +44,7 @@ const slug = location.search.slice(1).trim();
 
 if (!slug) {
   document.body.innerHTML = `<h2 style="color:red;text-align:center;">❌ No product slug provided in URL.</h2>`;
+  
   throw new Error("No slug provided");
 }
 
@@ -126,8 +140,18 @@ $('.decrement').onclick = () => {
 function handleLayer() {
   const layerParam = new URLSearchParams(location.search).get('layer');
   const showBuyPage = layerParam === 'place-order';
-  $('.layer').classList.add('hidden');
-  $('.buy-page').classList.remove('hidden');
+  const showMyorderPage = layerParam === 'myorder'
+  
+  
+  if (showBuyPage) {
+    $('.layer').classList.add('hidden');
+  $('.buy-page').classList.remove('hidden');alert(5)
+  } else if (showMyorderPage) {
+     $('.layer').classList.add('hidden');
+     
+  $('.myorder-page').classList.remove('hidden');
+  }
+  checkSavedAddress()
 }
 
 //handleLayer();
@@ -158,16 +182,31 @@ $('#deliveryDate span').textContent = getDeliveryDate()
   
 };
 
+const checkSavedAddress = () =>{
+const savedAddress = localStorage.getItem('userAddress');
+
+if (savedAddress) {
+  const data = JSON.parse(savedAddress);
+  $('#fullname').value = data.name || '';
+  $('#orderNumber').value = data.number || '';
+  $('#district').value = data.district || '';
+  $('#city').value = data.city || '';
+  $('#locality').value = data.locality || '';
+  $('#pincode').value = data.pincode || '';
+}
+
+}
 
 
 $('#placeOrder').onclick = () => {
   const selectedItems = [];
-  const addressInputs=['#district', '#city', '#locality', '#pincode', '#fullname']
+  const addressInputs=['#district', '#city', '#locality', '#pincode', '#fullname', '#orderNumber']
   let hasEmpty = false;
   
   
   
-  addressInputs.forEach(sel=>{
+  
+    addressInputs.forEach(sel=>{
     const el=$(sel)
     if (el.value.trim() ==='') {
       el.classList.add('error')
@@ -185,6 +224,7 @@ $('#placeOrder').onclick = () => {
 
 const userDetails ={
   name: $('#fullname').value.trim(),
+  number: $('#orderNumber').value.trim(),
   district: $('#district').value.trim(),
   city: $('#city').value.trim(),
   locality: $('#locality').value.trim(),
@@ -193,7 +233,7 @@ const userDetails ={
 
 
 
-  
+  localStorage.setItem('userAddress', JSON.stringify(userDetails))
 
 
 
@@ -212,6 +252,9 @@ const userDetails ={
 console.table(selectedItems)
 console.table(userDetails);
 console.table(product)
+
+addOrderToDb(userDetails, selectedItems, product)
+
 
   localStorage.setItem(`combo-${slug}`, JSON.stringify(selectedItems));
   $('.order-placed-message-wrap').classList.remove('hidden');
@@ -234,7 +277,7 @@ icon.onclick = () => {
   localStorage.setItem(wishlistKey, isActive ? '0' : '1');
   icon.classList.toggle('fa-solid');
   icon.classList.toggle('fa-regular');
-  console.log(auth.currentUser)
+  //console.log(auth.currentUser)
 };
 
 // ✅ Related Products (same type, excluding current)
@@ -386,17 +429,39 @@ window.onpopstate = () => {
 
 
 
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // ✅ Authenticated
-    console.log('User is signed in:', user.email);
-    return user.email
-    // Example: show logout button, redirect to dashboard, etc.
-  } else {
-    // ❌ Not Authenticated
-    console.log('No user is signed in.');
-    showNotifier("You'r not signed in")
-    // Example: show login form
-  }
-});
 
+
+
+const db = getDatabase();
+
+function addOrderToDb(userDetails, selectedItems, product) {
+  const user = auth.currentUser;
+
+  if (user) {
+    const currentUserId = user.uid;
+
+    const ordersRef = ref(db, `orders/${currentUserId}`);
+    const newOrderRef = push(ordersRef);
+
+    set(newOrderRef, {
+      ...product,
+      address: userDetails,
+      items: selectedItems,
+      createdAt: new Date().toISOString(),
+      status: "pending"
+    })
+    .then(() => {
+      console.log("✅ Order placed!");
+      // Optionally show success UI
+    })
+    .catch((error) => {
+      console.error("❌ Order failed:", error);
+    });
+  } else {
+    console.log("🛑 User not authenticated");
+    showNotifier("Please login to place order");
+  }
+}
+
+
+//window.location='./?layer=myorder'

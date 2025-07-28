@@ -62,7 +62,7 @@ console.log(layerKey)
 
 function renderProductList(products) {
   if (products.length === 0) {
-    $('.product_list .list').innerHTML = '<p class="empty">No products found</p>';
+   // $('.product_list .list').innerHTML = '<p class="empty">No products found</p>';
     return;
   }
   
@@ -603,7 +603,7 @@ function getSuggestionsFromData(query) {
 window.onpopstate = () => {
   const params = new URLSearchParams(window.location.search);
   const layer = params.get('layer');
-  console.log("onpopstate layer:", layer);
+  showNotifier("onpopstate layer:", layer);
   
   if (layer === 'search-list') {
     // Show search results
@@ -656,7 +656,7 @@ window.onpopstate = () => {
         $('main.home').classList.add('hidden');
         window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scroll to top
   } else {
-    showNotifier('No products found!')
+    console.log('No products found!')
   }
 });
   } else{

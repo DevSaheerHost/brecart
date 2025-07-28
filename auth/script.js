@@ -104,7 +104,7 @@ $('#signin').onclick = async () => {
     
   } catch (error) {
  //   alert(`Login failed ❌: ${error.message}`);
-    showNotifier('Login failed ❌: ${error.message}')
+    showNotifier(`Login failed : ${error.message}`)
   }
 };
 

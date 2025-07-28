@@ -11,7 +11,7 @@ style.textContent = `
   color: #0BA2FF;
   font-size: 0.9rem;
   font-weight: 500;
-  border-radius: 1000px;
+  border-radius: 30px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   max-width: 90vw;
   width: max-content;
