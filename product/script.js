@@ -110,6 +110,8 @@ $('.compo_name').textContent=product.name
 const price = Number(product.product_price ?? product.price);
 $(".price").textContent = `₹${price.toLocaleString()}`;
   $(".total h3").textContent = `₹${price.toLocaleString()}`;
+  $('#placeOrder').textContent=`Place Order - ₹${price.toLocaleString()}`
+  
 // ✅ Quantity Buttons
 $('.increment').onclick = () => {
   let quantity = Number($('#quantity').textContent);
@@ -160,6 +162,7 @@ window.onpopstate = handleLayer;
 
 $('.buy_btn').onclick = () => {
   const user = auth.currentUser;
+
 
 if (user) {
   // ✅ User is signed in
@@ -357,7 +360,7 @@ ${item.offer_price?
     box.onchange=()=>updateTotalPrice()
   })
 } else {
-  compoDiv.innerHTML = `<p style="text-align:center;">No combo offers available for this product.</p>`;
+  compoDiv.innerHTML = `<p class='nocompo' style="text-align:center;">No combo offers available for this product.</p>`;
 }
 
 
@@ -388,6 +391,7 @@ function updateTotalPrice() {
   
   // ✅ Total price update
   $(".total h3").textContent = `₹${total.toLocaleString()}`;
+  $('#placeOrder').textContent=`Place Order - ₹${total.toLocaleString()}`
   
   // ✅ Button label + style
   const addBtn = $('.add_item');

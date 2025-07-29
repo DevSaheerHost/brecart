@@ -576,6 +576,11 @@ section.related div#related a {
     }
 }
 
+
+.nocompo{
+    color: #09a0ff;
+    font-style: italic;
+}
 input.error{
     border-color: red !important;
 }
