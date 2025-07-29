@@ -162,7 +162,9 @@ window.onpopstate = handleLayer;
 
 $('.buy_btn').onclick = () => {
   const user = auth.currentUser;
-window.scrollTo({ top: 0, behavior: 'smooth' });
+window.scrollTo({top: 0, behavior: 'smooth' });
+//window.scrollTo(0, 0);
+
 
 if (user) {
   // ✅ User is signed in
@@ -421,7 +423,8 @@ window.onpopstate = () => {
     $('.layer').classList.add('hidden');
     $('.buy-page').classList.add('hidden');
     $('.overview').classList.remove('hidden');
-    
+    $('.overview').classList.add('zoomout');
+    showNotifier(layer)
   }
 
   

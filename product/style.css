@@ -24,9 +24,19 @@ main{
   animation: zoomed .4s;
 }
 
+main.zoomout{
+    animation: zoomout .4s;
+}
+
 @keyframes zoomed {
   from{
     transform: scale(.7);
+  }
+}
+
+@keyframes zoomout {
+  from{
+    transform: scale(1.5);
   }
 }
 section{
