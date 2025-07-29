@@ -514,6 +514,15 @@ footer{
     }
   }
 }
+.layer{
+  animation: zoomed .4s;
+}
+
+@keyframes zoomed {
+  from{
+    transform: scale(.7);
+  }
+}
 
 
 .layer.product_list{

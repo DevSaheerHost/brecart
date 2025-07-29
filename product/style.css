@@ -19,6 +19,16 @@ main{
     
     padding-block-start: 0;
 }
+
+main{
+  animation: zoomed .4s;
+}
+
+@keyframes zoomed {
+  from{
+    transform: scale(.7);
+  }
+}
 section{
     padding: 2rem;
 }

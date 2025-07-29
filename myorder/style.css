@@ -9,6 +9,16 @@ img{
   max-width: 100%;
 }
 
+* {
+  animation: zoomed .4s;
+}
+
+@keyframes zoomed {
+  from {
+    transform: scale(.7);
+  }
+}
+
 header{
   display: flex;
   justify-content: space-between;

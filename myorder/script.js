@@ -7,6 +7,7 @@ import { getDatabase, ref, set , onValue} from "https://www.gstatic.com/firebase
 import {showNotifier} from '../notifier.js';
 import {card} from './listComponent.js'
 
+const $ = selector => document.querySelector(selector)
 // ✅ Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyCsTD5XSRNl7VG-i6Ir0F3D1X1PxWk2Rfs",
@@ -101,9 +102,34 @@ function showOrders(data) {
 
     // ✅ Pass order to your custom card component
     const li = document.createElement("li");
-    li.innerHTML = card(order); // 🔥 using your component here
+    li.innerHTML = card(order); // using your component here
     orderList.appendChild(li);
   }
 }
 
 //window.location= '../product/index.html?layer=myorder'
+
+
+
+function getHomeURL() {
+  if (location.hostname.includes('github.io')) {
+    const root = location.pathname.split('/')[1];
+    return `${location.origin}/${root}/`;
+  } else {
+    return `${location.origin}/`;
+  }
+}
+
+$('#back').onclick = () => {
+  if (document.referrer && document.referrer !== location.href) {
+    history.back();
+    setTimeout(() => {
+      window.location = getHomeURL(); // fallback after 500ms
+    }, 1000);
+  } else {
+    window.location = getHomeURL();
+  }
+};
+
+console.log(getHomeURL());
+$('#back').onclick=()=> window.location=getHomeURL()

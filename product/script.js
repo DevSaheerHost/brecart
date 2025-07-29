@@ -162,7 +162,7 @@ window.onpopstate = handleLayer;
 
 $('.buy_btn').onclick = () => {
   const user = auth.currentUser;
-
+window.scrollTo({ top: 0, behavior: 'smooth' });
 
 if (user) {
   // ✅ User is signed in
