@@ -605,7 +605,7 @@ function getSuggestionsFromData(query) {
 window.onpopstate = () => {
   const params = new URLSearchParams(window.location.search);
   const layer = params.get('layer');
-  showNotifier("onpopstate layer:", layer);
+  //showNotifier("onpopstate layer:", layer);
   
   if (layer === 'search-list') {
     // Show search results
@@ -616,6 +616,7 @@ window.onpopstate = () => {
     $('.layer.search').classList.add('hidden');
     
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    
     localStorage.setItem('previousPage', 'search');
     
     const word = localStorage.getItem('searchWord') || '';
@@ -656,7 +657,8 @@ window.onpopstate = () => {
         console.log("Showing:", product.name);
         $('.product_list').classList.remove('hidden');
         $('main.home').classList.add('hidden');
-        window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scroll to top
+        //window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scroll to top
+        window.scrollTo(0,0);
   } else {
     console.log('No products found!')
   }
@@ -669,6 +671,7 @@ window.onpopstate = () => {
     $('header').classList.remove('hidden');
     $('nav').classList.remove('hidden');
     localStorage.setItem('previousPage', 'home');
+    $('main.home').classList.add('zoomout');
   }
   
   
@@ -677,7 +680,7 @@ window.onpopstate = () => {
 };
 
 
-//later clear history 
+//later clear history
 // document.querySelector('.clear-history').onclick = () => {
 //   history = [];
 //   localStorage.removeItem(STORAGE_KEY);

@@ -272,6 +272,7 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2rem;
+  z-index: 90;
 }
 
 .loader {
@@ -521,6 +522,17 @@ footer{
 @keyframes zoomed {
   from{
     transform: scale(.7);
+  }
+}
+
+main.zoomout{
+    animation: zoomout .4s;
+}
+
+
+@keyframes zoomout {
+  from{
+    transform: scale(1.5);
   }
 }
 
