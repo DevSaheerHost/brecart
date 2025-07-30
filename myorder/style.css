@@ -9,13 +9,26 @@ img{
   max-width: 100%;
 }
 
-* {
+main, main *{
   animation: zoomed .4s;
 }
 
 @keyframes zoomed {
   from {
     transform: scale(.7);
+  }
+}
+
+main.zoomout{
+  animation: zoomout .4s !important;
+  
+}
+main.zoomout *{
+  animation: none;
+}
+@keyframes zoomout {
+  from {
+    transform: scale(1.5);
   }
 }
 
@@ -40,12 +53,18 @@ main{
   margin-top: 1rem;
   
 }
+ul#orderList{
+  display: flex;
+  flex-flow: column-reverse;
+  flex-wrap: wrap;
+}
 ul#orderList li{
   padding: 1rem;
   border: 1px solid #E8E8E8;
   border-radius: 10px;
   list-style: none;
   margin-top: 1rem;
+  
 }
 #orderList .product{
   display: flex;
@@ -164,3 +183,7 @@ header.none{
   animation: none !important;
   display: none !important;
 }
+
+
+
+

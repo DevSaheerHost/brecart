@@ -192,7 +192,12 @@ function formatDeliveryDate(input) {
 }
 
 function formatOrderDate(input) {
-  const [day, , year] = input.split('/').map(Number);
+  
+  
+  const [day,month , year] = input.split('/').map(Number);
+  const date = new Date(year, month - 1, day); 
+const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
   const d = String(day); // or padStart(2, '0') if needed
   const m = monthNames[date.getMonth()];
@@ -234,6 +239,7 @@ window.onpopstate = () => {
   if (page==null) {
   $('.selected-product').classList.add('hidden')
 $('.home').classList.remove('hidden')
+$('.home').classList.add('zoomout')
 $('header').classList.remove('none')
   }
 
