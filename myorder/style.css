@@ -29,8 +29,11 @@ header{
   top: 0;
   width: 100%;
   background: #fff;
+  animation: none;
 }
-
+header *{
+  animation: none;
+}
 
 main{
   padding: 2rem;
@@ -39,7 +42,7 @@ main{
 }
 ul#orderList li{
   padding: 1rem;
-  border: 1px solid darkgray;
+  border: 1px solid #E8E8E8;
   border-radius: 10px;
   list-style: none;
   margin-top: 1rem;
@@ -48,8 +51,8 @@ ul#orderList li{
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  border-bottom: 1px solid #D8D8D8;
-  padding-bottom: 1rem;
+  border-bottom: 1px solid #F2F2F2;
+  padding-bottom: .5rem;
 }
 #orderList img {
   width: 80px;
@@ -64,8 +67,9 @@ ul#orderList li{
   margin-top: .5rem;
 }
 
-#orderList p span{
+#orderList .detail p span.status{
   color: #FEBD00;
+  text-transform: capitalize;
 }
 
 .price{
@@ -74,6 +78,89 @@ ul#orderList li{
 }
 
 
+.selected-product{
+  background: #F3F4FF;
+  height: 100vh;
+  margin: auto;
+}
+.selected-product h2{
+  font-weight: 700;
+  font-size: 30px;
+}
+.selected-product .count
+{
+  color: #0ba2ff;
+  margin-top: 2rem;
+}
+.selected-product .card{
+  background: #FFFFFF;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0px 5px rgba(0, 0, 0, 0.15);
+  margin-top: 1rem;
+}
+
+.selected-product .card .id, .selected-product .card .date-flex, .selected-product .card .from-to{
+  color: #BABABA;
+  font-weight: 600;
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+}
+.selected-product .card .pname{
+  margin: 1rem 0;
+}
+.from-to p{
+  color: #0ba2ff;
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.selected-product .card .process{
+  height: 2px;
+  width: 100%;
+  display: block;
+  background: lightgray;
+  position: relative;
+  margin-top: 2rem;
+}
+
+.selected-product .card .process::before{
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  background: lightgray;
+  border-radius: 100px;
+  left: 0;
+  top: -10px;
+  background: #0ba2ff;
+}
+.selected-product .card .process::after{
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  background: lightgray;
+  border-radius: 100px;
+  right: 0;
+  top: -10px;
+}
+
+.selected-product .card .process .fill{
+  display: block;
+  height: 2px;
+  background: #0ba2ff;
+  width: 25%;
+}
+
+
 .hidden{
   display: none;
+}
+
+header.none{
+  animation: none !important;
+  display: none !important;
 }

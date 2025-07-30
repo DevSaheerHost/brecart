@@ -8,17 +8,17 @@ export const card = (data) => {
 
         <div class="detail">
           <h4>${data.name}</h4>
-          <p>Ordered on: ${formattedDate}</p>
-          <p>Status: <span>${data.status}</span></p>
+          <p class='date'>Ordered on: <span>${formattedDate}</span></p>
+          <p>Status: <span class='status'>${data.status}</span></p>
         </div>
 
-        <span class="price">₹${data.price}</span>
+        <span class="price">₹${data.price.toLocaleString()}</span>
       </div>
 
       <div class="address">
         <p>Delivery to: ${data.address?.name || "Unknown"}, 
         ${data.address?.district || ""}, 
-        ${data.address?.city || ""}, 
+       <span class='city'> ${data.address?.city || ""} </span>, 
         ${data.address?.place || ""}, 
         ${data.address?.locality || ""}, 
         ${data.address?.pincode || ""}</p>

@@ -105,6 +105,12 @@ function showOrders(data) {
     li.innerHTML = card(order); // using your component here
     orderList.appendChild(li);
   }
+  
+  const productCard = $('#orderList').querySelectorAll('.product')
+
+productCard.forEach(product => {
+  product.onclick = () => handleProductClick(product);
+});
 }
 
 //window.location= '../product/index.html?layer=myorder'
@@ -133,3 +139,103 @@ $('#back').onclick = () => {
 
 console.log(getHomeURL());
 $('#back').onclick=()=> window.location=getHomeURL()
+
+
+
+function handleProductClick(productElement) {
+  const imgElement = productElement.querySelector('img');
+  const nameElement = productElement.querySelector('h4');
+  const priceElement = productElement.querySelector('.price');
+  const dateElement = productElement.querySelector('.date span');
+  const cityElement = productElement.parentElement.querySelector('.city')
+
+  if (!imgElement || !nameElement || !priceElement || !dateElement || !cityElement) {
+    console.warn('Product details missing in DOM.');
+    showNotifier('Product details missing in DOM.')
+    return;
+  }
+
+  const img = imgElement.src;
+  const productName = nameElement.textContent.trim();
+  const price = priceElement.textContent.trim();
+  const orderedOn = dateElement.textContent.trim();
+  const city = cityElement.textContent.trim();
+  const date = dateElement.textContent.trim();
+  
+
+history.pushState({}, '', `?page=selected-product`)
+handlePage()
+  renderProduct({img, productName, price, orderedOn, city, date});
+}
+
+
+const renderProduct = (data) => {
+  
+  $('.pname').textContent=data.productName
+  $('.order-to').textContent=data.city
+  $('#ordered-on').textContent= formatOrderDate(data.date)
+  $('#deliveryDate').textContent=formatDeliveryDate(data.date)
+};
+function formatDeliveryDate(input) {
+  const [day, month, year] = input.split('/').map(Number);
+  const date = new Date(year, month - 1, day); // Month is 0-indexed
+
+  date.setDate(date.getDate() + 7); // Add 7 days
+
+  const d = date.getDate();
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const m = monthNames[date.getMonth()];
+  const y = `'${String(date.getFullYear()).slice(2)}`; // '25
+
+  return `${d} ${m}, ${y}`;
+}
+
+function formatOrderDate(input) {
+  const [day, , year] = input.split('/').map(Number);
+
+  const d = String(day); // or padStart(2, '0') if needed
+  const m = monthNames[date.getMonth()];
+  const y = `'${String(year).slice(2)}`; // '25
+
+  return `${d} ${m}, ${y}`;
+}
+
+
+
+
+const handlePage = ()=>{
+  const params = new URLSearchParams(window.location.search);
+  const page = params.get('page');
+  
+  if (page=='selected-product') {
+    $('main').classList.add('hidden')
+    $('.selected-product').classList.remove('hidden')
+    $('header').classList.add('none')
+  }
+  
+  if (page==null) {
+    $('main').classList.add('hidden')
+$('.home').classList.remove('hidden')
+$('header').classList.remove('none')
+  }
+
+}
+
+
+
+window.onpopstate = () => {
+  const params = new URLSearchParams(window.location.search);
+  const page = params.get('page');
+  console.log("onpopstate layer:", page);
+  
+  
+  
+  if (page==null) {
+  $('.selected-product').classList.add('hidden')
+$('.home').classList.remove('hidden')
+$('header').classList.remove('none')
+  }
+
+  
+}
