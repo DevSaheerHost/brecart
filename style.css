@@ -59,7 +59,7 @@ html {
   background-repeat: no-repeat;
   /* max-inline-size: 700px; */
   margin: auto;
-  padding-block-end: 3rem;
+  padding-block-end: 0rem;
 }
 
 #searchPlaceHolder{
@@ -137,7 +137,7 @@ header {
 }
 main{
   padding: 0 !important;
-  height: 100vh;
+  min-height: 100vh;
 }
 section{
   padding: 2rem;

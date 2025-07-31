@@ -43,7 +43,7 @@ const $ = (selector) => document.querySelector(selector);
 const slug = location.search.slice(1).trim();
 
 if (!slug) {
-  document.body.innerHTML = `<h2 style="color:red;text-align:center;">❌ No product slug provided in URL.</h2>`;
+  document.body.innerHTML = `<h2 style="color:red;text-align:center; padding: '1rem'">❌ No product slug provided in URL.</h2>`;
   
   throw new Error("No slug provided");
 }
