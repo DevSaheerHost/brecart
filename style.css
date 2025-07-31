@@ -137,6 +137,7 @@ header {
 }
 main{
   padding: 0 !important;
+  height: 100vh;
 }
 section{
   padding: 2rem;

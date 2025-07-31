@@ -605,6 +605,7 @@ function getSuggestionsFromData(query) {
 window.onpopstate = () => {
   const params = new URLSearchParams(window.location.search);
   const layer = params.get('layer');
+  const page = params.get('page');
   //showNotifier("onpopstate layer:", layer);
   
   if (layer === 'search-list') {
@@ -672,7 +673,22 @@ window.onpopstate = () => {
     $('nav').classList.remove('hidden');
     localStorage.setItem('previousPage', 'home');
     $('main.home').classList.add('zoomout');
+    
+    navButtons.forEach(btn=>{
+   btn.dataset.icon==page?btn.classList.add('active'):btn.classList.remove('active');
+   
+   
+ })
+ !page?$('nav .default').classList.add('active'):'';
   }
+  
+  if (page) {
+  const pages = document.querySelectorAll('main')
+ pages.forEach(p=>p.classList.add('hidden'))
+   
+    $(`main.${page}`).classList.remove('hidden')
+}
+  
   
   
 
@@ -726,8 +742,8 @@ const navButtons = document.querySelectorAll('nav span')
 
 navButtons.forEach(btn => {
   btn.addEventListener('click', (e) => {
-    navButtons.forEach(b => b.classList.remove('active'));
-    e.currentTarget.classList.add('active');
+    //navButtons.forEach(b => b.classList.remove('active'));
+   // e.currentTarget.classList.add('active');
     
     const icon = e.target.dataset.icon
     icon?switchPage(icon):showNotifier('Somthing went wrong!')
@@ -737,6 +753,19 @@ navButtons.forEach(btn => {
 const switchPage=icon=>{
   //document.querySelector('.layer').classList.add('hidden')
  // document.querySelector(`.${icon}`).classList.remove('hidden')
- document.location='./myorder/index.html'
+ 
+
+ $('main').classList.add('hidden')
+ if (icon=='myorder') {
+   document.location='./myorder/index.html'
+ } else {
+   window.history.pushState({}, '', `./?page=${icon}`);
+window.dispatchEvent(new PopStateEvent("popstate"));
+
+    const pages = document.querySelectorAll('main')
+ pages.forEach(page=>page.classList.add('hidden'))
+   
+    $(`main.${icon}`).classList.remove('hidden')
+ }
 }
 

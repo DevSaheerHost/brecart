@@ -296,11 +296,11 @@
 
     <nav>
       <div class="btn">
-        <span class="material-symbols-outlined active"> home </span>
+        <span class="material-symbols-outlined default active" data-icon="home"> home </span>
       </div>
 
       <div class="btn">
-        <span class="material-symbols-outlined"> shopping_cart </span>
+        <span class="material-symbols-outlined" data-icon="cart"> shopping_cart </span>
       </div>
 
       <div class="btn">
@@ -308,7 +308,7 @@
       </div>
 
       <div class="btn">
-        <span class="material-symbols-outlined"> person </span>
+        <span class="material-symbols-outlined" data-icon="account"> person </span>
       </div>
     </nav>
     
@@ -383,6 +383,16 @@
       <div class="suggestions"></div>
     </main>
     
+
+<!-- nav switching s -->
+<main class="hidden cart">
+  <h1>Currently showing: Cart Page</h1>
+</main>
+
+<main class="hidden account">
+  <h1>Currently showing: Account Page</h1>
+</main>
+
 
     <div class="loader">
       <h3>Loading...</h3>

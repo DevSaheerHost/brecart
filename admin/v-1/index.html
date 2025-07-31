@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="./style.css"/>
+</head>
+<body>
+  <button onclick="logout()">Logout</button>
+  <p>Logged in as: <span id="loggedInUser">saheerb28@gmail.com</span></p>
+
+  <h2>Admin Panel</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Variant</th>
+        <th>Stock</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="productTable"></tbody>
+  </table>
+
+  <h3>Add New Product</h3>
+  <div id="form">
+    <input type="text" id="productId" placeholder="Product ID"/>
+    <input type="text" id="productName" placeholder="Name"/>
+    <input type="text" id="variant" placeholder="Variant (e.g, 128GB Blue)"/>
+<div id="imageInputs">
+  <input type="text" class="imageUrl" oninput="previewImage(this)" />
+<img class="preview" src="" width="40" height="40" />
+</div>
+<button onclick="addMoreImages()">Add More Images</button>
+    <input type="number" id="stock" placeholder="Stock"/>
+    <textarea id="description" placeholder="Description"></textarea>
+    <button onclick="addProduct()">Add Product</button>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
