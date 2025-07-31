@@ -170,4 +170,12 @@ GitHub: @DevSaheerHost
 > “BreCart — Crafted for speed. Built for users.”
 
 31 Jul, 25
-• bug fixes
+• bug fixes.
+
+----------
+
+31 Jul, 25
+• Version support added.
+• Security level improvement.
+
+----------
