@@ -193,5 +193,9 @@ GitHub: @DevSaheerHost
 **01 Aug, 25**
 
 - navigate logic improve.
-
+- page switch handle optimization.
 -------
+
+**02 Aug, 25**
+
+- Vibration feedback added (May be boring)

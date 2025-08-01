@@ -44,7 +44,7 @@ const slug = location.search.slice(1).trim();
 
 if (!slug) {
   document.body.innerHTML = `<h2 style="color:red;text-align:center; padding: '1rem'">❌ No product slug provided in URL.</h2>`;
-  
+  navigator.vibrate([20, 100, 20]);
   throw new Error("No slug provided");
 }
 
@@ -86,6 +86,7 @@ if (!product) {
     </div>
   `;
   throw new Error("Product not found");
+  navigator.vibrate([20, 100, 20]);
 }
 
 // ✅ Dynamic SEO Meta Tags
@@ -176,6 +177,7 @@ $('#deliveryDate span').textContent = getDeliveryDate()
   console.log('Buying now as', user.email);
   // Proceed with buying process
 } else {
+  navigator.vibrate([20, 100, 20]);
   // ❌ User not signed in
   if (confirm('Please sign in first to buy')) {
     window.location.href = '../auth';
@@ -224,6 +226,7 @@ $('#placeOrder').onclick = () => {
   
   if (hasEmpty) {
   showNotifier('All fields are Required');
+  navigator.vibrate([20, 100, 20]);
   return;
 }
 
@@ -464,10 +467,14 @@ function addOrderToDb(userDetails, selectedItems, product) {
     })
     .catch((error) => {
       console.error("❌ Order failed:", error);
+      showNotifier("❌ Order failed:", error);
+
+      navigator.vibrate([20, 100, 20]);
     });
   } else {
     console.log("🛑 User not authenticated");
     showNotifier("Please login to place order");
+    navigator.vibrate([20, 100, 20]);
   }
 }
 

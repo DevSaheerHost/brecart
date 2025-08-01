@@ -44,6 +44,7 @@ onAuthStateChanged(auth, (user) => {
 //showNotifier(currentUserId)
     // ✅ Only this user’s orders
     const userOrdersRef = ref(db, `orders/${currentUserId}`);
+    
 showNotifier("Loading...");
     onValue(userOrdersRef, (snapshot) => {
       const data = snapshot.val();
@@ -69,6 +70,7 @@ function showOrderssssssss(data) {
   }
 
   for (const orderId in data) {
+    
     const order = data[orderId];
 
     showNotifier("✅ Order:", order);
@@ -143,6 +145,7 @@ $('#back').onclick=()=> window.location=getHomeURL()
 
 
 function handleProductClick(productElement) {
+  
   const imgElement = productElement.querySelector('img');
   const nameElement = productElement.querySelector('h4');
   const priceElement = productElement.querySelector('.price');
@@ -223,6 +226,7 @@ const handlePage = ()=>{
     $('main').classList.add('hidden')
 $('.home').classList.remove('hidden')
 $('header').classList.remove('none')
+
   }
 
 }

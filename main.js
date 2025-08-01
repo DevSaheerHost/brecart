@@ -47,6 +47,12 @@ let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
     .replace(/--+/g, '-')
     .replace(/^-+|-+$/g, '');
 }
+
+
+const handleHideAllMains = () => {
+  const allMainEle = document.querySelectorAll('main')
+  allMainEle.forEach(ele=>ele.classList.add('hidden'))
+}
   
   //$('.input-box').onclick=()=>window.location='./?layer=search'
   $('.input-box').onclick=()=>{
@@ -67,7 +73,7 @@ function renderProductList(products) {
    // $('.product_list .list').innerHTML = '<p class="empty">No products found</p>';
     return;
   }
-  
+  navigator.vibrate([20]);
   $('.product_list .list').innerHTML = products.map(product => `
     <div class="item" data-name="${product.name}">
       <i class="fa-heart heart fa-regular"></i>
@@ -81,6 +87,7 @@ function renderProductList(products) {
   `).join('');
   
   document.querySelectorAll(".product_list .list .item").forEach(el => {
+  
     el.addEventListener("click", () => {
       const name = el.getAttribute("data-name");
       const item = datas.products.find((i) => i.name === name);
@@ -93,6 +100,7 @@ function renderProductList(products) {
 
 // 1. Special case: Search Layer
 if (layerParam === 'search') {
+  handleHideAllMains()
   $('.product_list').classList.add('hidden');
   $('main.home').classList.add('hidden');
   $('.layer.search').classList.remove('hidden');
@@ -103,6 +111,7 @@ if (layerParam === 'search') {
 
 // 2. TYPE FILTER
 else if (typeParam) {
+  handleHideAllMains()
   $('main.home').classList.add('hidden');
   $('.product_list').classList.remove('hidden');
 
@@ -112,10 +121,13 @@ else if (typeParam) {
     renderProductList(filteredProducts)
 
   } catch (e) {
+    navigator.vibrate([20, 100, 20]);
     console.error('Error while rendering Product list on typeParam: ', e.message);
+    onpageshow('Error while rendering Product list on typeParam: ', e.message);
   }
 }
 else if (layerParam=='search-list') {
+  handleHideAllMains()
    $('.product_list').classList.remove('hidden');
   $('main.home').classList.add('hidden');
   $('.layer.search').classList.add('hidden');
@@ -141,6 +153,7 @@ else if (layerParam=='search-list') {
 
 } catch (e) {
   console.error('Error while rendering Product list on search:', e.message);
+  navigator.vibrate([20, 100, 20]);
 }
 }
 
@@ -417,6 +430,7 @@ get(child(dbRef, "shopless/home/ads"))
   
   
 function searchDatas(query) {
+  
   const keyword = query.toLowerCase();
 
   const result = {
@@ -479,6 +493,7 @@ input.addEventListener('keydown', (e) => {
       addToHistory(text);
       performSearch(text);
       input.blur();
+      navigator.vibrate([ 20]);
     }
   }
 });
@@ -607,9 +622,10 @@ window.onpopstate = () => {
   const layer = params.get('layer');
   const page = params.get('page');
   //showNotifier("onpopstate layer:", layer);
-  
+  handleHideAllMains()
   if (layer === 'search-list') {
     // Show search results
+    handleHideAllMains()
     $('header').classList.remove('hidden');
     $('nav').classList.remove('hidden');
     $('.product_list').classList.remove('hidden');
@@ -633,6 +649,7 @@ window.onpopstate = () => {
   }
   
   else if (layer === 'search') {
+    handleHideAllMains()
     $('.product_list').classList.add('hidden');
     $('main.home').classList.add('hidden');
     $('.layer.search').classList.remove('hidden');
@@ -662,6 +679,7 @@ window.onpopstate = () => {
         window.scrollTo(0,0);
   } else {
     console.log('No products found!')
+    navigator.vibrate([20, 100, 20]);
   }
 });
   } else{
@@ -676,11 +694,14 @@ window.onpopstate = () => {
     
     navButtons.forEach(btn=>{
 // btn.dataset.icon==page?btn.classList.add('active'):btn.classList.remove('active');
+
 btn.classList.remove('active')
     })
  !page?$('nav .default').classList.add('active'):'';
  showNotifier(page)
   }
+  
+  
   
   if (page!='home') {
    // const pages = document.querySelectorAll('main')
@@ -731,7 +752,7 @@ btn.classList.remove('active')
 
 window.onerror = function (message, source, lineno, colno, error) {
   showNotifier("Error: " + message + "\nLine: " + lineno + "\nColumn: " + colno);
-  
+  navigator.vibrate([200, 100, 200]);
   //showNotifier(mess)
 };
 
@@ -792,4 +813,6 @@ window.dispatchEvent(new PopStateEvent("popstate"));
     
  }
 }
+
+
 
