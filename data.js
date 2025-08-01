@@ -293,6 +293,22 @@ export const datas = {
   type: 'ipad-case'
 },
 
+{
+  img: 'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MW993?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=cFY4VmZTL2V4eVRxQmsrdkJFVzB2UWtuVHYzMERCZURia3c5SzJFOTlPaUp0eVo2ZlpDSStGZ2RqVVJFTTEvaDd1cTMrWTZ6UmxWNXVqcUxtS0tJSGc',
+  description: 'To purchase with monthly pricing, add this item to your bag and choose to check out with Apple Card Monthly Installments.',
+  price: 6917,
+  name: 'Smart Folio for iPad Pro 11-inch (M4) - Denim',
+  type: 'ipad-case'
+},
+
+{
+  img: 'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/HRHB2_AV3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=enFheWtydG55WEY5d0dDOE9Bd2N3RlZya2lKWlJmUEwrYndWOTJiVWJWQUYwVmtIbGRkS25RMVpBRlo0bk5DUUFBOE9qRzN4L2xJcDdrNzNxYlgzMHc',
+  description: 'Keep all your selections by saving this device to Your Saves, then come back anytime and pick up right where you left off.',
+  price: 7875,
+  name: 'OtterBox Statement Series Studio Case for iPad Pro 11-inch (M4) - Blue',
+  type: 'ipad-case'
+},
+
 
 // Wireless powerbank
 

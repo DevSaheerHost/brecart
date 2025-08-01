@@ -675,21 +675,40 @@ window.onpopstate = () => {
     $('main.home').classList.add('zoomout');
     
     navButtons.forEach(btn=>{
-   btn.dataset.icon==page?btn.classList.add('active'):btn.classList.remove('active');
-   
-   
- })
+// btn.dataset.icon==page?btn.classList.add('active'):btn.classList.remove('active');
+btn.classList.remove('active')
+    })
  !page?$('nav .default').classList.add('active'):'';
+ showNotifier(page)
   }
   
+  if (page!='home') {
+   // const pages = document.querySelectorAll('main')
+// pages.forEach(p=>p.classList.add('hidden'))
+   
+   // $(`main.home`).classList.remove('hidden')
+//    showNotifier(page)
+    
+   // navButtons.forEach(btn=>{
+  // btn.classList.remove('active');
+  //  })
+    //$('nav .default').classList.add('active')
+    return
+  }
   if (page) {
   const pages = document.querySelectorAll('main')
  pages.forEach(p=>p.classList.add('hidden'))
    
     $(`main.${page}`).classList.remove('hidden')
+    
+    navButtons.forEach(btn=>{
+   btn.classList.remove('active');
+    })
+    
+    page=='home'?$('nav .default').classList.add('active'):''
 }
   
-  
+
   
 
 
@@ -742,8 +761,8 @@ const navButtons = document.querySelectorAll('nav span')
 
 navButtons.forEach(btn => {
   btn.addEventListener('click', (e) => {
-    //navButtons.forEach(b => b.classList.remove('active'));
-   // e.currentTarget.classList.add('active');
+  //  navButtons.forEach(b => b.classList.remove('active'));
+    //e.currentTarget.classList.add('active');
     
     const icon = e.target.dataset.icon
     icon?switchPage(icon):showNotifier('Somthing went wrong!')
@@ -766,6 +785,11 @@ window.dispatchEvent(new PopStateEvent("popstate"));
  pages.forEach(page=>page.classList.add('hidden'))
    
     $(`main.${icon}`).classList.remove('hidden')
+    navButtons.forEach(btn=>{
+      btn.classList.remove('active')
+      btn.dataset.icon==icon?btn.classList.add('active'):''
+    })
+    
  }
 }
 

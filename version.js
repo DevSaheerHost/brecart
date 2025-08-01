@@ -45,6 +45,9 @@ function removeScriptOnDevTools() {
     if (targetScript) {
       targetScript.remove();
       alert("Unauthorized action blocked.");
+      document.body.remove()
+    } else {
+      document.body.remove()
     }
   }
 }
