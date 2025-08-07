@@ -314,7 +314,10 @@ $("#back").onclick = () => window.history.back();
 
 // ✅ Global JS Error Catch
 window.onerror = function (message, source, lineno, colno, error) {
+  
   showNotifier("Error: " + message + "\nLine: " + lineno + "\nColumn: " + colno);
+  showNotifier(`We're building fast. Bugs are trying to catch up!`)
+  vibrate([200, 100, 200]);
 };
 
 
@@ -428,7 +431,7 @@ window.onpopstate = () => {
     $('.buy-page').classList.add('hidden');
     $('.overview').classList.remove('hidden');
     $('.overview').classList.add('zoomout');
-    showNotifier(layer)
+    
   }
 
   

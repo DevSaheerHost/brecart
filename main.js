@@ -698,7 +698,7 @@ window.onpopstate = () => {
 btn.classList.remove('active')
     })
  !page?$('nav .default').classList.add('active'):'';
- showNotifier(page)
+ 
   }
   
   
@@ -753,7 +753,7 @@ btn.classList.remove('active')
 window.onerror = function (message, source, lineno, colno, error) {
   showNotifier("Error: " + message + "\nLine: " + lineno + "\nColumn: " + colno);
   vibrate([200, 100, 200]);
-  //showNotifier(mess)
+  showNotifier(`We're building fast. Bugs are trying to catch up!`)
 };
 
 

@@ -206,3 +206,6 @@ GitHub: @DevSaheerHost
 
 - Vibration feedback error fixes for desktop devices.
 - UI fixes.
+- Usless/development pop-ups' removed. 
+- bug fixes
+- UX improvement (commited ✅ )
