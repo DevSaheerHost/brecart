@@ -22,7 +22,7 @@ const firebaseConfig = {
 };
 
 import {datas} from './data.js';
-import {showNotifier} from './notifier.js';
+import {showNotifier, vibrate} from './notifier.js';
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -73,7 +73,7 @@ function renderProductList(products) {
    // $('.product_list .list').innerHTML = '<p class="empty">No products found</p>';
     return;
   }
-  navigator.vibrate([20]);
+  vibrate([20]);
   $('.product_list .list').innerHTML = products.map(product => `
     <div class="item" data-name="${product.name}">
       <i class="fa-heart heart fa-regular"></i>
@@ -121,7 +121,7 @@ else if (typeParam) {
     renderProductList(filteredProducts)
 
   } catch (e) {
-    navigator.vibrate([20, 100, 20]);
+    vibrate([20, 100, 20]);
     console.error('Error while rendering Product list on typeParam: ', e.message);
     onpageshow('Error while rendering Product list on typeParam: ', e.message);
   }
@@ -153,7 +153,7 @@ else if (layerParam=='search-list') {
 
 } catch (e) {
   console.error('Error while rendering Product list on search:', e.message);
-  navigator.vibrate([20, 100, 20]);
+  vibrate([20, 100, 20]);
 }
 }
 
@@ -493,7 +493,7 @@ input.addEventListener('keydown', (e) => {
       addToHistory(text);
       performSearch(text);
       input.blur();
-      navigator.vibrate([ 20]);
+      vibrate([ 20]);
     }
   }
 });
@@ -679,7 +679,7 @@ window.onpopstate = () => {
         window.scrollTo(0,0);
   } else {
     console.log('No products found!')
-    navigator.vibrate([20, 100, 20]);
+    vibrate([20, 100, 20]);
   }
 });
   } else{
@@ -752,7 +752,7 @@ btn.classList.remove('active')
 
 window.onerror = function (message, source, lineno, colno, error) {
   showNotifier("Error: " + message + "\nLine: " + lineno + "\nColumn: " + colno);
-  navigator.vibrate([200, 100, 200]);
+  vibrate([200, 100, 200]);
   //showNotifier(mess)
 };
 
@@ -813,6 +813,8 @@ window.dispatchEvent(new PopStateEvent("popstate"));
     
  }
 }
+
+
 
 
 

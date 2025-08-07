@@ -199,3 +199,10 @@ GitHub: @DevSaheerHost
 **02 Aug, 25**
 
 - Vibration feedback added (May be boring)
+- 
+-----
+
+**07 Aug, 25**
+
+- Vibration feedback error fixes for desktop devices.
+- UI fixes.

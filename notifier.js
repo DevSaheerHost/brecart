@@ -48,3 +48,16 @@ setTimeout(() => {
 }, 3000);
 }
 
+
+
+export const vibrate = (val) => {
+  if (!("vibrate" in navigator)) {
+    console.log("Vibration not supported.");
+    return;
+  }
+  if (typeof val !== "number" && !Array.isArray(val)) {
+    console.warn("Invalid vibration pattern.");
+    return;
+  }
+  navigator.vibrate(val);
+};

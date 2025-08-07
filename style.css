@@ -180,6 +180,7 @@ main {
     .list-view {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 1.4rem;
       margin-block-start: 1rem;
       flex-wrap: wrap;
@@ -696,3 +697,6 @@ main.zoomout{
   border-radius: 100px;
   padding: .5rem;
 }
+
+
+
